@@ -53,12 +53,15 @@ jobs:
 
 
       - name: Unit
+        if: ${{ success() }}
         run: python3 scripts/pipeline.py unit
 
       - name: Integration
+        if: ${{ success() }}
         run: python3 scripts/pipeline.py integration
 
       - name: E2E
+        if: ${{ success() }}
         run: python3 scripts/pipeline.py e2e
 
       - name: Finish session and update Allure
