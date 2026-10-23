@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-count=${COUNT:-2}
+count=${COUNT:-5}
 [[ "$count" =~ ^[1-9][0-9]*$ ]] || { echo 'COUNT должен быть положительным целым числом'; exit 2; }
 python3 scripts/stand.py up
 prefix="parallel-$(date +%Y%m%d-%H%M%S)-$RANDOM"
@@ -12,7 +12,7 @@ for ((i=1; i<=count; i++)); do
   pids+=("$!")
 done
 trap 'kill -TERM "${pids[@]}" 2>/dev/null || true; wait || true; exit 130' INT TERM
-echo "Запущено прогонов: $count. Логи: tail -F reports/$prefix-*.log"
+echo "Запущено прогонов: $count. Логи: make parallel-logs"
 status=0
 for i in "${!pids[@]}"; do
   if wait "${pids[$i]}"; then

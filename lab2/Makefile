@@ -3,11 +3,11 @@ SHELL := /bin/bash
 
 RUN_ID ?=
 export RUN_ID
-COUNT ?= 2
+COUNT ?= 5
 export COUNT
 export PYTHONDONTWRITEBYTECODE := 1
 
-.PHONY: help setup up down status test repeat parallel check-interruption recover debug debug-connect ci ci-stop ci-run
+.PHONY: help setup up down status test repeat parallel parallel-logs check-interruption recover debug debug-connect ci ci-stop ci-run
 
 help:
 	@printf '%s\n' \
@@ -16,7 +16,8 @@ help:
 	  'make status              Состояние MongoDB, API и сервера отчётов' \
 	  'make test                Unit → integration → E2E; отчёт Allure' \
 	  'make repeat              Два последовательных прогона' \
-	  'make parallel COUNT=5    Пять параллельных прогонов на общем стенде' \
+	  'make parallel            Пять параллельных прогонов и отчёты Allure' \
+	  'make parallel-logs       Логи последнего параллельного запуска' \
 	  'make check-interruption  Проверить откат после SIGTERM' \
 	  'make debug RUN_ID=...    Запустить e2e под Delve' \
 	  'make recover RUN_ID=...  Очистить только указанную сессию' \
@@ -37,7 +38,10 @@ repeat:
 	$(MAKE) test RUN_ID=
 
 parallel:
-	bash scripts/parallel.sh
+	@bash scripts/parallel.sh
+
+parallel-logs:
+	@python3 scripts/parallel_logs.py
 
 check-interruption:
 	python3 scripts/check-interruption.py
