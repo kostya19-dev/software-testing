@@ -1,0 +1,25 @@
+{
+  "app": {
+    "name": "VitaLine Clinic",
+    "environment": "local"
+  },
+  "api": {
+    "address": ":8080"
+  },
+  "gui": {
+    "address": ":8090",
+    "api_base_url": "http://localhost:8080"
+  },
+  "database": {
+    "driver": "mongodb",
+    "url": "mongodb://localhost:27017",
+    "name": "vitaline_clinic"
+  },
+  "logging": {
+    "level": "info",
+    "file": "./logs/clinic.log"
+  },
+  "business": {
+    "appointment_min_lead_time_minutes": 30
+  }
+}
