@@ -1,0 +1,63 @@
+pipeline {
+    agent any
+
+    options {
+        timestamps()
+        timeout(time: 30, unit: 'MINUTES')
+        buildDiscarder(logRotator(numToKeepStr: '20'))
+    }
+
+    parameters {
+        choice(
+            name: 'FAIL_STAGE',
+            choices: ['', 'integration', 'e2e'],
+            description: 'Этап для демонстрации сбоя и отката после тестов'
+        )
+    }
+
+    environment {
+        RUN_ID = "jenkins-${BUILD_NUMBER}"
+        LAB2_FAIL_STAGE = "${params.FAIL_STAGE}"
+    }
+
+    stages {
+        stage('Prepare') {
+            steps {
+                sh 'python3 "$LAB_ROOT/lab2/scripts/pipeline.py" prepare --id "$RUN_ID"'
+            }
+        }
+        stage('Unit') {
+            steps {
+                sh 'python3 "$LAB_ROOT/lab2/scripts/pipeline.py" unit --id "$RUN_ID"'
+            }
+        }
+        stage('Integration') {
+            steps {
+                sh 'python3 "$LAB_ROOT/lab2/scripts/pipeline.py" integration --id "$RUN_ID"'
+            }
+        }
+        stage('E2E') {
+            steps {
+                sh 'python3 "$LAB_ROOT/lab2/scripts/pipeline.py" e2e --id "$RUN_ID"'
+            }
+        }
+    }
+
+    post {
+        always {
+            script {
+                def cleanup = sh(
+                    script: 'python3 "$LAB_ROOT/lab2/scripts/pipeline.py" finish --id "$RUN_ID"',
+                    returnStatus: true
+                )
+                dir("${env.LAB_ROOT}/lab2/reports/${env.RUN_ID}") {
+                    junit testResults: '**/*junit.xml', allowEmptyResults: false
+                    archiveArtifacts artifacts: '**/*', allowEmptyArchive: false
+                }
+                if (cleanup != 0) {
+                    error('Не удалось восстановить БД или завершить тестовую сессию; см. отчёт')
+                }
+            }
+        }
+    }
+}

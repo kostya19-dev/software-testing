@@ -1,0 +1,79 @@
+name: Lab 2 - tests and Allure
+
+on:
+  push:
+    paths:
+      - '.github/workflows/lab2.yml'
+      - 'lab1/**'
+      - 'lab2/**'
+      - 'project/VitaLineClinic/**'
+  workflow_dispatch:
+    inputs:
+      fail_stage:
+        description: 'Demonstrate pipeline failure after a stage'
+        type: choice
+        default: ''
+        options: ['', integration, e2e]
+      fail_e2e:
+        description: 'Fail the e2e Go test after patient registration'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  lab2:
+    runs-on: [self-hosted, linux, x64, tiopo-lab2]
+    timeout-minutes: 45
+    defaults:
+      run:
+        shell: bash
+        working-directory: lab2
+    env:
+      RUN_ID: gha-${{ github.run_id }}-${{ github.run_attempt }}
+      LAB2_FAIL_STAGE: ${{ inputs.fail_stage || '' }}
+      LAB2_E2E_FAIL: ${{ inputs.fail_e2e && '1' || '' }}
+      PYTHONDONTWRITEBYTECODE: '1'
+
+    steps:
+      - name: Checkout sources
+        id: checkout
+        uses: actions/checkout@v7
+        with:
+          
+          clean: false
+          persist-credentials: false
+
+      - name: Build test tools
+        run: make setup
+
+      - name: Prepare session and check the shared stand
+        run: python3 scripts/pipeline.py prepare
+
+
+      - name: Unit
+        run: python3 scripts/pipeline.py unit
+
+      - name: Integration
+        run: python3 scripts/pipeline.py integration
+
+      - name: E2E
+        run: python3 scripts/pipeline.py e2e
+
+      - name: Finish session and update Allure
+        if: ${{ always() && steps.checkout.outcome == 'success' }}
+        run: python3 scripts/pipeline.py finish
+
+      - name: Upload Allure, JUnit, logs and traffic
+        if: ${{ always() && steps.checkout.outcome == 'success' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: lab2-${{ env.RUN_ID }}
+          path: lab2/reports/${{ env.RUN_ID }}/
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Show persistent stand status
+        if: ${{ always() && steps.checkout.outcome == 'success' }}
+        run: make status

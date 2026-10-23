@@ -1,0 +1,67 @@
+services:
+  api:
+    image: tiopo-lab2-runner:2
+    labels: {lab2.session: "true"}
+    command: ["api"]
+    environment:
+      DATABASE_URL: mongodb://mongo:27017
+      MONGODB_DATABASE: ${TEST_DATABASE:?}
+      VITALINE_DATABASE_DRIVER: mongodb
+      VITALINE_HTTP_ADDRESS: ":8080"
+    volumes:
+      - ${RUN_DIR:?}/source.bundle:/input/source.bundle:ro
+      - modules:/go/pkg/mod
+      - build:/root/.cache/go-build
+    networks:
+      default:
+        aliases: ["api-${RUN_ID:?}"]
+      stand:
+        aliases: ["api-${RUN_ID:?}"]
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/health"]
+      interval: 2s
+      timeout: 5s
+      retries: 120
+  tests:
+    image: tiopo-lab2-runner:2
+    labels: {lab2.session: "true"}
+    environment:
+      LAB2_STAND: persistent
+      MONGODB_URI: mongodb://mongo:27017
+      MONGODB_DATABASE: ${TEST_DATABASE:?}
+      API_URL: http://api-${RUN_ID:?}:8080
+      RUN_ID: ${RUN_ID:?}
+      LAB2_E2E_FAIL: ${LAB2_E2E_FAIL:-}
+    volumes:
+      - ${RUN_DIR:?}/source.bundle:/input/source.bundle:ro
+      - ${REPORT_DIR:?}:/reports
+      - modules:/go/pkg/mod
+      - build:/root/.cache/go-build
+    networks: [default, stand]
+  debug:
+    extends: tests
+    command: ["debug"]
+    ports:
+      - "127.0.0.1::40000"
+    cap_add: [SYS_PTRACE]
+    security_opt: [seccomp:unconfined]
+  capture:
+    image: tiopo-lab2-runner:2
+    labels: {lab2.session: "true"}
+    entrypoint: ["tcpdump", "--immediate-mode", "-Z", "root", "-i", "any", "-U", "-s", "0", "-w", "/reports/traffic/demo.pcap", "tcp port 8080"]
+    network_mode: service:api
+    cap_add: [NET_RAW, NET_ADMIN]
+    user: "0"
+    volumes:
+      - ${REPORT_DIR:?}:/reports
+volumes:
+  modules:
+    external: true
+    name: tiopo-lab2_modules
+  build:
+    external: true
+    name: tiopo-lab2_build
+networks:
+  stand:
+    external: true
+    name: tiopo-lab2_default

@@ -1,0 +1,17 @@
+services:
+  jenkins:
+    build: .
+    image: tiopo-lab2-jenkins:1
+    user: "0:0"
+    ports:
+      - "127.0.0.1:${JENKINS_PORT:-8092}:8080"
+    environment:
+      JAVA_OPTS: -Djenkins.install.runSetupWizard=false
+      LAB_ROOT: ${LAB_ROOT:?}
+      LAB_ADMIN_PASSWORD: ${LAB_ADMIN_PASSWORD:?}
+    volumes:
+      - home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${LAB_ROOT:?}:${LAB_ROOT:?}
+volumes:
+  home:

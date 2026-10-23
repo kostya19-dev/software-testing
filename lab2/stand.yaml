@@ -1,0 +1,50 @@
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    environment:
+      MONGODB_DATABASE: lab2_stand
+    volumes:
+      - mongo:/data/db
+      - ${LAB_ROOT:?}/lab2/.runs:/runs
+      - ${LAB_ROOT:?}/project/VitaLineClinic/migrations/mongo/001-init.js:/docker-entrypoint-initdb.d/init.js:ro
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "quit(db.adminCommand({ping:1}).ok ? 0 : 1)"]
+      interval: 2s
+      timeout: 5s
+      retries: 40
+  api:
+    image: tiopo-lab2-runner:2
+    restart: unless-stopped
+    command: ["api-stand"]
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: mongodb://mongo:27017
+      MONGODB_DATABASE: lab2_stand
+      VITALINE_DATABASE_DRIVER: mongodb
+      VITALINE_HTTP_ADDRESS: ":8080"
+    ports:
+      - "127.0.0.1:8094:8080"
+    volumes:
+      - ${LAB_ROOT:?}/project/VitaLineClinic:/workspace:ro
+      - modules:/go/pkg/mod
+      - build:/root/.cache/go-build
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8080/health"]
+      interval: 3s
+      timeout: 5s
+      retries: 120
+  reports:
+    image: tiopo-lab2-runner:2
+    restart: unless-stopped
+    entrypoint: ["python3", "-m", "http.server", "8080", "--bind", "0.0.0.0", "--directory", "/reports"]
+    ports:
+      - "127.0.0.1:8093:8080"
+    volumes:
+      - ${LAB_ROOT:?}/lab2/reports:/reports:ro
+volumes:
+  mongo:
+  modules:
+  build:
