@@ -194,7 +194,7 @@ class Run:
         self.render()
 
     def mongo(self, *args, capture=False):
-        return stand.compose("exec", "-T", "mongo", *args, capture=capture)
+        return stand.compose("exec", "-T", "--interactive=false", "mongo", *args, capture=capture)
 
     def fingerprint(self):
         script = 'const d=db.getSiblingDB(' + json.dumps(self.database) + '); print(EJSON.stringify(d.getCollectionNames().sort().map(n=>({name:n,documents:d.getCollection(n).find().sort({_id:1}).toArray(),indexes:d.getCollection(n).getIndexes().sort((a,b)=>a.name.localeCompare(b.name))}))));'
@@ -249,7 +249,8 @@ class Run:
             )
 
     def tests(self, stage):
-        self.compose("run", "--rm", "--no-deps", "tests", stage)
+        # Background test sessions must never read the controlling terminal.
+        self.compose("run", "--rm", "--no-deps", "-T", "--interactive=false", "tests", stage)
 
     def start_capture(self):
         self.compose("up", "-d", "--no-deps", "capture")
@@ -264,7 +265,7 @@ class Run:
         if not (self.report / "traffic/demo.pcap").exists():
             return
         output = self.compose(
-            "run", "--rm", "--no-deps", "--entrypoint", "tcpdump",
+            "run", "--rm", "--no-deps", "-T", "--interactive=false", "--entrypoint", "tcpdump",
             "tests", "-nn", "-A", "-r", "/reports/traffic/demo.pcap", capture=True,
         )
         (self.report / "traffic/decoded.txt").write_text(output)
@@ -473,7 +474,8 @@ class Run:
             rows = []
             for path in sorted((LAB / "reports").glob("*/summary.json"), key=lambda p: p.stat().st_mtime, reverse=True):
                 data = json.loads(path.read_text())
-                stages = " → ".join(data["stages"].values())
+                active = not data.get("finished") and "failed" not in data["stages"].values()
+                stages = " → ".join("ожидает" if active and value == "skipped" else value for value in data["stages"].values())
                 rows.append(f'<li><a href="{html.escape(data["id"])}/index.html">Allure: {html.escape(data["id"])}</a> — {html.escape(stages)}</li>')
             text = '<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta http-equiv="refresh" content="10"><title>ЛР2 — запуски</title></head><body><h1>ЛР2 — отчёты Allure</h1><p>Каждый запуск имеет отдельный отчёт. Страница обновляется раз в 10 секунд.</p><ul>' + "".join(rows) + '</ul></body></html>'
             pending = LAB / "reports/index.tmp"
