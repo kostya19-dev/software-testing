@@ -16,7 +16,7 @@ help:
 	  'make status              Состояние MongoDB, API и сервера отчётов' \
 	  'make test                Unit → integration → E2E; отчёт Allure' \
 	  'make repeat              Два последовательных прогона' \
-	  'make parallel            Пять параллельных прогонов и отчёты Allure' \
+	  'make parallel            Пять прогонов на уже поднятом стенде' \
 	  'make parallel-logs       Логи последнего параллельного запуска' \
 	  'make check-interruption  Проверить откат после SIGTERM' \
 	  'make debug RUN_ID=...    Запустить e2e под Delve' \

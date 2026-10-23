@@ -3,7 +3,7 @@ set -euo pipefail
 mkdir -p /reports/traffic
 exec > >(tee /reports/traffic/requests.txt) 2>&1
 base=${API_URL:?}
-[[ "$base" == "http://api-${RUN_ID:?}:8080" ]]
+[[ "$base" == "http://api${API_SLOT:?}:8080" ]]
 request() {
   local expected=$1 method=$2 path=$3 data=${4:-}
   local args=(-sS --max-time 15 -X "$method" -H 'Content-Type: application/json' -o /tmp/response.json -w '%{http_code}')

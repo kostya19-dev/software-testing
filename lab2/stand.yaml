@@ -1,4 +1,51 @@
+x-slot-api: &slot-api
+  image: tiopo-lab2-runner:2
+  restart: unless-stopped
+  command: ["api-stand"]
+  depends_on:
+    mongo:
+      condition: service_healthy
+  volumes:
+    - ${LAB_ROOT:?}/project/VitaLineClinic:/workspace:ro
+    - modules:/go/pkg/mod
+    - build:/root/.cache/go-build
+  healthcheck:
+    test: ["CMD", "curl", "-fsS", "http://localhost:8080/health"]
+    interval: 3s
+    timeout: 5s
+    retries: 120
+
+x-slot-environment: &slot-environment
+  DATABASE_URL: mongodb://mongo:27017
+  VITALINE_DATABASE_DRIVER: mongodb
+  VITALINE_HTTP_ADDRESS: ":8080"
+
 services:
+  api1:
+    <<: *slot-api
+    environment:
+      <<: *slot-environment
+      MONGODB_DATABASE: ${SLOT_DATABASE_1:?}
+  api2:
+    <<: *slot-api
+    environment:
+      <<: *slot-environment
+      MONGODB_DATABASE: ${SLOT_DATABASE_2:?}
+  api3:
+    <<: *slot-api
+    environment:
+      <<: *slot-environment
+      MONGODB_DATABASE: ${SLOT_DATABASE_3:?}
+  api4:
+    <<: *slot-api
+    environment:
+      <<: *slot-environment
+      MONGODB_DATABASE: ${SLOT_DATABASE_4:?}
+  api5:
+    <<: *slot-api
+    environment:
+      <<: *slot-environment
+      MONGODB_DATABASE: ${SLOT_DATABASE_5:?}
   mongo:
     image: mongo:7
     restart: unless-stopped

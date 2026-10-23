@@ -45,8 +45,8 @@ jobs:
           clean: false
           persist-credentials: false
 
-      - name: Build test tools
-        run: make setup
+      - name: Check existing test tools
+        run: docker image inspect tiopo-lab2-runner:2
 
       - name: Prepare session and check the shared stand
         run: python3 scripts/pipeline.py prepare

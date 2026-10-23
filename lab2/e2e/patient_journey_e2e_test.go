@@ -14,8 +14,9 @@ import (
 
 func TestPatientJourney(t *testing.T) {
 	base := os.Getenv("API_URL")
-	if os.Getenv("RUN_ID") == "" || base != "http://api-"+os.Getenv("RUN_ID")+":8080" || os.Getenv("LAB2_STAND") != "persistent" {
-		t.Fatal("Use make test to start the Lab 2 stand")
+	slot := os.Getenv("API_SLOT")
+	if os.Getenv("RUN_ID") == "" || slot < "1" || slot > "5" || len(slot) != 1 || base != "http://api"+slot+":8080" || os.Getenv("LAB2_STAND") != "persistent" {
+		t.Fatal("Use make test against the already running Lab 2 stand")
 	}
 	client := &http.Client{Timeout: 10 * time.Second}
 	t.Cleanup(client.CloseIdleConnections)

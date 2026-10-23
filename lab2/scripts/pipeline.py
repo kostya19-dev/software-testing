@@ -69,6 +69,12 @@ class Run:
         self.state = (
             json.loads(self.statefile.read_text()) if self.statefile.exists() else {}
         )
+        if self.state.get("slot"):
+            self.configure_slot(self.state["slot"])
+
+    def configure_slot(self, slot):
+        self.database = stand.slot_database(slot)
+        self.env.update(TEST_DATABASE=self.database, API_SLOT=str(slot), API_CONTAINER=f"tiopo-lab2-api{slot}-1")
 
     def save(self):
         pending = self.statefile.with_suffix(".tmp")
@@ -95,8 +101,6 @@ class Run:
             raise ValueError(
                 "RUN_ID already exists: use a new ID, or make recover RUN_ID=..."
             )
-        command(["docker", "info"], capture=True)
-        stand.up()
         self.run.mkdir(parents=True)
         self.report.mkdir(parents=True)
         self.state = {
@@ -119,6 +123,18 @@ class Run:
             )
         (self.report / "traffic").mkdir()
         (self.run / "baseline").mkdir()
+        try:
+            stand.check()
+            slot = stand.lease(self.id)
+            self.configure_slot(slot)
+            self.state.update(slot=slot, database=self.database)
+            self.save()
+        except Exception as exc:
+            self.state.update(preparation_error=str(exc), cleaned=True, finished=dt.datetime.now(dt.timezone.utc).isoformat())
+            self.save()
+            junit(self.report / "prepare-junit.xml", "prepare", "failed", str(exc))
+            self.render()
+            raise
         shutil.copyfile(LAB / "compose.yaml", self.run / "compose.yaml")
         shutil.copyfile(
             ROOT / "project/VitaLineClinic/migrations/mongo/001-init.js",
@@ -169,14 +185,6 @@ class Run:
         self.save()
         (self.report / "source.txt").write_text(self.state["commit"] + "\n")
         for image in ("tiopo-lab2-runner:2", "mongo:7"):
-            if image == "mongo:7":
-                inspected = sp.run(
-                    ["docker", "image", "inspect", image],
-                    stdout=sp.DEVNULL,
-                    stderr=sp.DEVNULL,
-                )
-                if inspected.returncode:
-                    command(["docker", "pull", image])
             with (self.report / "images.txt").open("a") as out:
                 out.write(
                     command(
@@ -202,12 +210,11 @@ class Run:
         return hashlib.sha256(result.strip().encode()).hexdigest()
 
     def baseline(self):
-        existing = self.mongo("mongosh", "--quiet", "--eval",
-                              "print(db.getMongo().getDBNames().includes(" + json.dumps(self.database) + "))", capture=True)
-        if existing.strip() == "true":
-            raise RuntimeError("База запуска уже существует: " + self.database)
+        if self.state.get("slot") is None or self.database != stand.slot_database(self.state["slot"]):
+            raise RuntimeError("Нет выделенного API и базы")
         self.state["database_owned"] = True
         self.save()
+        self.mongo("mongosh", "--quiet", "--eval", "db.getSiblingDB(" + json.dumps(self.database) + ").dropDatabase()")
         self.mongo(
             "env", "MONGODB_DATABASE=" + self.database, "mongosh", "--quiet", f"/runs/{self.id}/init.js"
         )
@@ -225,7 +232,7 @@ class Run:
     def rollback(self, label):
         if not self.state.get("baseline"):
             return
-        self.compose("stop", "-t", "10", "tests", "capture", "debug", "api")
+        self.compose("stop", "-t", "10", "tests", "capture", "debug")
         containers = command(["docker", "ps", "-q", "--filter",
                               "label=com.docker.compose.project=" + self.project], capture=True).split()
         if containers:
@@ -249,7 +256,6 @@ class Run:
             )
 
     def tests(self, stage):
-        # Background test sessions must never read the controlling terminal.
         self.compose("run", "--rm", "--no-deps", "-T", "--interactive=false", "tests", stage)
 
     def start_capture(self):
@@ -272,13 +278,14 @@ class Run:
 
     def logs(self):
         (self.report / "containers.log").write_text(
-            self.compose("logs", "--no-color", capture=True)
+            stand.compose("logs", "--no-color", "mongo", "api" + str(self.state["slot"]), capture=True)
+            + self.compose("logs", "--no-color", capture=True)
         )
 
     def debug(self):
+        stand.check()
         if not self.state.get("baseline"):
             self.baseline()
-        self.compose("up", "-d", "--wait", "--wait-timeout", "300", "api")
         self.compose("up", "-d", "--no-deps", "debug")
         for _ in range(180):
             if "API server listening at:" in self.compose("logs", "--no-color", "debug", capture=True):
@@ -304,10 +311,10 @@ class Run:
         (self.report / stage / "junit.xml").unlink(missing_ok=True)
         error = None
         try:
+            stand.check()
             if stage == "integration":
                 self.baseline()
             if stage == "e2e":
-                self.compose("up", "-d", "--wait", "--wait-timeout", "300", "api")
                 self.start_capture()
             self.tests(stage)
             if os.getenv("LAB2_FAIL_STAGE") == stage:
@@ -359,6 +366,7 @@ class Run:
 
     def finish(self, force=False):
         if not self.state or self.state.get("cleaned"):
+            stand.lease(self.id, release=True)
             return
         for stage, status in self.state["stages"].items():
             if status == "running":
@@ -379,8 +387,7 @@ class Run:
             return
         errors = []
         try:
-            logs = self.compose("logs", "--no-color", capture=True)
-            (self.report / "containers.log").write_text(logs)
+            self.logs()
             self.rollback("finalize")
             if self.state.get("database_owned", self.state.get("baseline")):
                 self.mongo("mongosh", "--quiet", "--eval",
@@ -433,6 +440,7 @@ class Run:
         self.render()
         if errors:
             raise RuntimeError("; ".join(errors))
+        stand.lease(self.id, release=True)
         self.prune_runtime()
 
     def prune_runtime(self):
@@ -462,25 +470,14 @@ class Run:
         summary.write_text(json.dumps(dict(self.state, counts=counts), indent=2, ensure_ascii=False))
         summary.replace(self.report / "summary.json")
         command([
-            "docker", "run", "--rm", "--label", "lab2.report=" + self.id, "--network", "none",
+            "docker", "run", "--pull=never", "--rm", "--label", "lab2.report=" + self.id, "--network", "none",
             "-v", str(self.report) + ":/reports",
             "-v", str(LAB / "reports") + ":/all-reports:ro",
             "-v", str(LAB / "scripts/report.py") + ":/report.py:ro",
             "--entrypoint", "python3", "tiopo-lab2-runner:2", "/report.py", "/reports",
             "--history-root", "/all-reports",
         ])
-        with (LAB / ".runs/reports.lock").open("w") as lock:
-            fcntl.flock(lock, fcntl.LOCK_EX)
-            rows = []
-            for path in sorted((LAB / "reports").glob("*/summary.json"), key=lambda p: p.stat().st_mtime, reverse=True):
-                data = json.loads(path.read_text())
-                active = not data.get("finished") and "failed" not in data["stages"].values()
-                stages = " → ".join("ожидает" if active and value == "skipped" else value for value in data["stages"].values())
-                rows.append(f'<li><a href="{html.escape(data["id"])}/index.html">Allure: {html.escape(data["id"])}</a> — {html.escape(stages)}</li>')
-            text = '<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta http-equiv="refresh" content="10"><title>ЛР2 — запуски</title></head><body><h1>ЛР2 — отчёты Allure</h1><p>Каждый запуск имеет отдельный отчёт. Страница обновляется раз в 10 секунд.</p><ul>' + "".join(rows) + '</ul></body></html>'
-            pending = LAB / "reports/index.tmp"
-            pending.write_text(text)
-            pending.replace(LAB / "reports/index.html")
+        render_index(LAB)
         if os.geteuid() == 0:
             owner = LAB.stat()
             for directory in (self.run, self.report):
@@ -490,6 +487,33 @@ class Run:
 
 def interrupted(signum, frame):
     raise KeyboardInterrupt(f"Interrupted by signal {signum}")
+
+
+def render_index(lab):
+    with (lab / ".runs/reports.lock").open("w") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        states = [json.loads(path.read_text()) for path in (lab / "reports").glob("*/summary.json")]
+        states.sort(key=lambda data: (data["started"], data["id"]), reverse=True)
+
+        def group(run_id):
+            match = re.fullmatch(r"((?:parallel|five)-\d{8}-\d{6}-\d+)-\d+", run_id)
+            return match[1] if match else run_id
+
+        latest = group(states[0]["id"]) if states else None
+        current, previous = [], []
+        for data in states:
+            active = not data.get("finished") and "failed" not in data["stages"].values()
+            stages = " → ".join("ожидает" if active and value == "skipped" else value for value in data["stages"].values())
+            if data.get("preparation_error"):
+                stages = "Подготовка: failed — " + data["preparation_error"].split(". Тесты не восстанавливают сервисы.")[0]
+            row = f'<li><a href="{html.escape(data["id"])}/index.html">Allure: {html.escape(data["id"])}</a> — {html.escape(stages)}</li>'
+            (current if group(data["id"]) == latest else previous).append(row)
+        text = '<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta http-equiv="refresh" content="10"><title>ЛР2 — запуски</title></head><body><h1>ЛР2 — отчёты Allure</h1><ul>' + "".join(current) + '</ul>'
+        if previous:
+            text += f'<details><summary>Предыдущие запуски ({len(previous)})</summary><ul>' + "".join(previous) + '</ul></details>'
+        pending = lab / "reports/index.tmp"
+        pending.write_text(text + '</body></html>')
+        pending.replace(lab / "reports/index.html")
 
 
 def main():
@@ -515,8 +539,8 @@ def main():
         print("Lab 2 run: " + args.id, flush=True)
         signal.signal(signal.SIGTERM, interrupted)
         if args.action == "all":
-            run.prepare()
             try:
+                run.prepare()
                 for stage in STAGES:
                     run.stage(stage)
             finally:
