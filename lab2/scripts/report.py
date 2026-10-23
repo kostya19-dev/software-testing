@@ -100,6 +100,7 @@ def generate(directory, history_root=None):
                     ],
                     "parameters": [
                         {"name": "Запуск", "value": state["id"]},
+                        {"name": "Разработчик", "value": state.get("developer", "manual")},
                         {"name": "База", "value": state.get("database", "")},
                         {"name": "Go-тест", "value": name},
                     ],
@@ -134,6 +135,7 @@ def generate(directory, history_root=None):
         (results / "environment.properties").write_text(
             f'RUN_ID={state["id"]}\nDATABASE={state.get("database", "")}\n'
             f'SOURCE={state.get("commit", "")}\n'
+            f'DEVELOPER={state.get("developer", "manual")}\nAPI=api{state.get("slot", "")}\n'
         )
         (results / "executor.json").write_text(json.dumps({
             "name": "Docker", "type": "local", "buildName": state["id"],

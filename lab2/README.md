@@ -102,7 +102,7 @@ make debug-connect RUN_ID=debug-01
 Пример команд в Delve:
 
 ```text
-break /src/lab2/e2e/patient_journey_e2e_test.go:61
+break /src/lab2/e2e/patient_journey_e2e_test.go:63
 continue
 print base
 print p.ID
@@ -111,7 +111,7 @@ continue
 exit
 ```
 
-Строка 61 — начало создания записи, после успешной регистрации пациента. На этой точке можно увидеть адрес API и выданный ID. После изменений файла уточните номер строки через `list TestPatientJourney`.
+Строка 63 — начало создания записи, после успешной регистрации пациента. На этой точке можно увидеть адрес API и выданный ID. После изменений файла уточните номер строки через `list TestPatientJourney`.
 
 Для IDE команда `make debug` печатает свободный локальный порт. Настройте remote attach к `127.0.0.1:<порт>` и соответствие локального каталога `lab2` пути `/src/lab2`.
 
@@ -160,7 +160,11 @@ make recover RUN_ID=debug-01
 | `rollback.txt`, `cleanup.txt` | Восстановление и очистка сессии |
 | `source.txt`, `images.txt` | Снимок исходников и версии Docker-образов |
 
-В Wireshark откройте PCAP, задайте фильтр `http`, затем **Follow → TCP Stream**.
+Каждый из пяти параллельных прогонов моделирует отдельного разработчика (`developer-1` … `developer-5`). `make parallel-logs` печатает каждую строку с префиксом `[developer-N][RUN_ID]`. При подготовке в лог записываются разработчик, RUN_ID, выделенный API и база. Те же идентификаторы находятся в Allure.
+
+В Wireshark откройте `reports/<RUN_ID>/traffic/demo.pcap` через **File → Open**. Захват выполняется автоматически на стороне выделенного API; вручную выбирать сетевой интерфейс не требуется. Задайте фильтр `http`, выберите запрос и откройте **Follow → TCP Stream**: видны запрос, JSON и ответ сервера. Запросы e2e и дополнительного curl-сценария содержат заголовки `X-Test-Run-ID` и `X-Test-Developer`. Фильтр `http.request && http contains "developer-1"` выделяет запросы первого разработчика. Для конкретного прогона используйте `http.request && http contains "<RUN_ID>"`. Health-check запросы не имеют этих заголовков.
+
+Для показа параллельности сопоставьте RUN_ID из логов, каталога PCAP и Allure; время начала и завершения пяти прогонов записано в `summary.json`. Пять `PASS`, разные базы и пересечение времени проверяет `make parallel`.
 
 ## GitHub Actions
 

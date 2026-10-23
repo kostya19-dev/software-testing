@@ -10,6 +10,7 @@ services:
       API_URL: http://api${API_SLOT:?}:8080
       API_SLOT: ${API_SLOT:?}
       RUN_ID: ${RUN_ID:?}
+      DEVELOPER_ID: ${DEVELOPER_ID:-manual}
       LAB2_E2E_FAIL: ${LAB2_E2E_FAIL:-}
     volumes:
       - ${RUN_DIR:?}/source.bundle:/input/source.bundle:ro

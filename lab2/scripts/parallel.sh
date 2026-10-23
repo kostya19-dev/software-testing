@@ -7,7 +7,7 @@ stand=$(python3 scripts/stand.py snapshot)
 mkdir -p reports
 pids=()
 for ((i=1; i<=count; i++)); do
-  python3 scripts/pipeline.py all --id "$prefix-$i" </dev/null > "reports/$prefix-$i.log" 2>&1 &
+  DEVELOPER_ID="developer-$i" python3 scripts/pipeline.py all --id "$prefix-$i" </dev/null > "reports/$prefix-$i.log" 2>&1 &
   pids+=("$!")
 done
 trap 'kill -TERM "${pids[@]}" 2>/dev/null || true; wait || true; exit 130' INT TERM

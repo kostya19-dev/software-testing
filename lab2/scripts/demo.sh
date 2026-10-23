@@ -6,7 +6,7 @@ base=${API_URL:?}
 [[ "$base" == "http://api${API_SLOT:?}:8080" ]]
 request() {
   local expected=$1 method=$2 path=$3 data=${4:-}
-  local args=(-sS --max-time 15 -X "$method" -H 'Content-Type: application/json' -o /tmp/response.json -w '%{http_code}')
+  local args=(-sS --max-time 15 -X "$method" -H 'Content-Type: application/json' -H "X-Test-Run-ID: ${RUN_ID:?}" -H "X-Test-Developer: ${DEVELOPER_ID:-manual}" -o /tmp/response.json -w '%{http_code}')
   [[ -z "$data" ]] || args+=(-d "$data")
   local code
   code=$(curl "${args[@]}" "$base$path")

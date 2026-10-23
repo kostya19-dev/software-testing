@@ -1,7 +1,7 @@
 import argparse
-import os
 from pathlib import Path
 import re
+import subprocess
 
 
 def latest_logs(directory):
@@ -24,4 +24,19 @@ if __name__ == "__main__":
     if args.list:
         print("\n".join(str(path) for path in logs))
     else:
-        os.execvp("tail", ["tail", "-n", "20", "-F", *map(str, logs)])
+        names = {str(path): path.stem for path in logs}
+        run_id = logs[0].stem
+        process = subprocess.Popen(["tail", "-n", "20", "-F", *map(str, logs)], stdout=subprocess.PIPE, text=True)
+        try:
+            for line in process.stdout:
+                header = re.fullmatch(r"==> (.+) <==\n?", line)
+                if header:
+                    run_id = names.get(header[1], run_id)
+                elif line.strip():
+                    developer = "developer-" + run_id.rsplit("-", 1)[1]
+                    print(f"[{developer}][{run_id}] {line.rstrip()}", flush=True)
+        except KeyboardInterrupt:
+            pass
+        finally:
+            process.terminate()
+            process.wait()

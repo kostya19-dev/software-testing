@@ -74,7 +74,7 @@ class Run:
 
     def configure_slot(self, slot):
         self.database = stand.slot_database(slot)
-        self.env.update(TEST_DATABASE=self.database, API_SLOT=str(slot), API_CONTAINER=f"tiopo-lab2-api{slot}-1")
+        self.env.update(TEST_DATABASE=self.database, API_SLOT=str(slot), API_CONTAINER=f"tiopo-lab2-api{slot}-1", DEVELOPER_ID=self.state.get("developer", os.getenv("DEVELOPER_ID", "manual")))
 
     def save(self):
         pending = self.statefile.with_suffix(".tmp")
@@ -105,6 +105,7 @@ class Run:
         self.report.mkdir(parents=True)
         self.state = {
             "id": self.id,
+            "developer": os.getenv("DEVELOPER_ID", "manual"),
             "database": self.database,
             "keep_failed": os.getenv("LAB2_KEEP_FAILED") == "1",
             "started": dt.datetime.now(dt.timezone.utc).isoformat(),
@@ -129,6 +130,7 @@ class Run:
             self.configure_slot(slot)
             self.state.update(slot=slot, database=self.database)
             self.save()
+            print(f"DEVELOPER_ID={self.state['developer']} RUN_ID={self.id} API=api{slot} DATABASE={self.database}", flush=True)
         except Exception as exc:
             self.state.update(preparation_error=str(exc), cleaned=True, finished=dt.datetime.now(dt.timezone.utc).isoformat())
             self.save()

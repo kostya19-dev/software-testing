@@ -31,6 +31,8 @@ func TestPatientJourney(t *testing.T) {
 			t.Fatal(err)
 		}
 		req.Header.Set("Content-Type", "application/json")
+		req.Header.Set("X-Test-Run-ID", os.Getenv("RUN_ID"))
+		req.Header.Set("X-Test-Developer", os.Getenv("DEVELOPER_ID"))
 		response, err := client.Do(req)
 		if err != nil {
 			t.Fatal(err)
