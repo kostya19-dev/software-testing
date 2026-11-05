@@ -4,6 +4,8 @@
 
 ## Ветки
 
+- `lab3` — лабораторная №3: микробенчмарки JSON/gob, 100 Docker-испытаний, статистика и графики.
+
 - `lab1` — лабораторная №1: модульные тесты, сценарии UC/TC, Allure и покрытие.
 - `lab2` — лабораторная №2: интеграционные и e2e-тесты, постоянный Docker-стенд и GitHub Actions.
 
@@ -34,3 +36,16 @@ GitHub Actions требует self-hosted Linux x64 runner с меткой `tiop
 Без подключённого runner задания ожидают выполнения. Инструкция настройки находится в README ЛР2.
 
 Сгенерированные отчёты, резервные копии сессий, зависимости инструментов и локальные настройки не включены в Git.
+
+## Лабораторная работа №3
+
+Исходники и инструкция: [lab3/README.md](lab3/README.md).
+Результаты 100 испытаний: [lab3/evidence/README.md](lab3/evidence/README.md).
+Матрица требований: [lab3/docs/requirements.md](lab3/docs/requirements.md).
+
+```bash
+cd lab3
+make test
+make smoke
+make run
+```

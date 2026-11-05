@@ -159,7 +159,7 @@ def render(m,trials,output):
     summary,grouped = summarize(m,trials)
     (output/"summary.json").write_text(json.dumps(summary,ensure_ascii=False,indent=2)+"\n")
     with (output/"statistics.csv").open("w",newline="") as f:
-        writer = csv.writer(f)
+        writer = csv.writer(f, lineterminator="\n")
         writer.writerow(["size","scenario","codec","trials","requests","bytes","batch_median_ns",
                          "p50_ns","p75_ns","p90_ns","p95_ns","p99_ns","min_ns","max_ns"])
         for r in summary["rows"]:

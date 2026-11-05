@@ -72,7 +72,7 @@ def archive(source, target):
         for scenario in ("write","read","roundtrip"):
             lines.append(f"![{scenario}, {size} записей]({scenario}-{size}.png)")
             lines.append("")
-    (target/"README.md").write_text("\n".join(lines)+"\n",encoding="utf-8")
+    (target/"README.md").write_text("\n".join(lines).rstrip()+"\n",encoding="utf-8")
     hashes = [f"{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.name}" for p in sorted(target.iterdir()) if p.is_file()]
     (target/"SHA256SUMS").write_text("\n".join(hashes)+"\n")
     print(target)

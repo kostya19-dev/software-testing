@@ -69,4 +69,3 @@ python3 scripts/verify.py evidence
 ![read, 64 записей](read-64.png)
 
 ![roundtrip, 64 записей](roundtrip-64.png)
-
