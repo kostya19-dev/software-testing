@@ -1,0 +1,612 @@
+{
+  "run_id": "20261105t153029z-7865e4d7",
+  "mode": "full",
+  "trials": 100,
+  "rows": [
+    {
+      "size": 4,
+      "scenario": "read",
+      "codec": "gob",
+      "trials": 100,
+      "requests": 25600,
+      "bytes": 304,
+      "batch_median_ns": 25979.884765625,
+      "batch_median_ci95_ns": [
+        25175.234375,
+        27848.56640625
+      ],
+      "request_mean_ns": 25848.0287109375,
+      "request_stddev_ns": 56698.0891534293,
+      "request_min_ns": 12989,
+      "request_max_ns": 4360879,
+      "outside_100ns_50ms": 0,
+      "percentiles_ns": {
+        "p50": 19356,
+        "p75": 26971,
+        "p90": 36835,
+        "p95": 47740,
+        "p99": 106687
+      },
+      "phases": {
+        "warmup": {
+          "operations": 25600,
+          "elapsed_ns": 588274129
+        },
+        "batch": {
+          "operations": 25600,
+          "elapsed_ns": 772275956
+        },
+        "requests": {
+          "operations": 25600,
+          "elapsed_ns": 663888189
+        },
+        "teardown": {
+          "operations": 25600,
+          "elapsed_ns": 649157641
+        }
+      },
+      "total_ns": 2723929553
+    },
+    {
+      "size": 4,
+      "scenario": "read",
+      "codec": "json",
+      "trials": 100,
+      "requests": 25600,
+      "bytes": 315,
+      "batch_median_ns": 3516.26953125,
+      "batch_median_ci95_ns": [
+        3281.171875,
+        3778.53125
+      ],
+      "request_mean_ns": 4113.2855859375,
+      "request_stddev_ns": 5596.761264679581,
+      "request_min_ns": 2581,
+      "request_max_ns": 447030,
+      "outside_100ns_50ms": 0,
+      "percentiles_ns": {
+        "p50": 3218,
+        "p75": 4571,
+        "p90": 5682,
+        "p95": 6254,
+        "p99": 9839
+      },
+      "phases": {
+        "warmup": {
+          "operations": 25600,
+          "elapsed_ns": 104247361
+        },
+        "batch": {
+          "operations": 25600,
+          "elapsed_ns": 108739806
+        },
+        "requests": {
+          "operations": 25600,
+          "elapsed_ns": 107199227
+        },
+        "teardown": {
+          "operations": 25600,
+          "elapsed_ns": 105712059
+        }
+      },
+      "total_ns": 476826379
+    },
+    {
+      "size": 4,
+      "scenario": "roundtrip",
+      "codec": "gob",
+      "trials": 100,
+      "requests": 25600,
+      "bytes": 304,
+      "batch_median_ns": 30871.96875,
+      "batch_median_ci95_ns": [
+        29615.607421875,
+        31959.212890625
+      ],
+      "request_mean_ns": 32917.776171875,
+      "request_stddev_ns": 78478.71603830579,
+      "request_min_ns": 16312,
+      "request_max_ns": 9259559,
+      "outside_100ns_50ms": 0,
+      "percentiles_ns": {
+        "p50": 24544,
+        "p75": 34543,
+        "p90": 47236,
+        "p95": 62539,
+        "p99": 137488
+      },
+      "phases": {
+        "warmup": {
+          "operations": 25600,
+          "elapsed_ns": 820963343
+        },
+        "batch": {
+          "operations": 25600,
+          "elapsed_ns": 908519769
+        },
+        "requests": {
+          "operations": 25600,
+          "elapsed_ns": 844792210
+        },
+        "teardown": {
+          "operations": 25600,
+          "elapsed_ns": 824760066
+        }
+      },
+      "total_ns": 3453784033
+    },
+    {
+      "size": 4,
+      "scenario": "roundtrip",
+      "codec": "json",
+      "trials": 100,
+      "requests": 25600,
+      "bytes": 315,
+      "batch_median_ns": 5159.443359375,
+      "batch_median_ci95_ns": [
+        4954.31640625,
+        5543.927734375
+      ],
+      "request_mean_ns": 6328.1114453125,
+      "request_stddev_ns": 29664.09066997367,
+      "request_min_ns": 3867,
+      "request_max_ns": 4584786,
+      "outside_100ns_50ms": 0,
+      "percentiles_ns": {
+        "p50": 4772,
+        "p75": 6859,
+        "p90": 8946,
+        "p95": 9855,
+        "p99": 18743
+      },
+      "phases": {
+        "warmup": {
+          "operations": 25600,
+          "elapsed_ns": 168203033
+        },
+        "batch": {
+          "operations": 25600,
+          "elapsed_ns": 159586104
+        },
+        "requests": {
+          "operations": 25600,
+          "elapsed_ns": 164134749
+        },
+        "teardown": {
+          "operations": 25600,
+          "elapsed_ns": 173946667
+        }
+      },
+      "total_ns": 733356993
+    },
+    {
+      "size": 4,
+      "scenario": "write",
+      "codec": "gob",
+      "trials": 100,
+      "requests": 25600,
+      "bytes": 304,
+      "batch_median_ns": 4566.576171875,
+      "batch_median_ci95_ns": [
+        4252.63671875,
+        4746.98828125
+      ],
+      "request_mean_ns": 5749.4677734375,
+      "request_stddev_ns": 44032.17687366963,
+      "request_min_ns": 2981,
+      "request_max_ns": 5561391,
+      "outside_100ns_50ms": 0,
+      "percentiles_ns": {
+        "p50": 3785,
+        "p75": 6102,
+        "p90": 7464,
+        "p95": 10303,
+        "p99": 19679
+      },
+      "phases": {
+        "warmup": {
+          "operations": 25600,
+          "elapsed_ns": 141317693
+        },
+        "batch": {
+          "operations": 25600,
+          "elapsed_ns": 133338289
+        },
+        "requests": {
+          "operations": 25600,
+          "elapsed_ns": 148970965
+        },
+        "teardown": {
+          "operations": 25600,
+          "elapsed_ns": 139395701
+        }
+      },
+      "total_ns": 620835844
+    },
+    {
+      "size": 4,
+      "scenario": "write",
+      "codec": "json",
+      "trials": 100,
+      "requests": 25600,
+      "bytes": 315,
+      "batch_median_ns": 1670.357421875,
+      "batch_median_ci95_ns": [
+        1569.5234375,
+        1782.6171875
+      ],
+      "request_mean_ns": 1936.207578125,
+      "request_stddev_ns": 9454.705681056816,
+      "request_min_ns": 1190,
+      "request_max_ns": 1465962,
+      "outside_100ns_50ms": 0,
+      "percentiles_ns": {
+        "p50": 1500,
+        "p75": 1987,
+        "p90": 2679,
+        "p95": 2903,
+        "p99": 4859
+      },
+      "phases": {
+        "warmup": {
+          "operations": 25600,
+          "elapsed_ns": 54578295
+        },
+        "batch": {
+          "operations": 25600,
+          "elapsed_ns": 51892108
+        },
+        "requests": {
+          "operations": 25600,
+          "elapsed_ns": 51132297
+        },
+        "teardown": {
+          "operations": 25600,
+          "elapsed_ns": 45156145
+        }
+      },
+      "total_ns": 256014984
+    },
+    {
+      "size": 64,
+      "scenario": "read",
+      "codec": "gob",
+      "trials": 100,
+      "requests": 25600,
+      "bytes": 1625,
+      "batch_median_ns": 30556.58984375,
+      "batch_median_ci95_ns": [
+        29658.591796875,
+        32987.888671875
+      ],
+      "request_mean_ns": 33679.8935546875,
+      "request_stddev_ns": 44237.8134312364,
+      "request_min_ns": 17200,
+      "request_max_ns": 3519785,
+      "outside_100ns_50ms": 0,
+      "percentiles_ns": {
+        "p50": 24896,
+        "p75": 37681,
+        "p90": 47721,
+        "p95": 65159,
+        "p99": 126959
+      },
+      "phases": {
+        "warmup": {
+          "operations": 25600,
+          "elapsed_ns": 892953358
+        },
+        "batch": {
+          "operations": 25600,
+          "elapsed_ns": 917562474
+        },
+        "requests": {
+          "operations": 25600,
+          "elapsed_ns": 864336972
+        },
+        "teardown": {
+          "operations": 25600,
+          "elapsed_ns": 871559916
+        }
+      },
+      "total_ns": 3598916554
+    },
+    {
+      "size": 64,
+      "scenario": "read",
+      "codec": "json",
+      "trials": 100,
+      "requests": 25600,
+      "bytes": 3435,
+      "batch_median_ns": 37429.701171875,
+      "batch_median_ci95_ns": [
+        35823.87109375,
+        40568.578125
+      ],
+      "request_mean_ns": 49010.64046875,
+      "request_stddev_ns": 74890.0193772391,
+      "request_min_ns": 26479,
+      "request_max_ns": 4410987,
+      "outside_100ns_50ms": 0,
+      "percentiles_ns": {
+        "p50": 39223,
+        "p75": 50609,
+        "p90": 70675,
+        "p95": 84574,
+        "p99": 157057
+      },
+      "phases": {
+        "warmup": {
+          "operations": 25600,
+          "elapsed_ns": 1001236155
+        },
+        "batch": {
+          "operations": 25600,
+          "elapsed_ns": 1050294855
+        },
+        "requests": {
+          "operations": 25600,
+          "elapsed_ns": 1257368592
+        },
+        "teardown": {
+          "operations": 25600,
+          "elapsed_ns": 1048809088
+        }
+      },
+      "total_ns": 4401363406
+    },
+    {
+      "size": 64,
+      "scenario": "roundtrip",
+      "codec": "gob",
+      "trials": 100,
+      "requests": 25600,
+      "bytes": 1625,
+      "batch_median_ns": 45168.146484375,
+      "batch_median_ci95_ns": [
+        43865.2109375,
+        50476.95703125
+      ],
+      "request_mean_ns": 55510.8951953125,
+      "request_stddev_ns": 133307.7266202755,
+      "request_min_ns": 24935,
+      "request_max_ns": 10785288,
+      "outside_100ns_50ms": 0,
+      "percentiles_ns": {
+        "p50": 43216,
+        "p75": 59201,
+        "p90": 86454,
+        "p95": 109481,
+        "p99": 187743
+      },
+      "phases": {
+        "warmup": {
+          "operations": 25600,
+          "elapsed_ns": 1368179281
+        },
+        "batch": {
+          "operations": 25600,
+          "elapsed_ns": 1407163044
+        },
+        "requests": {
+          "operations": 25600,
+          "elapsed_ns": 1423534111
+        },
+        "teardown": {
+          "operations": 25600,
+          "elapsed_ns": 1433627198
+        }
+      },
+      "total_ns": 5676203056
+    },
+    {
+      "size": 64,
+      "scenario": "roundtrip",
+      "codec": "json",
+      "trials": 100,
+      "requests": 25600,
+      "bytes": 3435,
+      "batch_median_ns": 63909.9453125,
+      "batch_median_ci95_ns": [
+        60719.458984375,
+        69586.7109375
+      ],
+      "request_mean_ns": 65591.096640625,
+      "request_stddev_ns": 124909.98242613506,
+      "request_min_ns": 37056,
+      "request_max_ns": 11034044,
+      "outside_100ns_50ms": 0,
+      "percentiles_ns": {
+        "p50": 51163,
+        "p75": 68076,
+        "p90": 92484,
+        "p95": 114069,
+        "p99": 198835
+      },
+      "phases": {
+        "warmup": {
+          "operations": 25600,
+          "elapsed_ns": 1571596299
+        },
+        "batch": {
+          "operations": 25600,
+          "elapsed_ns": 1914173312
+        },
+        "requests": {
+          "operations": 25600,
+          "elapsed_ns": 1681492492
+        },
+        "teardown": {
+          "operations": 25600,
+          "elapsed_ns": 1618447535
+        }
+      },
+      "total_ns": 6843014900
+    },
+    {
+      "size": 64,
+      "scenario": "write",
+      "codec": "gob",
+      "trials": 100,
+      "requests": 25600,
+      "bytes": 1625,
+      "batch_median_ns": 16488.650390625,
+      "batch_median_ci95_ns": [
+        15609.72265625,
+        17544.33984375
+      ],
+      "request_mean_ns": 15833.741953125,
+      "request_stddev_ns": 78564.42697780744,
+      "request_min_ns": 6794,
+      "request_max_ns": 8988096,
+      "outside_100ns_50ms": 0,
+      "percentiles_ns": {
+        "p50": 10735,
+        "p75": 17041,
+        "p90": 22657,
+        "p95": 31711,
+        "p99": 74704
+      },
+      "phases": {
+        "warmup": {
+          "operations": 25600,
+          "elapsed_ns": 309528037
+        },
+        "batch": {
+          "operations": 25600,
+          "elapsed_ns": 467199257
+        },
+        "requests": {
+          "operations": 25600,
+          "elapsed_ns": 407313901
+        },
+        "teardown": {
+          "operations": 25600,
+          "elapsed_ns": 369189719
+        }
+      },
+      "total_ns": 1598029926
+    },
+    {
+      "size": 64,
+      "scenario": "write",
+      "codec": "json",
+      "trials": 100,
+      "requests": 25600,
+      "bytes": 3435,
+      "batch_median_ns": 13953.0,
+      "batch_median_ci95_ns": [
+        13557.1328125,
+        14611.72265625
+      ],
+      "request_mean_ns": 16817.4125390625,
+      "request_stddev_ns": 63163.77807373523,
+      "request_min_ns": 10720,
+      "request_max_ns": 8745707,
+      "outside_100ns_50ms": 0,
+      "percentiles_ns": {
+        "p50": 13189,
+        "p75": 14748,
+        "p90": 23505,
+        "p95": 27210,
+        "p99": 55474
+      },
+      "phases": {
+        "warmup": {
+          "operations": 25600,
+          "elapsed_ns": 447119742
+        },
+        "batch": {
+          "operations": 25600,
+          "elapsed_ns": 406068111
+        },
+        "requests": {
+          "operations": 25600,
+          "elapsed_ns": 432560957
+        },
+        "teardown": {
+          "operations": 25600,
+          "elapsed_ns": 675537401
+        }
+      },
+      "total_ns": 2008307333
+    }
+  ],
+  "comparisons": [
+    {
+      "size": 4,
+      "scenario": "write",
+      "gob_over_json": 2.5699446883997776,
+      "ci95": [
+        2.471848091867944,
+        2.7533920710267648
+      ]
+    },
+    {
+      "size": 4,
+      "scenario": "read",
+      "gob_over_json": 7.507737688342514,
+      "ci95": [
+        7.1977795118518575,
+        7.819870340420763
+      ]
+    },
+    {
+      "size": 4,
+      "scenario": "roundtrip",
+      "gob_over_json": 5.948379013024661,
+      "ci95": [
+        5.6566291855882325,
+        6.095736307305275
+      ]
+    },
+    {
+      "size": 64,
+      "scenario": "write",
+      "gob_over_json": 1.1416301933669968,
+      "ci95": [
+        1.0947094304551666,
+        1.1874818103607023
+      ]
+    },
+    {
+      "size": 64,
+      "scenario": "read",
+      "gob_over_json": 0.8415053395385095,
+      "ci95": [
+        0.8127433880400965,
+        0.8818673687167766
+      ]
+    },
+    {
+      "size": 64,
+      "scenario": "roundtrip",
+      "gob_over_json": 0.7297445164443446,
+      "ci95": [
+        0.6980243388528523,
+        0.781550572743988
+      ]
+    }
+  ],
+  "wall_seconds": 220.56843569900002,
+  "benchmark_seconds": 35.19922773,
+  "overhead": {
+    "batch_median_ns": 2.1650345,
+    "batch_p99_ns": 3.35113,
+    "trials_above_5ns": 0,
+    "timer_mean_ns": 39.515219,
+    "timer_loop_median_ns": 94.37195,
+    "timer_min_positive_ns": 99,
+    "timer_zero_samples": 656659,
+    "timer_median_ns": 0.0,
+    "timer_p99_median_ns": 100.0
+  },
+  "operations": {
+    "warmup": 307200,
+    "batch": 307200,
+    "requests": 307200,
+    "teardown": 307200
+  },
+  "control_operations": 1001000000,
+  "validation_codec_calls": 2400
+}
