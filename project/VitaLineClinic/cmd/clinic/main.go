@@ -11,6 +11,7 @@ import (
 	"syscall"
 	"time"
 
+	"vitaline-clinic/internal/auth"
 	"vitaline-clinic/internal/bootstrap"
 	"vitaline-clinic/internal/delivery/cli"
 	guidelivery "vitaline-clinic/internal/delivery/gui"
@@ -89,6 +90,17 @@ func runAPI(app *bootstrap.App) error {
 		},
 		app.Logger,
 	)
+	if enabled := os.Getenv("VITALINE_AUTH_ENABLED"); enabled != "" && enabled != "0" {
+		if enabled != "1" {
+			return errors.New("VITALINE_AUTH_ENABLED must be 0 or 1")
+		}
+		authentication, err := auth.Open(context.Background())
+		if err != nil {
+			return err
+		}
+		defer authentication.Close()
+		server.Wrap(authentication.Wrap)
+	}
 	return serve(app, server)
 }
 

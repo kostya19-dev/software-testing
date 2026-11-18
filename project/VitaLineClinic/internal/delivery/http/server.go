@@ -67,6 +67,10 @@ func (s *Server) ListenAndServe() error {
 	return s.httpServer.ListenAndServe()
 }
 
+func (s *Server) Wrap(middleware func(http.Handler) http.Handler) {
+	s.httpServer.Handler = middleware(s.httpServer.Handler)
+}
+
 func (s *Server) Shutdown(ctx context.Context) error {
 	s.logger.Info("http server shutting down")
 	return s.httpServer.Shutdown(ctx)

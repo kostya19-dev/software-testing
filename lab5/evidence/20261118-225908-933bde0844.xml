@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="VitaLine authentication" tests="12" skipped="0" failures="0" errors="0" time="3.058513811">
+  <testsuite name="Аутентификация сотрудника VitaLine Clinic" tests="12" skipped="0" failures="0" errors="0" time="3.057592604">
+    <testcase name="Два фактора обязательны, код одноразовый, выход отзывает сессию" status="passed" time="0.147903373"></testcase>
+    <testcase name="Лимит неверных паролей и восстановление заблокированной учётной записи" status="passed" time="0.61397218"></testcase>
+    <testcase name="Ограничено число попыток второго фактора" status="passed" time="0.173708905"></testcase>
+    <testcase name="Истёкший код не открывает доступ" status="passed" time="0.159853625"></testcase>
+    <testcase name="Плановая смена просроченного пароля" status="passed" time="0.598111588"></testcase>
+    <testcase name="Восстановление отзывает существующую сессию" status="passed" time="0.244350378"></testcase>
+    <testcase name="Лимит попыток восстановления" status="passed" time="0.084028979"></testcase>
+    <testcase name="Истёкшая сессия не открывает доступ" status="passed" time="0.137778711"></testcase>
+    <testcase name="Повторный запрос кода не сбрасывает лимит попыток" status="passed" time="0.217630833"></testcase>
+    <testcase name="Блокировка отзывает существующую сессию" status="passed" time="0.462733658"></testcase>
+    <testcase name="Истёкший код восстановления отклоняется" status="passed" time="0.067903576"></testcase>
+    <testcase name="Только один из одновременных запросов может использовать код" status="passed" time="0.140790208"></testcase>
+  </testsuite>
+</testsuites>
