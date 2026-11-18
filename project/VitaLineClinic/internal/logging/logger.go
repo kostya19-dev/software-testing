@@ -17,33 +17,36 @@ type Instance struct {
 }
 
 func New(cfg appconfig.LoggingConfig, debug bool) (*Instance, error) {
-	level, err := parseLevel(cfg.Level)
-	if err != nil {
-		return nil, err
-	}
-	if debug {
-		level = slog.LevelDebug
-	}
-
-	if err := os.MkdirAll(filepath.Dir(cfg.File), 0o755); err != nil {
+	if err := os.MkdirAll(filepath.Dir(cfg.File), 0o755); err != nil { //nolint:gosec // G301: host must read logs
 		return nil, fmt.Errorf("create log directory: %w", err)
 	}
 
-	file, err := os.OpenFile(cfg.File, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)
+	file, err := os.OpenFile(cfg.File, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644) //nolint:gosec // G302: host must read logs
 	if err != nil {
 		return nil, fmt.Errorf("open log file: %w", err)
 	}
 
-	writer := io.MultiWriter(os.Stdout, file)
-	handler := slog.NewTextHandler(writer, &slog.HandlerOptions{
+	logger, err := NewLogger(io.MultiWriter(os.Stdout, file), cfg, debug)
+	if err != nil {
+		_ = file.Close()
+		return nil, err
+	}
+	return &Instance{Logger: logger, file: file}, nil
+}
+
+func NewLogger(w io.Writer, cfg appconfig.LoggingConfig, debug bool) (*slog.Logger, error) {
+	level, err := parseLevel(cfg.Level)
+	if err != nil {
+		return nil, err
+	}
+	debug = debug || cfg.Extended
+	if debug {
+		level = slog.LevelDebug
+	}
+	return slog.New(slog.NewTextHandler(w, &slog.HandlerOptions{
 		Level:     level,
 		AddSource: debug,
-	})
-
-	return &Instance{
-		Logger: slog.New(handler),
-		file:   file,
-	}, nil
+	})), nil
 }
 
 func (i *Instance) Close() error {

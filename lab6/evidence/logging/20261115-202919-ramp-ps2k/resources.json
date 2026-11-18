@@ -1,0 +1,3804 @@
+{
+  "window_s": [
+    0,
+    767.488
+  ],
+  "overall": {
+    "api": {
+      "cpu_cores": {
+        "min": 0.009,
+        "max": 0.963,
+        "mean": 0.513,
+        "median": 0.504,
+        "p95": 0.909
+      },
+      "cpu_throttled": {
+        "min": 0,
+        "max": 0.407,
+        "mean": 0.027,
+        "median": 0,
+        "p95": 0.148
+      },
+      "disk_read_kbps": {
+        "min": 0,
+        "max": 0,
+        "mean": 0,
+        "median": 0,
+        "p95": 0
+      },
+      "disk_write_kbps": {
+        "min": 0,
+        "max": 18625.595,
+        "mean": 1431.402,
+        "median": 0,
+        "p95": 12488
+      },
+      "memory_mb": {
+        "min": 2.809,
+        "max": 101.363,
+        "mean": 29.396,
+        "median": 18.809,
+        "p95": 82.493
+      },
+      "net_rx_kbps": {
+        "min": 0.219,
+        "max": 1714.762,
+        "mean": 651.253,
+        "median": 619.688,
+        "p95": 1462.172
+      },
+      "net_tx_kbps": {
+        "min": 0.099,
+        "max": 1904.592,
+        "mean": 726.115,
+        "median": 708.152,
+        "p95": 1593.609
+      },
+      "threads": {
+        "min": 7,
+        "max": 17,
+        "mean": 9.741,
+        "median": 10,
+        "p95": 11
+      }
+    },
+    "exporter": {
+      "cpu_cores": {
+        "min": 0.001,
+        "max": 0.009,
+        "mean": 0.004,
+        "median": 0.004,
+        "p95": 0.006
+      },
+      "cpu_throttled": {
+        "min": 0,
+        "max": 0,
+        "mean": 0,
+        "median": 0,
+        "p95": 0
+      },
+      "disk_read_kbps": {
+        "min": 0,
+        "max": 0,
+        "mean": 0,
+        "median": 0,
+        "p95": 0
+      },
+      "disk_write_kbps": {
+        "min": 0,
+        "max": 0,
+        "mean": 0,
+        "median": 0,
+        "p95": 0
+      },
+      "memory_mb": {
+        "min": 2.902,
+        "max": 8.254,
+        "mean": 7.77,
+        "median": 7.887,
+        "p95": 8.167
+      },
+      "net_rx_kbps": {
+        "min": 0.237,
+        "max": 0.552,
+        "mean": 0.449,
+        "median": 0.48,
+        "p95": 0.481
+      },
+      "net_tx_kbps": {
+        "min": 1.982,
+        "max": 4.053,
+        "mean": 3.745,
+        "median": 4.019,
+        "p95": 4.045
+      },
+      "threads": {
+        "min": 4,
+        "max": 7,
+        "mean": 6.197,
+        "median": 7,
+        "p95": 7
+      }
+    },
+    "loadgen": {
+      "cpu_cores": {
+        "min": 0.002,
+        "max": 0.462,
+        "mean": 0.219,
+        "median": 0.21,
+        "p95": 0.406
+      },
+      "cpu_throttled": {
+        "min": 0,
+        "max": 0,
+        "mean": 0,
+        "median": 0,
+        "p95": 0
+      },
+      "disk_read_kbps": {
+        "min": 0,
+        "max": 0,
+        "mean": 0,
+        "median": 0,
+        "p95": 0
+      },
+      "disk_write_kbps": {
+        "min": 0,
+        "max": 0,
+        "mean": 0,
+        "median": 0,
+        "p95": 0
+      },
+      "memory_mb": {
+        "min": 2.453,
+        "max": 71.48,
+        "mean": 25.757,
+        "median": 17.883,
+        "p95": 67.635
+      },
+      "net_rx_kbps": {
+        "min": 1.681,
+        "max": 857.626,
+        "mean": 317.576,
+        "median": 299.806,
+        "p95": 715.967
+      },
+      "net_tx_kbps": {
+        "min": 1.475,
+        "max": 523.172,
+        "mean": 195.034,
+        "median": 186.644,
+        "p95": 432.422
+      },
+      "threads": {
+        "min": 7,
+        "max": 9,
+        "mean": 8.875,
+        "median": 9,
+        "p95": 9
+      }
+    },
+    "mongo": {
+      "cpu_cores": {
+        "min": 0.054,
+        "max": 1.065,
+        "mean": 0.64,
+        "median": 0.619,
+        "p95": 1
+      },
+      "cpu_throttled": {
+        "min": 0,
+        "max": 1.195,
+        "mean": 0.422,
+        "median": 0.273,
+        "p95": 1.12
+      },
+      "disk_read_kbps": {
+        "min": 0,
+        "max": 45,
+        "mean": 0.332,
+        "median": 0,
+        "p95": 0
+      },
+      "disk_write_kbps": {
+        "min": 1.34,
+        "max": 5840.46,
+        "mean": 332.199,
+        "median": 167.365,
+        "p95": 1552.464
+      },
+      "memory_mb": {
+        "min": 179.879,
+        "max": 479.238,
+        "mean": 304.431,
+        "median": 288.465,
+        "p95": 454.594
+      },
+      "net_rx_kbps": {
+        "min": 0.113,
+        "max": 1054.451,
+        "mean": 409.82,
+        "median": 408.842,
+        "p95": 872.412
+      },
+      "net_tx_kbps": {
+        "min": 0.034,
+        "max": 1204.445,
+        "mean": 458.666,
+        "median": 431.256,
+        "p95": 1032.215
+      },
+      "threads": {
+        "min": 39,
+        "max": 153,
+        "mean": 98.365,
+        "median": 91,
+        "p95": 150
+      }
+    },
+    "prometheus": {
+      "cpu_cores": {
+        "min": 0.006,
+        "max": 0.04,
+        "mean": 0.017,
+        "median": 0.017,
+        "p95": 0.025
+      },
+      "cpu_throttled": {
+        "min": 0,
+        "max": 0,
+        "mean": 0,
+        "median": 0,
+        "p95": 0
+      },
+      "disk_read_kbps": {
+        "min": 0,
+        "max": 383.442,
+        "mean": 1.997,
+        "median": 0,
+        "p95": 0
+      },
+      "disk_write_kbps": {
+        "min": 0,
+        "max": 9.002,
+        "mean": 0.944,
+        "median": 0,
+        "p95": 7
+      },
+      "memory_mb": {
+        "min": 16.875,
+        "max": 25.328,
+        "mean": 20.221,
+        "median": 21.004,
+        "p95": 21.588
+      },
+      "net_rx_kbps": {
+        "min": 2.437,
+        "max": 6.847,
+        "mean": 5.706,
+        "median": 6.099,
+        "p95": 6.287
+      },
+      "net_tx_kbps": {
+        "min": 0.356,
+        "max": 1.237,
+        "mean": 0.906,
+        "median": 0.96,
+        "p95": 1.057
+      },
+      "threads": {
+        "min": 7,
+        "max": 14,
+        "mean": 8.034,
+        "median": 8,
+        "p95": 8
+      }
+    }
+  },
+  "steady_phases": {
+    "100 VU": {
+      "api": {
+        "cpu_cores": {
+          "min": 0.082,
+          "max": 0.207,
+          "mean": 0.15,
+          "median": 0.153,
+          "p95": 0.197
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 1386.347,
+          "mean": 226.479,
+          "median": 0,
+          "p95": 1214.4
+        },
+        "memory_mb": {
+          "min": 8.824,
+          "max": 13.418,
+          "mean": 9.489,
+          "median": 9.438,
+          "p95": 9.94
+        },
+        "net_rx_kbps": {
+          "min": 63.948,
+          "max": 142.213,
+          "mean": 114.098,
+          "median": 120.141,
+          "p95": 137.68
+        },
+        "net_tx_kbps": {
+          "min": 73.412,
+          "max": 154.738,
+          "mean": 130.449,
+          "median": 139.723,
+          "p95": 153.329
+        },
+        "threads": {
+          "min": 8,
+          "max": 8,
+          "mean": 8,
+          "median": 8,
+          "p95": 8
+        }
+      },
+      "exporter": {
+        "cpu_cores": {
+          "min": 0.002,
+          "max": 0.009,
+          "mean": 0.005,
+          "median": 0.005,
+          "p95": 0.008
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 7.473,
+          "max": 8.105,
+          "mean": 7.768,
+          "median": 7.762,
+          "p95": 8.098
+        },
+        "net_rx_kbps": {
+          "min": 0.244,
+          "max": 0.481,
+          "mean": 0.449,
+          "median": 0.48,
+          "p95": 0.481
+        },
+        "net_tx_kbps": {
+          "min": 2.021,
+          "max": 3.988,
+          "mean": 3.72,
+          "median": 3.982,
+          "p95": 3.986
+        },
+        "threads": {
+          "min": 5,
+          "max": 5,
+          "mean": 5,
+          "median": 5,
+          "p95": 5
+        }
+      },
+      "loadgen": {
+        "cpu_cores": {
+          "min": 0.033,
+          "max": 0.086,
+          "mean": 0.063,
+          "median": 0.064,
+          "p95": 0.083
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 7.184,
+          "max": 8.289,
+          "mean": 7.892,
+          "median": 7.877,
+          "p95": 8.279
+        },
+        "net_rx_kbps": {
+          "min": 32.365,
+          "max": 67.343,
+          "mean": 55.262,
+          "median": 58.14,
+          "p95": 66.517
+        },
+        "net_tx_kbps": {
+          "min": 20.114,
+          "max": 41.711,
+          "mean": 36.289,
+          "median": 39.039,
+          "p95": 40.723
+        },
+        "threads": {
+          "min": 8,
+          "max": 9,
+          "mean": 8.48,
+          "median": 8,
+          "p95": 9
+        }
+      },
+      "mongo": {
+        "cpu_cores": {
+          "min": 0.119,
+          "max": 0.537,
+          "mean": 0.343,
+          "median": 0.344,
+          "p95": 0.505
+        },
+        "cpu_throttled": {
+          "min": 0.026,
+          "max": 0.168,
+          "mean": 0.088,
+          "median": 0.084,
+          "p95": 0.154
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 32.446,
+          "max": 105,
+          "mean": 66.981,
+          "median": 66.997,
+          "p95": 83.571
+        },
+        "memory_mb": {
+          "min": 188.016,
+          "max": 357.516,
+          "mean": 223.653,
+          "median": 189.775,
+          "p95": 349.192
+        },
+        "net_rx_kbps": {
+          "min": 41.105,
+          "max": 89.827,
+          "mean": 75.66,
+          "median": 81.995,
+          "p95": 87.625
+        },
+        "net_tx_kbps": {
+          "min": 44.792,
+          "max": 107.175,
+          "mean": 79.747,
+          "median": 81.961,
+          "p95": 100.362
+        },
+        "threads": {
+          "min": 43,
+          "max": 63,
+          "mean": 48.9,
+          "median": 47,
+          "p95": 60
+        }
+      },
+      "prometheus": {
+        "cpu_cores": {
+          "min": 0.007,
+          "max": 0.023,
+          "mean": 0.016,
+          "median": 0.016,
+          "p95": 0.02
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 9.002,
+          "mean": 1.278,
+          "median": 0,
+          "p95": 6.001
+        },
+        "memory_mb": {
+          "min": 17.855,
+          "max": 21.578,
+          "mean": 18.319,
+          "median": 18.26,
+          "p95": 18.604
+        },
+        "net_rx_kbps": {
+          "min": 3.055,
+          "max": 6.151,
+          "mean": 5.652,
+          "median": 6.024,
+          "p95": 6.138
+        },
+        "net_tx_kbps": {
+          "min": 0.487,
+          "max": 1.089,
+          "mean": 0.926,
+          "median": 0.96,
+          "p95": 1.07
+        },
+        "threads": {
+          "min": 8,
+          "max": 14,
+          "mean": 8.12,
+          "median": 8,
+          "p95": 8
+        }
+      }
+    },
+    "1000 VU": {
+      "api": {
+        "cpu_cores": {
+          "min": 0.391,
+          "max": 0.951,
+          "mean": 0.792,
+          "median": 0.842,
+          "p95": 0.918
+        },
+        "cpu_throttled": {
+          "min": 0.006,
+          "max": 0.168,
+          "mean": 0.04,
+          "median": 0.03,
+          "p95": 0.099
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 18215,
+          "mean": 2124.237,
+          "median": 0,
+          "p95": 18215
+        },
+        "memory_mb": {
+          "min": 35.938,
+          "max": 50.191,
+          "mean": 40.454,
+          "median": 39.574,
+          "p95": 49.316
+        },
+        "net_rx_kbps": {
+          "min": 506.914,
+          "max": 1261.17,
+          "mean": 994.064,
+          "median": 1015.575,
+          "p95": 1233.866
+        },
+        "net_tx_kbps": {
+          "min": 578.158,
+          "max": 1407.499,
+          "mean": 1117.616,
+          "median": 1151.947,
+          "p95": 1359.326
+        },
+        "threads": {
+          "min": 10,
+          "max": 16,
+          "mean": 10.4,
+          "median": 10,
+          "p95": 11
+        }
+      },
+      "exporter": {
+        "cpu_cores": {
+          "min": 0.002,
+          "max": 0.008,
+          "mean": 0.005,
+          "median": 0.005,
+          "p95": 0.007
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 7.719,
+          "max": 8.164,
+          "mean": 7.987,
+          "median": 7.99,
+          "p95": 8.144
+        },
+        "net_rx_kbps": {
+          "min": 0.24,
+          "max": 0.481,
+          "mean": 0.444,
+          "median": 0.48,
+          "p95": 0.481
+        },
+        "net_tx_kbps": {
+          "min": 2.02,
+          "max": 4.043,
+          "mean": 3.737,
+          "median": 4.04,
+          "p95": 4.043
+        },
+        "threads": {
+          "min": 7,
+          "max": 7,
+          "mean": 7,
+          "median": 7,
+          "p95": 7
+        }
+      },
+      "loadgen": {
+        "cpu_cores": {
+          "min": 0.157,
+          "max": 0.431,
+          "mean": 0.342,
+          "median": 0.361,
+          "p95": 0.409
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 31.879,
+          "max": 40.422,
+          "mean": 35.554,
+          "median": 34.902,
+          "p95": 40.336
+        },
+        "net_rx_kbps": {
+          "min": 254.874,
+          "max": 615.906,
+          "mean": 485.823,
+          "median": 495.196,
+          "p95": 595.223
+        },
+        "net_tx_kbps": {
+          "min": 154.802,
+          "max": 372.66,
+          "mean": 298.297,
+          "median": 303.779,
+          "p95": 367.813
+        },
+        "threads": {
+          "min": 9,
+          "max": 9,
+          "mean": 9,
+          "median": 9,
+          "p95": 9
+        }
+      },
+      "mongo": {
+        "cpu_cores": {
+          "min": 0.451,
+          "max": 1.01,
+          "mean": 0.89,
+          "median": 0.957,
+          "p95": 1
+        },
+        "cpu_throttled": {
+          "min": 0.107,
+          "max": 1.159,
+          "mean": 0.719,
+          "median": 0.727,
+          "p95": 1.09
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 120.383,
+          "max": 2406,
+          "mean": 555.064,
+          "median": 233.971,
+          "p95": 2389.381
+        },
+        "memory_mb": {
+          "min": 282.734,
+          "max": 456.676,
+          "mean": 377.178,
+          "median": 425.193,
+          "p95": 453.391
+        },
+        "net_rx_kbps": {
+          "min": 322.133,
+          "max": 795.173,
+          "mean": 632.381,
+          "median": 659.794,
+          "p95": 765.451
+        },
+        "net_tx_kbps": {
+          "min": 352.72,
+          "max": 895.797,
+          "mean": 698.067,
+          "median": 714.741,
+          "p95": 870.155
+        },
+        "threads": {
+          "min": 137,
+          "max": 152,
+          "mean": 143.52,
+          "median": 143,
+          "p95": 152
+        }
+      },
+      "prometheus": {
+        "cpu_cores": {
+          "min": 0.009,
+          "max": 0.035,
+          "mean": 0.018,
+          "median": 0.02,
+          "p95": 0.024
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 7,
+          "mean": 0.56,
+          "median": 0,
+          "p95": 6.999
+        },
+        "memory_mb": {
+          "min": 21.09,
+          "max": 25.328,
+          "mean": 21.497,
+          "median": 21.367,
+          "p95": 21.596
+        },
+        "net_rx_kbps": {
+          "min": 3.061,
+          "max": 6.125,
+          "mean": 5.662,
+          "median": 6.122,
+          "p95": 6.125
+        },
+        "net_tx_kbps": {
+          "min": 0.48,
+          "max": 0.96,
+          "mean": 0.888,
+          "median": 0.96,
+          "p95": 0.96
+        },
+        "threads": {
+          "min": 8,
+          "max": 14,
+          "mean": 8.12,
+          "median": 8,
+          "p95": 8
+        }
+      }
+    },
+    "1200 VU": {
+      "api": {
+        "cpu_cores": {
+          "min": 0.446,
+          "max": 0.928,
+          "mean": 0.843,
+          "median": 0.877,
+          "p95": 0.917
+        },
+        "cpu_throttled": {
+          "min": 0.003,
+          "max": 0.203,
+          "mean": 0.062,
+          "median": 0.045,
+          "p95": 0.159
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 18625.595,
+          "mean": 2976.771,
+          "median": 0,
+          "p95": 18607.559
+        },
+        "memory_mb": {
+          "min": 47.125,
+          "max": 74.117,
+          "mean": 54.654,
+          "median": 52.9,
+          "p95": 65.568
+        },
+        "net_rx_kbps": {
+          "min": 617.735,
+          "max": 1468.216,
+          "mean": 1209.368,
+          "median": 1255.006,
+          "p95": 1440.394
+        },
+        "net_tx_kbps": {
+          "min": 688.084,
+          "max": 1643.747,
+          "mean": 1337.249,
+          "median": 1395.338,
+          "p95": 1616.876
+        },
+        "threads": {
+          "min": 11,
+          "max": 17,
+          "mean": 11.36,
+          "median": 11,
+          "p95": 14.3
+        }
+      },
+      "exporter": {
+        "cpu_cores": {
+          "min": 0.003,
+          "max": 0.006,
+          "mean": 0.005,
+          "median": 0.005,
+          "p95": 0.006
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 7.668,
+          "max": 8.254,
+          "mean": 7.938,
+          "median": 7.902,
+          "p95": 8.216
+        },
+        "net_rx_kbps": {
+          "min": 0.244,
+          "max": 0.481,
+          "mean": 0.46,
+          "median": 0.48,
+          "p95": 0.481
+        },
+        "net_tx_kbps": {
+          "min": 2.054,
+          "max": 4.047,
+          "mean": 3.867,
+          "median": 4.041,
+          "p95": 4.043
+        },
+        "threads": {
+          "min": 7,
+          "max": 7,
+          "mean": 7,
+          "median": 7,
+          "p95": 7
+        }
+      },
+      "loadgen": {
+        "cpu_cores": {
+          "min": 0.187,
+          "max": 0.423,
+          "mean": 0.365,
+          "median": 0.375,
+          "p95": 0.406
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 45.176,
+          "max": 51.664,
+          "mean": 48.412,
+          "median": 48.182,
+          "p95": 50.778
+        },
+        "net_rx_kbps": {
+          "min": 294.937,
+          "max": 725.141,
+          "mean": 593.077,
+          "median": 618.91,
+          "p95": 713.025
+        },
+        "net_tx_kbps": {
+          "min": 188.533,
+          "max": 452.488,
+          "mean": 359.009,
+          "median": 372.47,
+          "p95": 444.702
+        },
+        "threads": {
+          "min": 9,
+          "max": 9,
+          "mean": 9,
+          "median": 9,
+          "p95": 9
+        }
+      },
+      "mongo": {
+        "cpu_cores": {
+          "min": 0.476,
+          "max": 1.017,
+          "mean": 0.935,
+          "median": 0.977,
+          "p95": 1.001
+        },
+        "cpu_throttled": {
+          "min": 0.225,
+          "max": 1.133,
+          "mean": 0.872,
+          "median": 0.931,
+          "p95": 1.127
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 124.015,
+          "max": 2775.306,
+          "mean": 647.844,
+          "median": 261.533,
+          "p95": 2737.266
+        },
+        "memory_mb": {
+          "min": 292.313,
+          "max": 466.609,
+          "mean": 393.105,
+          "median": 440.889,
+          "p95": 461.686
+        },
+        "net_rx_kbps": {
+          "min": 387.069,
+          "max": 929.712,
+          "mean": 744.879,
+          "median": 782.715,
+          "p95": 909.176
+        },
+        "net_tx_kbps": {
+          "min": 420.895,
+          "max": 1031.701,
+          "mean": 852.688,
+          "median": 882.235,
+          "p95": 1002.269
+        },
+        "threads": {
+          "min": 137,
+          "max": 153,
+          "mean": 144.26,
+          "median": 148,
+          "p95": 151.1
+        }
+      },
+      "prometheus": {
+        "cpu_cores": {
+          "min": 0.009,
+          "max": 0.032,
+          "mean": 0.018,
+          "median": 0.018,
+          "p95": 0.027
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 7,
+          "mean": 0.56,
+          "median": 0,
+          "p95": 6.998
+        },
+        "memory_mb": {
+          "min": 21.113,
+          "max": 21.766,
+          "mean": 21.385,
+          "median": 21.387,
+          "p95": 21.623
+        },
+        "net_rx_kbps": {
+          "min": 3.193,
+          "max": 6.839,
+          "mean": 6.01,
+          "median": 6.281,
+          "p95": 6.284
+        },
+        "net_tx_kbps": {
+          "min": 0.488,
+          "max": 1.08,
+          "mean": 0.919,
+          "median": 0.96,
+          "p95": 0.96
+        },
+        "threads": {
+          "min": 8,
+          "max": 8,
+          "mean": 8,
+          "median": 8,
+          "p95": 8
+        }
+      }
+    },
+    "1500 VU": {
+      "api": {
+        "cpu_cores": {
+          "min": 0.422,
+          "max": 0.963,
+          "mean": 0.865,
+          "median": 0.898,
+          "p95": 0.944
+        },
+        "cpu_throttled": {
+          "min": 0.005,
+          "max": 0.407,
+          "mean": 0.134,
+          "median": 0.133,
+          "p95": 0.294
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 17082,
+          "mean": 2340.128,
+          "median": 0,
+          "p95": 17071.973
+        },
+        "memory_mb": {
+          "min": 47.988,
+          "max": 100.758,
+          "mean": 72.175,
+          "median": 71.148,
+          "p95": 97.117
+        },
+        "net_rx_kbps": {
+          "min": 525.796,
+          "max": 1579.229,
+          "mean": 1212.435,
+          "median": 1292.958,
+          "p95": 1542.894
+        },
+        "net_tx_kbps": {
+          "min": 561.11,
+          "max": 1730.258,
+          "mean": 1301.316,
+          "median": 1374.436,
+          "p95": 1655.223
+        },
+        "threads": {
+          "min": 11,
+          "max": 16,
+          "mean": 11.2,
+          "median": 11,
+          "p95": 12
+        }
+      },
+      "exporter": {
+        "cpu_cores": {
+          "min": 0.004,
+          "max": 0.009,
+          "mean": 0.006,
+          "median": 0.005,
+          "p95": 0.008
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 7.621,
+          "max": 8.211,
+          "mean": 7.878,
+          "median": 7.895,
+          "p95": 8.194
+        },
+        "net_rx_kbps": {
+          "min": 0.237,
+          "max": 0.481,
+          "mean": 0.459,
+          "median": 0.48,
+          "p95": 0.481
+        },
+        "net_tx_kbps": {
+          "min": 1.995,
+          "max": 4.053,
+          "mean": 3.864,
+          "median": 4.044,
+          "p95": 4.046
+        },
+        "threads": {
+          "min": 7,
+          "max": 7,
+          "mean": 7,
+          "median": 7,
+          "p95": 7
+        }
+      },
+      "loadgen": {
+        "cpu_cores": {
+          "min": 0.176,
+          "max": 0.46,
+          "mean": 0.391,
+          "median": 0.396,
+          "p95": 0.458
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 50.055,
+          "max": 71.48,
+          "mean": 57.546,
+          "median": 57.281,
+          "p95": 67.225
+        },
+        "net_rx_kbps": {
+          "min": 249.236,
+          "max": 783.905,
+          "mean": 586.789,
+          "median": 609.357,
+          "p95": 755.182
+        },
+        "net_tx_kbps": {
+          "min": 149.745,
+          "max": 455.682,
+          "mean": 356.399,
+          "median": 378.074,
+          "p95": 443.394
+        },
+        "threads": {
+          "min": 9,
+          "max": 9,
+          "mean": 9,
+          "median": 9,
+          "p95": 9
+        }
+      },
+      "mongo": {
+        "cpu_cores": {
+          "min": 0.426,
+          "max": 1.065,
+          "mean": 0.953,
+          "median": 1,
+          "p95": 1.026
+        },
+        "cpu_throttled": {
+          "min": 0.336,
+          "max": 1.195,
+          "mean": 1,
+          "median": 1.084,
+          "p95": 1.147
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 105.575,
+          "max": 5840.46,
+          "mean": 694.936,
+          "median": 269.034,
+          "p95": 3139.55
+        },
+        "memory_mb": {
+          "min": 300.578,
+          "max": 463.992,
+          "mean": 386.124,
+          "median": 409.123,
+          "p95": 462.359
+        },
+        "net_rx_kbps": {
+          "min": 305.547,
+          "max": 946.237,
+          "mean": 714.751,
+          "median": 755.948,
+          "p95": 909.403
+        },
+        "net_tx_kbps": {
+          "min": 357.131,
+          "max": 1141.033,
+          "mean": 857.899,
+          "median": 900.159,
+          "p95": 1116.304
+        },
+        "threads": {
+          "min": 111,
+          "max": 150,
+          "mean": 141.42,
+          "median": 143,
+          "p95": 148
+        }
+      },
+      "prometheus": {
+        "cpu_cores": {
+          "min": 0.009,
+          "max": 0.04,
+          "mean": 0.021,
+          "median": 0.019,
+          "p95": 0.035
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 7,
+          "mean": 1.04,
+          "median": 0,
+          "p95": 7
+        },
+        "memory_mb": {
+          "min": 21.148,
+          "max": 21.727,
+          "mean": 21.42,
+          "median": 21.402,
+          "p95": 21.697
+        },
+        "net_rx_kbps": {
+          "min": 2.557,
+          "max": 6.847,
+          "mean": 6.029,
+          "median": 6.285,
+          "p95": 6.588
+        },
+        "net_tx_kbps": {
+          "min": 0.356,
+          "max": 1.08,
+          "mean": 0.922,
+          "median": 0.96,
+          "p95": 1.025
+        },
+        "threads": {
+          "min": 8,
+          "max": 8,
+          "mean": 8,
+          "median": 8,
+          "p95": 8
+        }
+      }
+    },
+    "200 VU": {
+      "api": {
+        "cpu_cores": {
+          "min": 0.12,
+          "max": 0.275,
+          "mean": 0.227,
+          "median": 0.245,
+          "p95": 0.259
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 4559,
+          "mean": 478.937,
+          "median": 0,
+          "p95": 4558.487
+        },
+        "memory_mb": {
+          "min": 9.426,
+          "max": 11.168,
+          "mean": 10.268,
+          "median": 10.248,
+          "p95": 10.939
+        },
+        "net_rx_kbps": {
+          "min": 122.634,
+          "max": 274.434,
+          "mean": 223.321,
+          "median": 241.577,
+          "p95": 268.514
+        },
+        "net_tx_kbps": {
+          "min": 138.101,
+          "max": 305.083,
+          "mean": 256.561,
+          "median": 279.651,
+          "p95": 301.817
+        },
+        "threads": {
+          "min": 8,
+          "max": 8,
+          "mean": 8,
+          "median": 8,
+          "p95": 8
+        }
+      },
+      "exporter": {
+        "cpu_cores": {
+          "min": 0.002,
+          "max": 0.007,
+          "mean": 0.004,
+          "median": 0.004,
+          "p95": 0.006
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 7.477,
+          "max": 8.113,
+          "mean": 7.819,
+          "median": 7.797,
+          "p95": 8.112
+        },
+        "net_rx_kbps": {
+          "min": 0.24,
+          "max": 0.481,
+          "mean": 0.46,
+          "median": 0.48,
+          "p95": 0.48
+        },
+        "net_tx_kbps": {
+          "min": 1.995,
+          "max": 4.001,
+          "mean": 3.826,
+          "median": 3.993,
+          "p95": 4.001
+        },
+        "threads": {
+          "min": 5,
+          "max": 5,
+          "mean": 5,
+          "median": 5,
+          "p95": 5
+        }
+      },
+      "loadgen": {
+        "cpu_cores": {
+          "min": 0.051,
+          "max": 0.119,
+          "mean": 0.099,
+          "median": 0.105,
+          "p95": 0.114
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 7.988,
+          "max": 10.336,
+          "mean": 9.718,
+          "median": 9.9,
+          "p95": 10.278
+        },
+        "net_rx_kbps": {
+          "min": 60.156,
+          "max": 132.017,
+          "mean": 108.604,
+          "median": 117.734,
+          "p95": 129.393
+        },
+        "net_tx_kbps": {
+          "min": 35.685,
+          "max": 80.724,
+          "mean": 69.579,
+          "median": 75.713,
+          "p95": 78.932
+        },
+        "threads": {
+          "min": 9,
+          "max": 9,
+          "mean": 9,
+          "median": 9,
+          "p95": 9
+        }
+      },
+      "mongo": {
+        "cpu_cores": {
+          "min": 0.103,
+          "max": 0.535,
+          "mean": 0.383,
+          "median": 0.377,
+          "p95": 0.508
+        },
+        "cpu_throttled": {
+          "min": 0.023,
+          "max": 0.208,
+          "mean": 0.112,
+          "median": 0.108,
+          "p95": 0.18
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 43.206,
+          "max": 108,
+          "mean": 86.468,
+          "median": 87.5,
+          "p95": 104
+        },
+        "memory_mb": {
+          "min": 190.902,
+          "max": 367.891,
+          "mean": 238.317,
+          "median": 197.492,
+          "p95": 361.586
+        },
+        "net_rx_kbps": {
+          "min": 78.386,
+          "max": 175.656,
+          "mean": 148.479,
+          "median": 163.185,
+          "p95": 173.55
+        },
+        "net_tx_kbps": {
+          "min": 81.128,
+          "max": 199.128,
+          "mean": 155.764,
+          "median": 169.218,
+          "p95": 193.62
+        },
+        "threads": {
+          "min": 47,
+          "max": 71,
+          "mean": 56.82,
+          "median": 56,
+          "p95": 67
+        }
+      },
+      "prometheus": {
+        "cpu_cores": {
+          "min": 0.007,
+          "max": 0.025,
+          "mean": 0.015,
+          "median": 0.015,
+          "p95": 0.021
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 7,
+          "mean": 0.88,
+          "median": 0,
+          "p95": 6.999
+        },
+        "memory_mb": {
+          "min": 18.375,
+          "max": 22.473,
+          "mean": 18.7,
+          "median": 18.635,
+          "p95": 18.881
+        },
+        "net_rx_kbps": {
+          "min": 3.02,
+          "max": 6.153,
+          "mean": 5.82,
+          "median": 6.05,
+          "p95": 6.146
+        },
+        "net_tx_kbps": {
+          "min": 0.48,
+          "max": 1.057,
+          "mean": 0.945,
+          "median": 0.96,
+          "p95": 1.057
+        },
+        "threads": {
+          "min": 8,
+          "max": 14,
+          "mean": 8.12,
+          "median": 8,
+          "p95": 8
+        }
+      }
+    },
+    "300 VU": {
+      "api": {
+        "cpu_cores": {
+          "min": 0.212,
+          "max": 0.458,
+          "mean": 0.327,
+          "median": 0.336,
+          "p95": 0.412
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 5849,
+          "mean": 606.741,
+          "median": 0,
+          "p95": 4949.207
+        },
+        "memory_mb": {
+          "min": 10.578,
+          "max": 15.938,
+          "mean": 11.809,
+          "median": 11.805,
+          "p95": 12.758
+        },
+        "net_rx_kbps": {
+          "min": 234.372,
+          "max": 404.702,
+          "mean": 333.444,
+          "median": 360.112,
+          "p95": 396.014
+        },
+        "net_tx_kbps": {
+          "min": 263.243,
+          "max": 451.762,
+          "mean": 381.812,
+          "median": 414.49,
+          "p95": 447.422
+        },
+        "threads": {
+          "min": 9,
+          "max": 14,
+          "mean": 9.1,
+          "median": 9,
+          "p95": 9
+        }
+      },
+      "exporter": {
+        "cpu_cores": {
+          "min": 0.003,
+          "max": 0.006,
+          "mean": 0.004,
+          "median": 0.004,
+          "p95": 0.006
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 7.254,
+          "max": 8.109,
+          "mean": 7.753,
+          "median": 7.738,
+          "p95": 8.109
+        },
+        "net_rx_kbps": {
+          "min": 0.292,
+          "max": 0.481,
+          "mean": 0.464,
+          "median": 0.48,
+          "p95": 0.481
+        },
+        "net_tx_kbps": {
+          "min": 2.435,
+          "max": 4.007,
+          "mean": 3.862,
+          "median": 4.002,
+          "p95": 4.006
+        },
+        "threads": {
+          "min": 5,
+          "max": 5,
+          "mean": 5,
+          "median": 5,
+          "p95": 5
+        }
+      },
+      "loadgen": {
+        "cpu_cores": {
+          "min": 0.094,
+          "max": 0.183,
+          "mean": 0.138,
+          "median": 0.143,
+          "p95": 0.164
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 9.324,
+          "max": 14.566,
+          "mean": 13.151,
+          "median": 13.457,
+          "p95": 14.21
+        },
+        "net_rx_kbps": {
+          "min": 114.081,
+          "max": 193.078,
+          "mean": 161.267,
+          "median": 173.547,
+          "p95": 191.272
+        },
+        "net_tx_kbps": {
+          "min": 68.687,
+          "max": 117.518,
+          "mean": 102.518,
+          "median": 111.868,
+          "p95": 116.626
+        },
+        "threads": {
+          "min": 9,
+          "max": 9,
+          "mean": 9,
+          "median": 9,
+          "p95": 9
+        }
+      },
+      "mongo": {
+        "cpu_cores": {
+          "min": 0.306,
+          "max": 0.692,
+          "mean": 0.477,
+          "median": 0.469,
+          "p95": 0.638
+        },
+        "cpu_throttled": {
+          "min": 0.088,
+          "max": 0.348,
+          "mean": 0.166,
+          "median": 0.155,
+          "p95": 0.284
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 64.909,
+          "max": 495.876,
+          "mean": 140.381,
+          "median": 113,
+          "p95": 304.1
+        },
+        "memory_mb": {
+          "min": 200.383,
+          "max": 374.543,
+          "mean": 245.306,
+          "median": 205.947,
+          "p95": 366.952
+        },
+        "net_rx_kbps": {
+          "min": 149.481,
+          "max": 259.583,
+          "mean": 221.069,
+          "median": 241.117,
+          "p95": 256.887
+        },
+        "net_tx_kbps": {
+          "min": 160.836,
+          "max": 291.781,
+          "mean": 232.967,
+          "median": 250.526,
+          "p95": 282.136
+        },
+        "threads": {
+          "min": 56,
+          "max": 77,
+          "mean": 62.18,
+          "median": 62,
+          "p95": 73.55
+        }
+      },
+      "prometheus": {
+        "cpu_cores": {
+          "min": 0.006,
+          "max": 0.022,
+          "mean": 0.016,
+          "median": 0.016,
+          "p95": 0.021
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 6.002,
+          "mean": 1.184,
+          "median": 0,
+          "p95": 6
+        },
+        "memory_mb": {
+          "min": 18.445,
+          "max": 22.809,
+          "mean": 18.853,
+          "median": 18.773,
+          "p95": 19.045
+        },
+        "net_rx_kbps": {
+          "min": 3.688,
+          "max": 6.16,
+          "mean": 5.87,
+          "median": 6.061,
+          "p95": 6.158
+        },
+        "net_tx_kbps": {
+          "min": 0.584,
+          "max": 1.057,
+          "mean": 0.949,
+          "median": 0.96,
+          "p95": 1.057
+        },
+        "threads": {
+          "min": 8,
+          "max": 8,
+          "mean": 8,
+          "median": 8,
+          "p95": 8
+        }
+      }
+    },
+    "400 VU": {
+      "api": {
+        "cpu_cores": {
+          "min": 0.224,
+          "max": 0.49,
+          "mean": 0.415,
+          "median": 0.427,
+          "p95": 0.482
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 5047,
+          "mean": 796.467,
+          "median": 0,
+          "p95": 4328
+        },
+        "memory_mb": {
+          "min": 12.52,
+          "max": 15.051,
+          "mean": 13.686,
+          "median": 13.666,
+          "p95": 14.896
+        },
+        "net_rx_kbps": {
+          "min": 255.242,
+          "max": 522.771,
+          "mean": 444.871,
+          "median": 484.195,
+          "p95": 515.057
+        },
+        "net_tx_kbps": {
+          "min": 286.434,
+          "max": 590.022,
+          "mean": 509.003,
+          "median": 556.28,
+          "p95": 584.747
+        },
+        "threads": {
+          "min": 9,
+          "max": 10,
+          "mean": 9.68,
+          "median": 10,
+          "p95": 10
+        }
+      },
+      "exporter": {
+        "cpu_cores": {
+          "min": 0.002,
+          "max": 0.005,
+          "mean": 0.004,
+          "median": 0.004,
+          "p95": 0.005
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 7.438,
+          "max": 8.137,
+          "mean": 7.788,
+          "median": 7.791,
+          "p95": 8.133
+        },
+        "net_rx_kbps": {
+          "min": 0.241,
+          "max": 0.481,
+          "mean": 0.459,
+          "median": 0.48,
+          "p95": 0.48
+        },
+        "net_tx_kbps": {
+          "min": 2.01,
+          "max": 4.023,
+          "mean": 3.836,
+          "median": 4.012,
+          "p95": 4.021
+        },
+        "threads": {
+          "min": 5,
+          "max": 6,
+          "mean": 5.8,
+          "median": 6,
+          "p95": 6
+        }
+      },
+      "loadgen": {
+        "cpu_cores": {
+          "min": 0.089,
+          "max": 0.21,
+          "mean": 0.174,
+          "median": 0.179,
+          "p95": 0.201
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 13.879,
+          "max": 16.043,
+          "mean": 15.156,
+          "median": 15.443,
+          "p95": 15.766
+        },
+        "net_rx_kbps": {
+          "min": 123.164,
+          "max": 251.264,
+          "mean": 215.085,
+          "median": 234.703,
+          "p95": 248.676
+        },
+        "net_tx_kbps": {
+          "min": 75.338,
+          "max": 154.627,
+          "mean": 135.538,
+          "median": 148.575,
+          "p95": 153.594
+        },
+        "threads": {
+          "min": 9,
+          "max": 9,
+          "mean": 9,
+          "median": 9,
+          "p95": 9
+        }
+      },
+      "mongo": {
+        "cpu_cores": {
+          "min": 0.206,
+          "max": 0.715,
+          "mean": 0.559,
+          "median": 0.567,
+          "p95": 0.702
+        },
+        "cpu_throttled": {
+          "min": 0.041,
+          "max": 0.339,
+          "mean": 0.223,
+          "median": 0.233,
+          "p95": 0.319
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 2,
+          "mean": 0.16,
+          "median": 0,
+          "p95": 2
+        },
+        "disk_write_kbps": {
+          "min": 63.126,
+          "max": 564,
+          "mean": 193.034,
+          "median": 149,
+          "p95": 543.65
+        },
+        "memory_mb": {
+          "min": 207.387,
+          "max": 378.824,
+          "mean": 266.151,
+          "median": 214.547,
+          "p95": 376.474
+        },
+        "net_rx_kbps": {
+          "min": 163.179,
+          "max": 342.399,
+          "mean": 294.486,
+          "median": 322.841,
+          "p95": 336.709
+        },
+        "net_tx_kbps": {
+          "min": 180.909,
+          "max": 373.325,
+          "mean": 311.409,
+          "median": 336.106,
+          "p95": 365.586
+        },
+        "threads": {
+          "min": 62,
+          "max": 83,
+          "mean": 70.32,
+          "median": 68,
+          "p95": 81.2
+        }
+      },
+      "prometheus": {
+        "cpu_cores": {
+          "min": 0.007,
+          "max": 0.029,
+          "mean": 0.018,
+          "median": 0.017,
+          "p95": 0.025
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 383.442,
+          "mean": 30.67,
+          "median": 0,
+          "p95": 383.346
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 6,
+          "mean": 0.92,
+          "median": 0,
+          "p95": 4
+        },
+        "memory_mb": {
+          "min": 18.855,
+          "max": 21.762,
+          "mean": 19.609,
+          "median": 19.145,
+          "p95": 21.23
+        },
+        "net_rx_kbps": {
+          "min": 3.041,
+          "max": 6.178,
+          "mean": 5.829,
+          "median": 6.07,
+          "p95": 6.175
+        },
+        "net_tx_kbps": {
+          "min": 0.481,
+          "max": 1.057,
+          "mean": 0.942,
+          "median": 0.96,
+          "p95": 1.057
+        },
+        "threads": {
+          "min": 8,
+          "max": 14,
+          "mean": 8.12,
+          "median": 8,
+          "p95": 8
+        }
+      }
+    },
+    "50 VU": {
+      "api": {
+        "cpu_cores": {
+          "min": 0.042,
+          "max": 0.103,
+          "mean": 0.08,
+          "median": 0.085,
+          "p95": 0.099
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 933.909,
+          "mean": 74.713,
+          "median": 0,
+          "p95": 933.909
+        },
+        "memory_mb": {
+          "min": 8.348,
+          "max": 9.551,
+          "mean": 8.839,
+          "median": 8.82,
+          "p95": 9.41
+        },
+        "net_rx_kbps": {
+          "min": 33.221,
+          "max": 76.564,
+          "mean": 56.683,
+          "median": 57.35,
+          "p95": 73.087
+        },
+        "net_tx_kbps": {
+          "min": 36.75,
+          "max": 83.165,
+          "mean": 64.704,
+          "median": 67.703,
+          "p95": 79.293
+        },
+        "threads": {
+          "min": 8,
+          "max": 8,
+          "mean": 8,
+          "median": 8,
+          "p95": 8
+        }
+      },
+      "exporter": {
+        "cpu_cores": {
+          "min": 0.001,
+          "max": 0.006,
+          "mean": 0.004,
+          "median": 0.004,
+          "p95": 0.005
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 5.004,
+          "max": 7.992,
+          "mean": 7.082,
+          "median": 7.129,
+          "p95": 7.776
+        },
+        "net_rx_kbps": {
+          "min": 0.24,
+          "max": 0.481,
+          "mean": 0.438,
+          "median": 0.48,
+          "p95": 0.48
+        },
+        "net_tx_kbps": {
+          "min": 1.982,
+          "max": 3.981,
+          "mean": 3.611,
+          "median": 3.949,
+          "p95": 3.977
+        },
+        "threads": {
+          "min": 4,
+          "max": 5,
+          "mean": 4.82,
+          "median": 5,
+          "p95": 5
+        }
+      },
+      "loadgen": {
+        "cpu_cores": {
+          "min": 0.016,
+          "max": 0.041,
+          "mean": 0.032,
+          "median": 0.035,
+          "p95": 0.04
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 6.148,
+          "max": 7.41,
+          "mean": 6.963,
+          "median": 7.025,
+          "p95": 7.342
+        },
+        "net_rx_kbps": {
+          "min": 16.088,
+          "max": 35.705,
+          "mean": 27.535,
+          "median": 28.462,
+          "p95": 34.797
+        },
+        "net_tx_kbps": {
+          "min": 10.652,
+          "max": 21.659,
+          "mean": 19.089,
+          "median": 20.861,
+          "p95": 21.575
+        },
+        "threads": {
+          "min": 8,
+          "max": 8,
+          "mean": 8,
+          "median": 8,
+          "p95": 8
+        }
+      },
+      "mongo": {
+        "cpu_cores": {
+          "min": 0.054,
+          "max": 0.399,
+          "mean": 0.273,
+          "median": 0.261,
+          "p95": 0.39
+        },
+        "cpu_throttled": {
+          "min": 0.009,
+          "max": 0.123,
+          "mean": 0.063,
+          "median": 0.06,
+          "p95": 0.112
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 1.344,
+          "mean": 0.09,
+          "median": 0,
+          "p95": 0.999
+        },
+        "disk_write_kbps": {
+          "min": 22.26,
+          "max": 69,
+          "mean": 47.599,
+          "median": 49,
+          "p95": 61.1
+        },
+        "memory_mb": {
+          "min": 187.598,
+          "max": 356.137,
+          "mean": 225.02,
+          "median": 188.049,
+          "p95": 349.574
+        },
+        "net_rx_kbps": {
+          "min": 21.575,
+          "max": 47.81,
+          "mean": 37.633,
+          "median": 39.711,
+          "p95": 45.039
+        },
+        "net_tx_kbps": {
+          "min": 22.927,
+          "max": 56.837,
+          "mean": 39.462,
+          "median": 39.046,
+          "p95": 54.238
+        },
+        "threads": {
+          "min": 41,
+          "max": 58,
+          "mean": 45.16,
+          "median": 43,
+          "p95": 55
+        }
+      },
+      "prometheus": {
+        "cpu_cores": {
+          "min": 0.007,
+          "max": 0.02,
+          "mean": 0.014,
+          "median": 0.014,
+          "p95": 0.018
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 6.002,
+          "mean": 0.48,
+          "median": 0,
+          "p95": 6
+        },
+        "memory_mb": {
+          "min": 17.129,
+          "max": 21.164,
+          "mean": 17.749,
+          "median": 17.693,
+          "p95": 18.114
+        },
+        "net_rx_kbps": {
+          "min": 2.994,
+          "max": 6.138,
+          "mean": 5.489,
+          "median": 5.99,
+          "p95": 6.117
+        },
+        "net_tx_kbps": {
+          "min": 0.483,
+          "max": 1.089,
+          "mean": 0.907,
+          "median": 0.96,
+          "p95": 1.089
+        },
+        "threads": {
+          "min": 7,
+          "max": 13,
+          "mean": 8,
+          "median": 8,
+          "p95": 8
+        }
+      }
+    },
+    "500 VU": {
+      "api": {
+        "cpu_cores": {
+          "min": 0.217,
+          "max": 0.606,
+          "mean": 0.473,
+          "median": 0.515,
+          "p95": 0.588
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 7690.511,
+          "mean": 1458.789,
+          "median": 0,
+          "p95": 7436.059
+        },
+        "memory_mb": {
+          "min": 14.355,
+          "max": 17.996,
+          "mean": 16.165,
+          "median": 16.174,
+          "p95": 17.658
+        },
+        "net_rx_kbps": {
+          "min": 263.831,
+          "max": 651.386,
+          "mean": 544.048,
+          "median": 571.676,
+          "p95": 649.318
+        },
+        "net_tx_kbps": {
+          "min": 297.62,
+          "max": 737.372,
+          "mean": 621.752,
+          "median": 664.386,
+          "p95": 736.593
+        },
+        "threads": {
+          "min": 10,
+          "max": 11,
+          "mean": 10.02,
+          "median": 10,
+          "p95": 10
+        }
+      },
+      "exporter": {
+        "cpu_cores": {
+          "min": 0.002,
+          "max": 0.005,
+          "mean": 0.004,
+          "median": 0.004,
+          "p95": 0.005
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 7.289,
+          "max": 8.172,
+          "mean": 7.832,
+          "median": 7.807,
+          "p95": 8.164
+        },
+        "net_rx_kbps": {
+          "min": 0.241,
+          "max": 0.481,
+          "mean": 0.443,
+          "median": 0.48,
+          "p95": 0.481
+        },
+        "net_tx_kbps": {
+          "min": 2.014,
+          "max": 4.034,
+          "mean": 3.711,
+          "median": 4.023,
+          "p95": 4.033
+        },
+        "threads": {
+          "min": 6,
+          "max": 7,
+          "mean": 6.44,
+          "median": 6,
+          "p95": 7
+        }
+      },
+      "loadgen": {
+        "cpu_cores": {
+          "min": 0.088,
+          "max": 0.256,
+          "mean": 0.198,
+          "median": 0.213,
+          "p95": 0.249
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 15.535,
+          "max": 18.262,
+          "mean": 16.856,
+          "median": 17.191,
+          "p95": 17.75
+        },
+        "net_rx_kbps": {
+          "min": 125.653,
+          "max": 314.416,
+          "mean": 263.384,
+          "median": 281.868,
+          "p95": 313.214
+        },
+        "net_tx_kbps": {
+          "min": 76.098,
+          "max": 193.275,
+          "mean": 164.21,
+          "median": 181.926,
+          "p95": 191.975
+        },
+        "threads": {
+          "min": 9,
+          "max": 9,
+          "mean": 9,
+          "median": 9,
+          "p95": 9
+        }
+      },
+      "mongo": {
+        "cpu_cores": {
+          "min": 0.192,
+          "max": 0.77,
+          "mean": 0.591,
+          "median": 0.623,
+          "p95": 0.75
+        },
+        "cpu_throttled": {
+          "min": 0.044,
+          "max": 0.411,
+          "mean": 0.251,
+          "median": 0.257,
+          "p95": 0.403
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 71.196,
+          "max": 771,
+          "mean": 289.08,
+          "median": 159.5,
+          "p95": 765.1
+        },
+        "memory_mb": {
+          "min": 219.227,
+          "max": 390.785,
+          "mean": 275.676,
+          "median": 227.379,
+          "p95": 386.641
+        },
+        "net_rx_kbps": {
+          "min": 171.405,
+          "max": 425.152,
+          "mean": 358.896,
+          "median": 383.797,
+          "p95": 424.249
+        },
+        "net_tx_kbps": {
+          "min": 189.068,
+          "max": 462.851,
+          "mean": 381.764,
+          "median": 394.587,
+          "p95": 460.544
+        },
+        "threads": {
+          "min": 70,
+          "max": 98,
+          "mean": 83.26,
+          "median": 85,
+          "p95": 98
+        }
+      },
+      "prometheus": {
+        "cpu_cores": {
+          "min": 0.007,
+          "max": 0.023,
+          "mean": 0.016,
+          "median": 0.016,
+          "p95": 0.022
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 7,
+          "mean": 1.122,
+          "median": 0,
+          "p95": 6.572
+        },
+        "memory_mb": {
+          "min": 20.75,
+          "max": 24.613,
+          "mean": 21.034,
+          "median": 21.004,
+          "p95": 21.262
+        },
+        "net_rx_kbps": {
+          "min": 3.048,
+          "max": 6.135,
+          "mean": 5.62,
+          "median": 6.088,
+          "p95": 6.132
+        },
+        "net_tx_kbps": {
+          "min": 0.481,
+          "max": 1.057,
+          "mean": 0.895,
+          "median": 0.96,
+          "p95": 1.056
+        },
+        "threads": {
+          "min": 8,
+          "max": 13,
+          "mean": 8.1,
+          "median": 8,
+          "p95": 8
+        }
+      }
+    },
+    "600 VU": {
+      "api": {
+        "cpu_cores": {
+          "min": 0.246,
+          "max": 0.676,
+          "mean": 0.523,
+          "median": 0.556,
+          "p95": 0.644
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0.006,
+          "mean": 0.001,
+          "median": 0,
+          "p95": 0.006
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 12730,
+          "mean": 1925.373,
+          "median": 0,
+          "p95": 12730
+        },
+        "memory_mb": {
+          "min": 17.316,
+          "max": 22.262,
+          "mean": 19.241,
+          "median": 19.279,
+          "p95": 21.06
+        },
+        "net_rx_kbps": {
+          "min": 319.117,
+          "max": 788.265,
+          "mean": 644.819,
+          "median": 649.114,
+          "p95": 778.07
+        },
+        "net_tx_kbps": {
+          "min": 365.838,
+          "max": 894.482,
+          "mean": 735.695,
+          "median": 743.123,
+          "p95": 884.112
+        },
+        "threads": {
+          "min": 10,
+          "max": 10,
+          "mean": 10,
+          "median": 10,
+          "p95": 10
+        }
+      },
+      "exporter": {
+        "cpu_cores": {
+          "min": 0.002,
+          "max": 0.007,
+          "mean": 0.004,
+          "median": 0.004,
+          "p95": 0.006
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 7.453,
+          "max": 8.188,
+          "mean": 7.87,
+          "median": 7.926,
+          "p95": 8.174
+        },
+        "net_rx_kbps": {
+          "min": 0.241,
+          "max": 0.481,
+          "mean": 0.439,
+          "median": 0.48,
+          "p95": 0.48
+        },
+        "net_tx_kbps": {
+          "min": 2.022,
+          "max": 4.036,
+          "mean": 3.681,
+          "median": 4.032,
+          "p95": 4.034
+        },
+        "threads": {
+          "min": 7,
+          "max": 7,
+          "mean": 7,
+          "median": 7,
+          "p95": 7
+        }
+      },
+      "loadgen": {
+        "cpu_cores": {
+          "min": 0.101,
+          "max": 0.28,
+          "mean": 0.213,
+          "median": 0.225,
+          "p95": 0.261
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 17.289,
+          "max": 20.215,
+          "mean": 18.865,
+          "median": 19.137,
+          "p95": 20.042
+        },
+        "net_rx_kbps": {
+          "min": 155.522,
+          "max": 380.087,
+          "mean": 311.997,
+          "median": 316.717,
+          "p95": 376.624
+        },
+        "net_tx_kbps": {
+          "min": 94.008,
+          "max": 233.73,
+          "mean": 193.344,
+          "median": 204.472,
+          "p95": 230.332
+        },
+        "threads": {
+          "min": 9,
+          "max": 9,
+          "mean": 9,
+          "median": 9,
+          "p95": 9
+        }
+      },
+      "mongo": {
+        "cpu_cores": {
+          "min": 0.191,
+          "max": 0.836,
+          "mean": 0.618,
+          "median": 0.637,
+          "p95": 0.769
+        },
+        "cpu_throttled": {
+          "min": 0.027,
+          "max": 0.471,
+          "mean": 0.277,
+          "median": 0.267,
+          "p95": 0.424
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 78.034,
+          "max": 1231,
+          "mean": 252.581,
+          "median": 175.5,
+          "p95": 1224.474
+        },
+        "memory_mb": {
+          "min": 232.102,
+          "max": 402.648,
+          "mean": 278.746,
+          "median": 237.17,
+          "p95": 400.37
+        },
+        "net_rx_kbps": {
+          "min": 209.337,
+          "max": 513.479,
+          "mean": 424.135,
+          "median": 429.349,
+          "p95": 511.887
+        },
+        "net_tx_kbps": {
+          "min": 223.302,
+          "max": 559.501,
+          "mean": 453.365,
+          "median": 463.239,
+          "p95": 552.997
+        },
+        "threads": {
+          "min": 87,
+          "max": 111,
+          "mean": 94.44,
+          "median": 91,
+          "p95": 109.55
+        }
+      },
+      "prometheus": {
+        "cpu_cores": {
+          "min": 0.008,
+          "max": 0.022,
+          "mean": 0.015,
+          "median": 0.016,
+          "p95": 0.019
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 7,
+          "mean": 1.12,
+          "median": 0,
+          "p95": 7
+        },
+        "memory_mb": {
+          "min": 20.773,
+          "max": 22.309,
+          "mean": 20.998,
+          "median": 21.057,
+          "p95": 21.066
+        },
+        "net_rx_kbps": {
+          "min": 3.065,
+          "max": 6.116,
+          "mean": 5.578,
+          "median": 6.111,
+          "p95": 6.113
+        },
+        "net_tx_kbps": {
+          "min": 0.482,
+          "max": 0.961,
+          "mean": 0.876,
+          "median": 0.96,
+          "p95": 0.96
+        },
+        "threads": {
+          "min": 8,
+          "max": 9,
+          "mean": 8.02,
+          "median": 8,
+          "p95": 8
+        }
+      }
+    },
+    "700 VU": {
+      "api": {
+        "cpu_cores": {
+          "min": 0.305,
+          "max": 0.861,
+          "mean": 0.643,
+          "median": 0.674,
+          "p95": 0.825
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0.065,
+          "mean": 0.011,
+          "median": 0.004,
+          "p95": 0.057
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 13600,
+          "mean": 1644.902,
+          "median": 0,
+          "p95": 13598.47
+        },
+        "memory_mb": {
+          "min": 20.547,
+          "max": 35.848,
+          "mean": 25.555,
+          "median": 24.793,
+          "p95": 31.044
+        },
+        "net_rx_kbps": {
+          "min": 363.06,
+          "max": 924.353,
+          "mean": 750.01,
+          "median": 772.773,
+          "p95": 902.17
+        },
+        "net_tx_kbps": {
+          "min": 412.004,
+          "max": 1042.569,
+          "mean": 852.69,
+          "median": 881.477,
+          "p95": 1022.113
+        },
+        "threads": {
+          "min": 10,
+          "max": 11,
+          "mean": 10.04,
+          "median": 10,
+          "p95": 10
+        }
+      },
+      "exporter": {
+        "cpu_cores": {
+          "min": 0.002,
+          "max": 0.007,
+          "mean": 0.004,
+          "median": 0.004,
+          "p95": 0.006
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 7.453,
+          "max": 8.184,
+          "mean": 7.903,
+          "median": 7.934,
+          "p95": 8.184
+        },
+        "net_rx_kbps": {
+          "min": 0.241,
+          "max": 0.481,
+          "mean": 0.439,
+          "median": 0.48,
+          "p95": 0.481
+        },
+        "net_tx_kbps": {
+          "min": 2.023,
+          "max": 4.04,
+          "mean": 3.685,
+          "median": 4.036,
+          "p95": 4.039
+        },
+        "threads": {
+          "min": 7,
+          "max": 7,
+          "mean": 7,
+          "median": 7,
+          "p95": 7
+        }
+      },
+      "loadgen": {
+        "cpu_cores": {
+          "min": 0.134,
+          "max": 0.366,
+          "mean": 0.268,
+          "median": 0.274,
+          "p95": 0.352
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 19.688,
+          "max": 27.172,
+          "mean": 22.596,
+          "median": 20.705,
+          "p95": 26.129
+        },
+        "net_rx_kbps": {
+          "min": 175.2,
+          "max": 443.032,
+          "mean": 363.926,
+          "median": 373.721,
+          "p95": 439.527
+        },
+        "net_tx_kbps": {
+          "min": 106.261,
+          "max": 271.65,
+          "mean": 224.872,
+          "median": 233.919,
+          "p95": 269.62
+        },
+        "threads": {
+          "min": 9,
+          "max": 9,
+          "mean": 9,
+          "median": 9,
+          "p95": 9
+        }
+      },
+      "mongo": {
+        "cpu_cores": {
+          "min": 0.293,
+          "max": 0.984,
+          "mean": 0.748,
+          "median": 0.793,
+          "p95": 0.954
+        },
+        "cpu_throttled": {
+          "min": 0.088,
+          "max": 0.859,
+          "mean": 0.414,
+          "median": 0.386,
+          "p95": 0.778
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 86.602,
+          "max": 2421,
+          "mean": 357.986,
+          "median": 195.049,
+          "p95": 1390.319
+        },
+        "memory_mb": {
+          "min": 244.188,
+          "max": 428.762,
+          "mean": 327.743,
+          "median": 311.559,
+          "p95": 420.478
+        },
+        "net_rx_kbps": {
+          "min": 236.628,
+          "max": 597.573,
+          "mean": 489.099,
+          "median": 509.294,
+          "p95": 586.166
+        },
+        "net_tx_kbps": {
+          "min": 257.335,
+          "max": 648.651,
+          "mean": 526.753,
+          "median": 542.724,
+          "p95": 638.613
+        },
+        "threads": {
+          "min": 98,
+          "max": 150,
+          "mean": 119.2,
+          "median": 116,
+          "p95": 148
+        }
+      },
+      "prometheus": {
+        "cpu_cores": {
+          "min": 0.007,
+          "max": 0.028,
+          "mean": 0.018,
+          "median": 0.018,
+          "p95": 0.026
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 7.002,
+          "mean": 0.76,
+          "median": 0,
+          "p95": 6
+        },
+        "memory_mb": {
+          "min": 20.816,
+          "max": 24.941,
+          "mean": 21.148,
+          "median": 21.066,
+          "p95": 21.376
+        },
+        "net_rx_kbps": {
+          "min": 3.065,
+          "max": 6.636,
+          "mean": 5.585,
+          "median": 6.116,
+          "p95": 6.12
+        },
+        "net_tx_kbps": {
+          "min": 0.481,
+          "max": 1.08,
+          "mean": 0.877,
+          "median": 0.96,
+          "p95": 0.96
+        },
+        "threads": {
+          "min": 8,
+          "max": 14,
+          "mean": 8.12,
+          "median": 8,
+          "p95": 8
+        }
+      }
+    },
+    "800 VU": {
+      "api": {
+        "cpu_cores": {
+          "min": 0.309,
+          "max": 0.834,
+          "mean": 0.677,
+          "median": 0.723,
+          "p95": 0.822
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0.084,
+          "mean": 0.015,
+          "median": 0.003,
+          "p95": 0.071
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 17083,
+          "mean": 2127.389,
+          "median": 0,
+          "p95": 15340.274
+        },
+        "memory_mb": {
+          "min": 28.98,
+          "max": 33.742,
+          "mean": 31.402,
+          "median": 31.635,
+          "p95": 33.262
+        },
+        "net_rx_kbps": {
+          "min": 332.979,
+          "max": 1026.271,
+          "mean": 842.213,
+          "median": 896.552,
+          "p95": 1012.076
+        },
+        "net_tx_kbps": {
+          "min": 381.347,
+          "max": 1159.223,
+          "mean": 958.229,
+          "median": 1015.815,
+          "p95": 1152.03
+        },
+        "threads": {
+          "min": 10,
+          "max": 10,
+          "mean": 10,
+          "median": 10,
+          "p95": 10
+        }
+      },
+      "exporter": {
+        "cpu_cores": {
+          "min": 0.002,
+          "max": 0.006,
+          "mean": 0.004,
+          "median": 0.005,
+          "p95": 0.006
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 7.699,
+          "max": 8.184,
+          "mean": 8.01,
+          "median": 8.035,
+          "p95": 8.166
+        },
+        "net_rx_kbps": {
+          "min": 0.242,
+          "max": 0.481,
+          "mean": 0.439,
+          "median": 0.48,
+          "p95": 0.48
+        },
+        "net_tx_kbps": {
+          "min": 2.039,
+          "max": 4.041,
+          "mean": 3.687,
+          "median": 4.038,
+          "p95": 4.041
+        },
+        "threads": {
+          "min": 7,
+          "max": 7,
+          "mean": 7,
+          "median": 7,
+          "p95": 7
+        }
+      },
+      "loadgen": {
+        "cpu_cores": {
+          "min": 0.129,
+          "max": 0.359,
+          "mean": 0.279,
+          "median": 0.297,
+          "p95": 0.344
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "memory_mb": {
+          "min": 25.336,
+          "max": 27.98,
+          "mean": 26.946,
+          "median": 27.02,
+          "p95": 27.979
+        },
+        "net_rx_kbps": {
+          "min": 166.334,
+          "max": 496.598,
+          "mean": 409.166,
+          "median": 433.682,
+          "p95": 489.954
+        },
+        "net_tx_kbps": {
+          "min": 101.93,
+          "max": 304.968,
+          "mean": 252.818,
+          "median": 266.784,
+          "p95": 302.924
+        },
+        "threads": {
+          "min": 9,
+          "max": 9,
+          "mean": 9,
+          "median": 9,
+          "p95": 9
+        }
+      },
+      "mongo": {
+        "cpu_cores": {
+          "min": 0.337,
+          "max": 0.984,
+          "mean": 0.769,
+          "median": 0.81,
+          "p95": 0.962
+        },
+        "cpu_throttled": {
+          "min": 0.029,
+          "max": 0.906,
+          "mean": 0.475,
+          "median": 0.485,
+          "p95": 0.832
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 80.976,
+          "max": 1977,
+          "mean": 583.329,
+          "median": 224.5,
+          "p95": 1887.7
+        },
+        "memory_mb": {
+          "min": 273.469,
+          "max": 444.422,
+          "mean": 344.79,
+          "median": 280.594,
+          "p95": 438.029
+        },
+        "net_rx_kbps": {
+          "min": 215.825,
+          "max": 667.02,
+          "mean": 549.164,
+          "median": 579.28,
+          "p95": 663.221
+        },
+        "net_tx_kbps": {
+          "min": 237.65,
+          "max": 726.557,
+          "mean": 590.989,
+          "median": 628.172,
+          "p95": 711.277
+        },
+        "threads": {
+          "min": 137,
+          "max": 150,
+          "mean": 142.28,
+          "median": 141,
+          "p95": 150
+        }
+      },
+      "prometheus": {
+        "cpu_cores": {
+          "min": 0.008,
+          "max": 0.036,
+          "mean": 0.018,
+          "median": 0.017,
+          "p95": 0.032
+        },
+        "cpu_throttled": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_read_kbps": {
+          "min": 0,
+          "max": 0,
+          "mean": 0,
+          "median": 0,
+          "p95": 0
+        },
+        "disk_write_kbps": {
+          "min": 0,
+          "max": 8,
+          "mean": 1.015,
+          "median": 0,
+          "p95": 5.119
+        },
+        "memory_mb": {
+          "min": 20.887,
+          "max": 21.508,
+          "mean": 21.234,
+          "median": 21.258,
+          "p95": 21.496
+        },
+        "net_rx_kbps": {
+          "min": 2.937,
+          "max": 6.635,
+          "mean": 5.564,
+          "median": 6.118,
+          "p95": 6.122
+        },
+        "net_tx_kbps": {
+          "min": 0.417,
+          "max": 1.08,
+          "mean": 0.871,
+          "median": 0.96,
+          "p95": 0.96
+        },
+        "threads": {
+          "min": 8,
+          "max": 8,
+          "mean": 8,
+          "median": 8,
+          "p95": 8
+        }
+      }
+    }
+  }
+}

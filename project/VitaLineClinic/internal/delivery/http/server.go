@@ -1,13 +1,23 @@
 package http
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
+	"io"
 	"log/slog"
 	"net/http"
 	"time"
 
+	"vitaline-clinic/internal/logging"
+	"vitaline-clinic/internal/tracing"
 	"vitaline-clinic/internal/usecase"
+)
+
+const (
+	bodyPreview = 1024
+
+	readHeaderTimeout = 10 * time.Second
 )
 
 type HealthChecker interface {
@@ -55,8 +65,9 @@ func NewServer(address string, appName string, health HealthChecker, services Se
 	mux.HandleFunc("/api/reschedule-offers/", srv.handleRescheduleOfferAction)
 
 	srv.httpServer = &http.Server{
-		Addr:    address,
-		Handler: srv.logRequests(mux),
+		Addr:              address,
+		Handler:           srv.logRequests(mux),
+		ReadHeaderTimeout: readHeaderTimeout,
 	}
 
 	return srv
@@ -109,16 +120,39 @@ func (s *Server) logRequests(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now()
 		recorder := &statusRecorder{ResponseWriter: w, status: http.StatusOK}
+		detailed := s.logger.Enabled(r.Context(), slog.LevelDebug)
+		var request *bodyRecorder
+		if detailed {
+			request = &bodyRecorder{ReadCloser: r.Body}
+			r.Body = request
+			recorder.body = &bytes.Buffer{}
+		}
 
 		next.ServeHTTP(recorder, r)
 
-		s.logger.Info(
-			"http request handled",
+		attrs := []any{
 			"method", r.Method,
 			"path", r.URL.Path,
 			"status", recorder.status,
 			"duration", time.Since(start),
-		)
+		}
+		if traceID := tracing.TraceID(r.Context()); traceID != "" {
+			attrs = append(attrs, "trace_id", traceID)
+		}
+		s.logger.InfoContext(r.Context(), "http request handled", attrs...)
+		if detailed {
+			s.logger.DebugContext(r.Context(), "http request details",
+				"method", r.Method,
+				"path", r.URL.Path,
+				"query", r.URL.RawQuery,
+				"remote_addr", r.RemoteAddr,
+				"user_agent", r.UserAgent(),
+				"request_bytes", request.size,
+				"request_body", logging.Truncate(request.body.String(), bodyPreview),
+				"response_bytes", recorder.size,
+				"response_body", logging.Truncate(recorder.body.String(), bodyPreview),
+			)
+		}
 	})
 }
 
@@ -131,9 +165,35 @@ func writeJSON(w http.ResponseWriter, status int, payload any) {
 type statusRecorder struct {
 	http.ResponseWriter
 	status int
+	size   int
+	body   *bytes.Buffer
 }
 
 func (r *statusRecorder) WriteHeader(status int) {
 	r.status = status
 	r.ResponseWriter.WriteHeader(status)
+}
+
+func (r *statusRecorder) Write(data []byte) (int, error) {
+	n, err := r.ResponseWriter.Write(data)
+	r.size += n
+	if r.body != nil && r.body.Len() < bodyPreview {
+		r.body.Write(data[:min(n, bodyPreview-r.body.Len())])
+	}
+	return n, err
+}
+
+type bodyRecorder struct {
+	io.ReadCloser
+	size int
+	body bytes.Buffer
+}
+
+func (b *bodyRecorder) Read(data []byte) (int, error) {
+	n, err := b.ReadCloser.Read(data)
+	b.size += n
+	if b.body.Len() < bodyPreview {
+		b.body.Write(data[:min(n, bodyPreview-b.body.Len())])
+	}
+	return n, err
 }

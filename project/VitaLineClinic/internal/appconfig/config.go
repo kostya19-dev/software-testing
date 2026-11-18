@@ -17,6 +17,7 @@ type Config struct {
 	GUI      GUIConfig      `json:"gui"`
 	Database DatabaseConfig `json:"database"`
 	Logging  LoggingConfig  `json:"logging"`
+	Tracing  TracingConfig  `json:"tracing"`
 	Business BusinessConfig `json:"business"`
 }
 
@@ -41,8 +42,16 @@ type DatabaseConfig struct {
 }
 
 type LoggingConfig struct {
-	Level string `json:"level"`
-	File  string `json:"file"`
+	Level    string `json:"level"`
+	File     string `json:"file"`
+	Extended bool   `json:"extended"`
+}
+
+type TracingConfig struct {
+	Enabled     bool    `json:"enabled"`
+	Endpoint    string  `json:"endpoint"`
+	ServiceName string  `json:"service_name"`
+	SampleRatio float64 `json:"sample_ratio"`
 }
 
 type BusinessConfig struct {
@@ -86,7 +95,7 @@ func LoadWithOptions(path string, opts LoadOptions) (Config, string, error) {
 	if err := cfg.applyEnvOverrides(); err != nil {
 		return Config{}, "", err
 	}
-	if err := cfg.ValidateWithOptions(ValidateOptions{RequireDatabase: opts.RequireDatabase}); err != nil {
+	if err := cfg.ValidateWithOptions(ValidateOptions(opts)); err != nil {
 		return Config{}, "", err
 	}
 
@@ -97,83 +106,84 @@ func (c Config) Validate() error {
 	return c.ValidateWithOptions(ValidateOptions{RequireDatabase: true})
 }
 
+type rule struct {
+	failed  bool
+	field   string
+	message string
+}
+
+const msgEmpty = "не может быть пустым"
+
+func blank(value string) bool { return strings.TrimSpace(value) == "" }
+
 func (c Config) ValidateWithOptions(opts ValidateOptions) error {
-	if strings.TrimSpace(c.App.Name) == "" {
-		return domain.NewValidationError("app.name", "не может быть пустым")
-	}
+	rules := []rule{{blank(c.App.Name), "app.name", msgEmpty}}
 	if opts.RequireDatabase {
-		driver := strings.TrimSpace(c.Database.Driver)
-		if driver == "" {
-			return domain.NewValidationError("database.driver", "не может быть пустым")
+		rules = append(rules, c.Database.rules()...)
+	}
+	rules = append(rules,
+		rule{blank(c.Logging.Level), "logging.level", msgEmpty},
+		rule{blank(c.Logging.File), "logging.file", msgEmpty},
+		rule{blank(c.API.Address), "api.address", msgEmpty},
+		rule{blank(c.GUI.Address), "gui.address", msgEmpty},
+		rule{blank(c.GUI.APIBaseURL), "gui.api_base_url", msgEmpty},
+		rule{c.Business.AppointmentMinLeadTimeMinutes < 0, "business.appointment_min_lead_time_minutes", "не может быть отрицательным"},
+		rule{c.Tracing.Enabled && blank(c.Tracing.Endpoint), "tracing.endpoint", "не может быть пустым при включённой трассировке"},
+		rule{c.Tracing.SampleRatio < 0 || c.Tracing.SampleRatio > 1, "tracing.sample_ratio", "должен быть от 0 до 1"},
+	)
+	return firstFailure(rules)
+}
+
+func (d DatabaseConfig) rules() []rule {
+	driver := strings.TrimSpace(d.Driver)
+	return []rule{
+		{driver == "", "database.driver", msgEmpty},
+		{driver != "postgres" && driver != "mongodb", "database.driver", "поддерживаются только postgres и mongodb"},
+		{blank(d.URL), "database.url", msgEmpty},
+		{driver == "mongodb" && blank(d.Name), "database.name", "не может быть пустым для mongodb"},
+	}
+}
+
+func firstFailure(rules []rule) error {
+	for _, r := range rules {
+		if r.failed {
+			return domain.NewValidationError(r.field, r.message)
 		}
-		if driver != "postgres" && driver != "mongodb" {
-			return domain.NewValidationError("database.driver", "поддерживаются только postgres и mongodb")
-		}
-		if strings.TrimSpace(c.Database.URL) == "" {
-			return domain.NewValidationError("database.url", "не может быть пустым")
-		}
-		if driver == "mongodb" && strings.TrimSpace(c.Database.Name) == "" {
-			return domain.NewValidationError("database.name", "не может быть пустым для mongodb")
-		}
-	}
-	if strings.TrimSpace(c.Logging.Level) == "" {
-		return domain.NewValidationError("logging.level", "не может быть пустым")
-	}
-	if strings.TrimSpace(c.Logging.File) == "" {
-		return domain.NewValidationError("logging.file", "не может быть пустым")
-	}
-	if strings.TrimSpace(c.API.Address) == "" {
-		return domain.NewValidationError("api.address", "не может быть пустым")
-	}
-	if strings.TrimSpace(c.GUI.Address) == "" {
-		return domain.NewValidationError("gui.address", "не может быть пустым")
-	}
-	if strings.TrimSpace(c.GUI.APIBaseURL) == "" {
-		return domain.NewValidationError("gui.api_base_url", "не может быть пустым")
-	}
-	if c.Business.AppointmentMinLeadTimeMinutes < 0 {
-		return domain.NewValidationError("business.appointment_min_lead_time_minutes", "не может быть отрицательным")
 	}
 	return nil
 }
 
 func (c *Config) applyDefaults() {
-	if strings.TrimSpace(c.App.Name) == "" {
-		c.App.Name = "VitaLine Clinic"
-	}
-	if strings.TrimSpace(c.App.Environment) == "" {
-		c.App.Environment = "local"
-	}
-	if strings.TrimSpace(c.API.Address) == "" {
-		c.API.Address = ":8080"
-	}
-	if strings.TrimSpace(c.GUI.Address) == "" {
-		c.GUI.Address = ":8090"
-	}
-	if strings.TrimSpace(c.GUI.APIBaseURL) == "" {
-		c.GUI.APIBaseURL = "http://localhost:8080"
-	}
-	if strings.TrimSpace(c.Database.Driver) == "" {
-		c.Database.Driver = "mongodb"
-	}
-	if strings.TrimSpace(c.Database.URL) == "" {
-		if c.Database.Driver == "postgres" {
-			c.Database.URL = "postgres://vitaline_app:vitaline_app@localhost:5432/vitaline_clinic?sslmode=disable"
-		} else {
-			c.Database.URL = "mongodb://localhost:27017"
-		}
-	}
-	if strings.TrimSpace(c.Database.Name) == "" {
-		c.Database.Name = "vitaline_clinic"
-	}
-	if strings.TrimSpace(c.Logging.Level) == "" {
-		c.Logging.Level = "info"
-	}
-	if strings.TrimSpace(c.Logging.File) == "" {
-		c.Logging.File = "./logs/clinic.log"
-	}
+	defaultString(&c.App.Name, "VitaLine Clinic")
+	defaultString(&c.App.Environment, "local")
+	defaultString(&c.API.Address, ":8080")
+	defaultString(&c.GUI.Address, ":8090")
+	defaultString(&c.GUI.APIBaseURL, "http://localhost:8080")
+	defaultString(&c.Database.Driver, "mongodb")
+	defaultString(&c.Database.URL, defaultDatabaseURL(c.Database.Driver))
+	defaultString(&c.Database.Name, "vitaline_clinic")
+	defaultString(&c.Logging.Level, "info")
+	defaultString(&c.Logging.File, "./logs/clinic.log")
+	defaultString(&c.Tracing.Endpoint, "localhost:4318")
+	defaultString(&c.Tracing.ServiceName, "vitaline-clinic-api")
 	if c.Business.AppointmentMinLeadTimeMinutes == 0 {
 		c.Business.AppointmentMinLeadTimeMinutes = 30
+	}
+	if c.Tracing.SampleRatio == 0 {
+		c.Tracing.SampleRatio = 1
+	}
+}
+
+func defaultDatabaseURL(driver string) string {
+	if driver == "postgres" {
+		return "postgres://vitaline_app:vitaline_app@localhost:5432/vitaline_clinic?sslmode=disable"
+	}
+	return "mongodb://localhost:27017"
+}
+
+func defaultString(dst *string, value string) {
+	if blank(*dst) {
+		*dst = value
 	}
 }
 
@@ -191,6 +201,23 @@ func (c *Config) applyEnvOverrides() error {
 	overrideString(&c.Logging.Level, os.Getenv("VITALINE_LOG_LEVEL"))
 	overrideString(&c.Logging.File, os.Getenv("VITALINE_LOG_FILE"))
 	overrideString(&c.App.Environment, os.Getenv("VITALINE_ENV"))
+	overrideString(&c.Tracing.Endpoint, os.Getenv("OTEL_EXPORTER_OTLP_ENDPOINT"))
+	overrideString(&c.Tracing.Endpoint, os.Getenv("VITALINE_TRACING_ENDPOINT"))
+	overrideString(&c.Tracing.ServiceName, os.Getenv("VITALINE_TRACING_SERVICE"))
+
+	if err := overrideBool(&c.Logging.Extended, "VITALINE_LOG_EXTENDED"); err != nil {
+		return err
+	}
+	if err := overrideBool(&c.Tracing.Enabled, "VITALINE_TRACING_ENABLED"); err != nil {
+		return err
+	}
+	if v := strings.TrimSpace(os.Getenv("VITALINE_TRACING_SAMPLE_RATIO")); v != "" {
+		ratio, err := strconv.ParseFloat(v, 64)
+		if err != nil {
+			return fmt.Errorf("parse VITALINE_TRACING_SAMPLE_RATIO: %w", err)
+		}
+		c.Tracing.SampleRatio = ratio
+	}
 
 	if v := strings.TrimSpace(os.Getenv("VITALINE_APPOINTMENT_MIN_LEAD_TIME_MINUTES")); v != "" {
 		minutes, err := strconv.Atoi(v)
@@ -222,6 +249,19 @@ func resolvePath(path string) (string, error) {
 		return "", fmt.Errorf("config file not found: %s", path)
 	}
 	return "", fmt.Errorf("config file not found in default locations: %s", strings.Join(defaultSearchPaths, ", "))
+}
+
+func overrideBool(dst *bool, name string) error {
+	value := strings.TrimSpace(os.Getenv(name))
+	if value == "" {
+		return nil
+	}
+	parsed, err := strconv.ParseBool(value)
+	if err != nil {
+		return fmt.Errorf("parse %s: %w", name, err)
+	}
+	*dst = parsed
+	return nil
 }
 
 func overrideString(dst *string, value string) {

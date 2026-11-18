@@ -6,6 +6,7 @@ import (
 	"strings"
 	"time"
 
+	"go.mongodb.org/mongo-driver/event"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 
@@ -19,7 +20,7 @@ type Store struct {
 	db     *mongo.Database
 }
 
-func Open(ctx context.Context, uri, databaseName string) (*Store, error) {
+func Open(ctx context.Context, uri, databaseName string, monitors ...*event.CommandMonitor) (*Store, error) {
 	if strings.TrimSpace(uri) == "" {
 		return nil, domain.NewValidationError("DATABASE_URL", "не должен быть пустым")
 	}
@@ -30,7 +31,11 @@ func Open(ctx context.Context, uri, databaseName string) (*Store, error) {
 		ctx = context.Background()
 	}
 
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI(uri))
+	clientOptions := options.Client().ApplyURI(uri)
+	if monitor := combineMonitors(monitors); monitor != nil {
+		clientOptions.SetMonitor(monitor)
+	}
+	client, err := mongo.Connect(ctx, clientOptions)
 	if err != nil {
 		return nil, fmt.Errorf("connect mongodb: %w", err)
 	}

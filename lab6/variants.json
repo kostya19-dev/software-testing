@@ -1,0 +1,28 @@
+[
+  {
+    "name": "baseline",
+    "title": "Без трассировки, логирование по умолчанию",
+    "env": {
+      "VITALINE_TRACING_ENABLED": "false",
+      "VITALINE_LOG_EXTENDED": "false"
+    }
+  },
+  {
+    "name": "tracing",
+    "title": "Трассировка OpenTelemetry → Jaeger",
+    "env": {
+      "VITALINE_TRACING_ENABLED": "true",
+      "VITALINE_LOG_EXTENDED": "false"
+    },
+    "profiles": ["tracing"],
+    "traces": true
+  },
+  {
+    "name": "logging",
+    "title": "Расширенное логирование: debug, тела запросов, команды MongoDB",
+    "env": {
+      "VITALINE_TRACING_ENABLED": "false",
+      "VITALINE_LOG_EXTENDED": "true"
+    }
+  }
+]

@@ -101,6 +101,7 @@ func runAPI(app *bootstrap.App) error {
 		defer authentication.Close()
 		server.Wrap(authentication.Wrap)
 	}
+	server.Wrap(app.Tracer.Handler)
 	return serve(app, server)
 }
 
