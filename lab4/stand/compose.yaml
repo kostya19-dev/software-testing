@@ -1,0 +1,104 @@
+x-pinned: &pinned
+  restart: "no"
+  labels:
+    lab4.run: ${RUN_ID:?}
+
+services:
+  mongo:
+    <<: *pinned
+    image: mongo:7
+    command: ["--wiredTigerCacheSizeGB", "0.25"]
+    cpuset: "2,3"
+    cpus: 1.0
+    mem_limit: 1g
+    mem_reservation: 1g
+    environment:
+      MONGODB_DATABASE: vitaline_clinic
+    volumes:
+      - mongo-data:/data/db
+      - ${CLINIC_ROOT:?}/migrations/mongo/001-init.js:/docker-entrypoint-initdb.d/001-init.js:ro
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "quit(db.adminCommand({ping:1}).ok ? 0 : 1)"]
+      interval: 2s
+      timeout: 5s
+      retries: 60
+
+  api:
+    <<: *pinned
+    image: ${API_IMAGE:?}
+    command: ["api"]
+    cpuset: "0,1"
+    cpus: 1.0
+    mem_limit: 512m
+    mem_reservation: 512m
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      VITALINE_APP_NAME: VitaLine Clinic
+      VITALINE_ENV: load-test
+      VITALINE_DATABASE_DRIVER: mongodb
+      DATABASE_URL: mongodb://mongo:27017
+      MONGODB_DATABASE: vitaline_clinic
+      VITALINE_HTTP_ADDRESS: ":8080"
+      VITALINE_LOG_LEVEL: info
+      VITALINE_LOG_FILE: /app/logs/backend.log
+      VITALINE_APPOINTMENT_MIN_LEAD_TIME_MINUTES: "30"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/health"]
+      interval: 2s
+      timeout: 3s
+      retries: 60
+
+  exporter:
+    <<: *pinned
+    image: ${EXPORTER_IMAGE:?}
+    cpuset: "6,7"
+    mem_limit: 64m
+    mem_reservation: 64m
+    environment:
+      STAND_PROJECT: ${COMPOSE_PROJECT_NAME:?}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  prometheus:
+    <<: *pinned
+    image: prom/prometheus:v3.5.0
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=1d
+    cpuset: "6,7"
+    mem_limit: 768m
+    mem_reservation: 768m
+    depends_on: [exporter]
+    ports:
+      - "127.0.0.1:${PROMETHEUS_PORT:?}:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:9090/-/ready"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  loadgen:
+    <<: *pinned
+    image: ${LOADGEN_IMAGE:?}
+    profiles: [load]
+    cpuset: "4,5"
+    mem_limit: 2g
+    mem_reservation: 2g
+    user: "${HOST_UID:?}:${HOST_GID:?}"
+    environment:
+      API_URL: http://api:8080
+      SCENARIO: ${SCENARIO:?}
+      TIME_SCALE: ${TIME_SCALE:?}
+    volumes:
+      - ../scenarios.json:/config/scenarios.json:ro
+      - ${RUN_DIR:?}/load:/results
+
+volumes:
+  mongo-data:
+  prometheus-data:
