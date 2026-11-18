@@ -15,7 +15,7 @@ def fixture():
             "rootfs":manifest["rootfs"],"environment":["GOMAXPROCS=1"],"exit_code":0})
         results = []
         for size in (4,64):
-            for scenario in ("write","read","roundtrip"):
+            for scenario in ("serialize","deserialize","roundtrip"):
                 for codec in (("json","gob") if number==1 else ("gob","json")):
                     r = {"codec":codec,"scenario":scenario,"size":size,"order":len(results),
                          "batch_ns_per_op":100,"total_ns":900,

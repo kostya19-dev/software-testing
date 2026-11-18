@@ -14,6 +14,14 @@ import uuid
 
 ROOT = Path(__file__).resolve().parents[1]
 
+def _containers(v):
+    if isinstance(v, dict):
+        return 1 + sum(_containers(x) for x in v.values())
+    if isinstance(v, list):
+        return 1 + sum(_containers(x) for x in v)
+    return 0
+
+
 def command(args, timeout=180):
     p = subprocess.run(args, cwd=ROOT, text=True, capture_output=True, timeout=timeout)
     if p.returncode:
@@ -32,9 +40,10 @@ def run(args):
         raise ValueError("Invalid operations/sample/CPU count")
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     run_id = stamp.lower()+"-"+uuid.uuid4().hex[:8]
-    out = ROOT / "results" / run_id
+    profile = args.profile
+    out = args.output_root / profile / run_id if args.output_root else ROOT / "results" / run_id
     out.mkdir(parents=True, exist_ok=False)
-    binary = ROOT / ".build/bench"
+    binary = ROOT / ".build" / ("bench-baseline" if profile == "baseline" else "bench")
     if not binary.is_file():
         raise ValueError("Run make build first")
     source_hash = hashlib.sha256()
@@ -49,16 +58,30 @@ def run(args):
         "started_utc":stamp, "host":platform.platform(),
         "binary_sha256":hashlib.sha256(binary.read_bytes()).hexdigest(),
         "source_sha256":source_hash.hexdigest(), "trials":[]}
+    inputs = []
+    for case in (("compact","pretty") if profile=="formats" else (4,64)):
+        size = 4 if profile=="formats" else case
+        depth = 3 if profile == "baseline" else (100 if profile == "formats" else 5)
+        prefix = "baseline" if profile == "baseline" else "patient"
+        name = f"{case}-100.json" if profile=="formats" else f"{prefix}-{size}.json"
+        data = (ROOT / "bench" / "inputs" / name).read_bytes()
+        (out / name).write_bytes(data)
+        inputs.append({"file":"inputs/"+name, "visits":size, "depth":depth,
+                       "sha256":hashlib.sha256(data).hexdigest()})
+        if profile=="formats":
+            inputs[-1].update(format=case,nodes=_containers(json.loads(data)))
+        print(f"INPUT=bench/inputs/{name} (expected depth {depth})", flush=True)
+    manifest["inputs"] = inputs
+    manifest["profile"] = profile
     started = time.monotonic()
     base_tag = "tiopo-lab3-base:"+run_id
     current_tag = None
     current_container = None
     try:
         manifest["docker"] = json.loads(command(["docker","info","--format","{{json .}}"]))
-        # Keep only non-sensitive machine details.
         manifest["docker"] = {k:manifest["docker"].get(k) for k in
                               ("ServerVersion","NCPU","MemTotal","Architecture","OSType","KernelVersion")}
-        command(["docker","build","--network=none","-t",base_tag,"."])
+        command(["docker","build","--network=none","--build-arg","BINARY="+binary.name,"-t",base_tag,"."])
         base = json.loads(command(["docker","image","inspect",base_tag]))[0]
         manifest["base_image"] = base["Id"]
         manifest["rootfs"] = base["RootFS"]
@@ -78,7 +101,7 @@ def run(args):
                 "--network=none","--read-only","--cap-drop=ALL","--security-opt=no-new-privileges",
                 "--cpuset-cpus",str(args.cpu),"--cpus=1","--memory=512m","--memory-swap=512m",
                 "--pids-limit=64",current_tag,"-trial",str(number),
-                "-iterations",str(args.iterations),"-samples",str(args.samples),"-seed","20261105"])
+                *(["-formats"] if profile=="formats" else []), "-iterations",str(args.iterations),"-samples",str(args.samples),"-seed","20261105"])
             before = json.loads(command(["docker","inspect",current_container]))[0]
             trial_start = time.monotonic()
             raw = command(["docker","start","--attach",current_container],timeout=120)
@@ -88,6 +111,8 @@ def run(args):
             trial = json.loads(raw)
             if trial["trial"] != number or trial["gomaxprocs"] != 1:
                 raise RuntimeError("Unexpected trial identity/configuration")
+            if trial.get("inputs") != manifest["inputs"]:
+                raise RuntimeError("Input files differ from those embedded in the benchmark binary; rebuild")
             save(out/f"trial-{number:03}.json",trial)
             hc = before["HostConfig"]
             manifest["trials"].append({"number":number,"image_id":image["Id"],
@@ -114,15 +139,26 @@ def run(args):
         save(out/"manifest.json",manifest)
         print(f"RESULT={out}",flush=True)
     command([sys.executable,"scripts/report.py",str(out)],timeout=180)
-    print(f"REPORT={out/'report.html'}")
+    print(f"REPORT={out/'report.html'}", flush=True)
+    if args.allure:
+        subprocess.run([sys.executable, "scripts/allure_run.py", "--result", str(out)],
+                       cwd=ROOT, check=True)
+
+    if profile == "formats" and not args.smoke:
+        from archive import publish_evidence
+        publish_evidence(out, ROOT/"evidence")
+    return out
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--profile",choices=("baseline","depth5","formats"),default="depth5")
+    parser.add_argument("--output-root",type=Path,help="Parent for profile-specific run directories")
     parser.add_argument("--trials",type=int,default=100)
     parser.add_argument("--cpu",type=int,default=0)
     parser.add_argument("--iterations",type=int,default=256)
     parser.add_argument("--samples",type=int,default=256)
     parser.add_argument("--smoke",action="store_true")
+    parser.add_argument("--allure", action="store_true", help="Build Allure for this Docker run")
     try: run(parser.parse_args())
     except (ValueError,RuntimeError,subprocess.TimeoutExpired) as exc:
         print(exc,file=sys.stderr); sys.exit(1)

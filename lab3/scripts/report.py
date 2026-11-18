@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Validate raw trials and produce a self-contained report with request statistics."""
 import argparse
+import hashlib
 import base64
 from collections import defaultdict
 import csv
@@ -15,11 +16,37 @@ import random
 import statistics
 
 PERCENTILES = (0.5, 0.75, 0.9, 0.95, 0.99)
-EXPECTED = {(c,s,n) for c in ("json","gob") for s in ("write","read","roundtrip") for n in (4,64)}
+SCENARIOS = ("serialize", "deserialize", "roundtrip")
+LEGACY = {"write":"serialize", "read":"deserialize"}
+EXPECTED = {(c,s,n) for c in ("json","gob") for s in SCENARIOS for n in (4,64)}
+
+def case_keys(manifest):
+    return ("compact", "pretty") if manifest.get("profile")=="formats" else (4,64)
+
+def case_label(key):
+    return f"{key} JSON · глубина 100" if isinstance(key,str) else f"посещений: {key}"
+
+def scenario_name(name):
+    return LEGACY.get(name, name)
+
+def read_summary(directory):
+    summary = json.loads((directory/"summary.json").read_text())
+    for row in summary["rows"] + summary["comparisons"]:
+        row["scenario"] = scenario_name(row["scenario"])
+    return summary
+
+def chart_source(directory, scenario, size):
+    path = directory/f"{scenario}-{size}.png"
+    if path.is_file():
+        return path
+    for old, new in LEGACY.items():
+        if scenario == new:
+            return directory/f"{old}-{size}.png"
+    return path
+
 PHASES = ("warmup","batch","requests","teardown")
 
 def percentile(values, p):
-    """Nearest rank, equal weight per observed request; no interpolation."""
     if not values or not 0 < p <= 1:
         raise ValueError("Empty data or invalid percentile")
     return sorted(values)[math.ceil(p*len(values))-1]
@@ -32,6 +59,10 @@ def bootstrap_median(values, seed=20261105):
 def load(directory):
     directory = Path(directory)
     manifest = json.loads((directory/"manifest.json").read_text())
+    for info in manifest.get("inputs", []):
+        data = (directory/Path(info["file"]).name).read_bytes()
+        if hashlib.sha256(data).hexdigest() != info["sha256"]:
+            raise ValueError("Input snapshot checksum mismatch")
     archive = directory/"raw.jsonl.gz"
     if archive.exists():
         with gzip.open(archive,"rt") as stream:
@@ -75,16 +106,18 @@ def validate(m, trials):
     if len(versions) != 1:
         raise ValueError("Unequal runtime versions")
     for t in trials:
+        if t.get("inputs") != m.get("inputs"):
+            raise ValueError("Different input files across trials")
         if t["schema"] != 1 or t["gomaxprocs"] != 1 or t["seed"] != cfg["seed"]:
             raise ValueError("Wrong runtime settings")
-        if len(t["results"]) != 12 or {(r["codec"],r["scenario"],r["size"]) for r in t["results"]} != EXPECTED:
+        if len(t["results"]) != 12 or {(r["codec"],scenario_name(r["scenario"]),r.get("format",r["size"])) for r in t["results"]} != {(c,s,k) for c in ("json","gob") for s in SCENARIOS for k in case_keys(m)}:
             raise ValueError("Missing/duplicate benchmark case")
         orders = {r["order"] for r in t["results"]}
         if orders != set(range(12)):
             raise ValueError("Invalid execution order")
         pairs = defaultdict(dict)
         for r in t["results"]:
-            pairs[(r["scenario"],r["size"])][r["codec"]] = r["order"]
+            pairs[(scenario_name(r["scenario"]),r.get("format",r["size"]))][r["codec"]] = r["order"]
             for phase in PHASES:
                 want = cfg["samples"] if phase=="requests" else cfg["iterations"]
                 if r[phase]["operations"] != want or r[phase]["elapsed_ns"] <= 0:
@@ -108,7 +141,7 @@ def summarize(m,trials):
     grouped = defaultdict(list)
     for t in trials:
         for r in t["results"]:
-            grouped[(r["size"],r["scenario"],r["codec"])].append((t,r))
+            grouped[(r.get("format",r["size"]),scenario_name(r["scenario"]),r["codec"])].append((t,r))
     rows = []
     for (size,scenario,codec),values in sorted(grouped.items()):
         requests = [s["latency_ns"] for _,r in values for s in r["samples"]]
@@ -127,8 +160,8 @@ def summarize(m,trials):
                "total_ns":sum(r["total_ns"] for _,r in values)}
         rows.append(row)
     comparisons = []
-    for size in (4,64):
-        for scenario in ("write","read","roundtrip"):
+    for size in case_keys(m):
+        for scenario in SCENARIOS:
             a = {t["trial"]:r["batch_ns_per_op"] for t,r in grouped[(size,scenario,"json")]}
             b = {t["trial"]:r["batch_ns_per_op"] for t,r in grouped[(size,scenario,"gob")]}
             ratios = [b[i]/a[i] for i in sorted(a)]
@@ -174,6 +207,12 @@ img{width:100%}.scroll{overflow-x:auto}.note{color:#52627a}code{overflow-wrap:an
 <h1>Лабораторная работа №3</h1><p>JSON и gob: микробенчмарки независимых сообщений в Go.</p>"""]
     parts.append(f"<p>Прогон <code>{html.escape(m['run_id'])}</code> · {len(trials)} испытаний · "
                  f"{html.escape(trials[0]['go'])} · CPU {m['config']['cpu']} · GOMAXPROCS=1</p>")
+    if "inputs" in m:
+        names = ", ".join(html.escape(Path(info["file"]).name) for info in m["inputs"])
+        depth = m["inputs"][0]["depth"]
+        parts.append(f"<p>Входные JSON глубины {depth}: {names}. "
+                     "Разбор файлов выполняется один раз до измерений. "
+                     "Оба кодека получают одну и ту же структуру пациента.</p>")
     if m["mode"] != "full":
         parts.append("<h2>ПРОБНЫЙ ЗАПУСК: не заменяет 100 испытаний</h2>")
     parts.append(f"<section><h2>Условия и время</h2><p>Для каждого испытания создан отдельный образ и свежий контейнер. "
@@ -200,11 +239,11 @@ img{width:100%}.scroll{overflow-x:auto}.note{color:#52627a}code{overflow-wrap:an
         "Перцентили ниже рассчитаны по отдельным запросам, а не по средним пакетам. "
         "Warmup и teardown в распределения не входят. Выбросы не удаляются.</p></section>")
     origin = min(dt.datetime.fromisoformat(t["started"].replace("Z","+00:00")).timestamp() for t in trials)
-    for size in (4,64):
-        for scenario in ("write","read","roundtrip"):
-            label = {"write":"Запись","read":"Чтение","roundtrip":"Запись + чтение"}[scenario]
+    for size in case_keys(m):
+        for scenario in SCENARIOS:
+            label = {"serialize":"Сериализация","deserialize":"Десериализация","roundtrip":"Сериализация + десериализация"}[scenario]
             fig,axes = plt.subplots(1,3,figsize=(15,4.4),layout="constrained")
-            all_lat = [s["latency_ns"]/1000 for c in ("json","gob") for _,r in grouped[(size,scenario,c)] for s in r["samples"]]
+            all_lat = [s["latency_ns"] for c in ("json","gob") for _,r in grouped[(size,scenario,c)] for s in r["samples"]]
             bins = np.geomspace(min(all_lat),max(all_lat)*1.001,45)
             for codec,color in (("json","#007e87"),("gob","#c64f25")):
                 data = grouped[(size,scenario,codec)]
@@ -213,31 +252,32 @@ img{width:100%}.scroll{overflow-x:auto}.note{color:#52627a}code{overflow-wrap:an
                     start = dt.datetime.fromisoformat(t["started"].replace("Z","+00:00")).timestamp()-origin
                     for s in r["samples"]:
                         times.append(start+s["at_ns"]/1e9)
-                        lat.append(s["latency_ns"]/1000)
+                        lat.append(s["latency_ns"])
                 axes[0].scatter(times,lat,s=2,alpha=.3,label=codec,color=color,rasterized=True)
                 q = np.linspace(.001,1,1000)
                 sorted_lat = np.sort(lat)
                 axes[1].plot(q*100,sorted_lat[np.ceil(q*len(lat)).astype(int)-1],label=f"{codec}: N={len(lat)}",color=color)
                 axes[1].scatter([p*100 for p in PERCENTILES],[percentile(lat,p) for p in PERCENTILES],s=20,color=color)
                 axes[2].hist(lat,bins=bins,histtype="step",linewidth=1.6,label=codec,color=color)
-            axes[0].set(title="Задержка во времени",xlabel="С начала эксперимента, с",ylabel="Задержка, мкс",yscale="log")
-            axes[1].set(title="Перцентили запросов",xlabel="Доля запросов, %",ylabel="Задержка, мкс",yscale="log")
-            axes[2].set(title="Гистограмма всех запросов",xlabel="Задержка, мкс",ylabel="Количество запросов",xscale="log")
+            axes[0].set(title="Задержка во времени",xlabel="С начала эксперимента, с",ylabel="Задержка, нс",yscale="log")
+            axes[1].set(title="Перцентили запросов",xlabel="Доля запросов, %",ylabel="Задержка, нс",yscale="log")
+            axes[2].set(title="Гистограмма всех запросов",xlabel="Задержка, нс",ylabel="Количество запросов",xscale="log")
             for ax in axes: ax.grid(alpha=.2); ax.legend(fontsize=8)
-            fig.suptitle(f"{label} · записей в сообщении: {size}",fontsize=14)
+            depth_label = f" · глубина JSON {m['inputs'][0]['depth']}" if m.get("inputs") else ""
+            fig.suptitle(f"{label} · {case_label(size)}{depth_label}",fontsize=14)
             name = f"{scenario}-{size}.png"
             buffer = io.BytesIO()
             fig.savefig(buffer,format="png",dpi=130,bbox_inches="tight")
             plt.close(fig)
             (output/name).write_bytes(buffer.getvalue())
-            parts.append(f'<section><h2>{label}: число записей — {size}</h2><img alt="Время, перцентили и гистограмма" src="data:image/png;base64,{base64.b64encode(buffer.getvalue()).decode()}">')
+            parts.append(f'<section><h2>{label}: {case_label(size)}</h2><img alt="Время, перцентили и гистограмма" src="data:image/png;base64,{base64.b64encode(buffer.getvalue()).decode()}">')
             rows = [r for r in summary["rows"] if r["size"]==size and r["scenario"]==scenario]
-            parts.append('<div class="scroll"><table><tr><th>Кодек</th><th>Размер, Б</th><th>Пакет, мкс/оп</th><th>p50</th><th>p75</th><th>p90</th><th>p95</th><th>p99</th><th>max</th></tr>')
+            parts.append('<div class="scroll"><table><tr><th>Кодек</th><th>Размер, Б</th><th>Пакет, нс/оп</th><th>p50</th><th>p75</th><th>p90</th><th>p95</th><th>p99</th><th>max</th></tr>')
             for r in rows:
-                parts.append(f"<tr><td>{r['codec']}</td><td>{r['bytes']}</td><td>{r['batch_median_ns']/1000:.3f}</td>"+
-                             "".join(f"<td>{x/1000:.3f}</td>" for x in r["percentiles_ns"].values())+
-                             f"<td>{r['request_max_ns']/1000:.3f}</td></tr>")
-            parts.append("</table></div><p class='note'>Задержки запросов — в мкс. Пакет — медиана среднего нс/оп по испытаниям.</p>")
+                parts.append(f"<tr><td>{r['codec']}</td><td>{r['bytes']}</td><td>{r['batch_median_ns']:.2f}</td>"+
+                             "".join(f"<td>{x:d}</td>" for x in r["percentiles_ns"].values())+
+                             f"<td>{r['request_max_ns']:d}</td></tr>")
+            parts.append("</table></div><p class='note'>Задержки запросов — в нс. Пакет — медиана среднего нс/оп по испытаниям.</p>")
             comp = next(c for c in summary["comparisons"] if c["size"]==size and c["scenario"]==scenario)
             parts.append(f"<p>Медиана парных отношений gob/JSON: {comp['gob_over_json']:.3f}; "
                          f"95% bootstrap-интервал по испытаниям: [{comp['ci95'][0]:.3f}; {comp['ci95'][1]:.3f}]. "
