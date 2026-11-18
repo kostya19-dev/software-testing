@@ -1,4 +1,5 @@
 /bin/
+/.deps/
 /results/
 __pycache__/
 *.test

@@ -2,6 +2,8 @@ SHELL := /bin/bash
 .DEFAULT_GOAL := help
 
 TOOL := bin/lab6
+LOADTEST_REV := 7de5ab26326a1886f6bc600a563b33584ef08123
+LOADTEST := .deps/$(LOADTEST_REV)
 SCALE ?= 1
 VARIANT ?= tracing
 SCENARIO ?= stable
@@ -26,13 +28,16 @@ setup: images build
 	docker pull --quiet prom/prometheus:v3.5.0
 	docker pull --quiet jaegertracing/jaeger:2.11.0
 
-images:
-	docker build --quiet --tag vitaline-lab6-api:base ../project/VitaLineClinic
-	docker build --quiet --target loadgen --tag vitaline-lab4-loadgen:1 ../lab4
-	docker build --quiet --target exporter --tag vitaline-lab4-exporter:1 ../lab4
+$(LOADTEST)/go.mod:
+	python3 scripts/export_source.py $(LOADTEST_REV) lab4 $(LOADTEST) go.mod go.sum Dockerfile cmd internal
 
-build:
-	$(MAKE) --no-print-directory -C ../lab4 build
+images: $(LOADTEST)/go.mod
+	docker build --quiet --tag vitaline-lab6-api:base ../project/VitaLineClinic
+	docker build --quiet --target loadgen --tag vitaline-lab4-loadgen:1 $(LOADTEST)
+	docker build --quiet --target exporter --tag vitaline-lab4-exporter:1 $(LOADTEST)
+
+build: $(LOADTEST)/go.mod
+	go -C $(LOADTEST) build -o "$(CURDIR)/bin/runner" ./cmd/runner
 	go build -o $(TOOL) ./cmd/lab6
 
 run: build

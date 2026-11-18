@@ -4,7 +4,6 @@ on:
   push:
     paths:
       - '.github/workflows/lab6.yml'
-      - 'lab4/**'
       - 'lab6/**'
       - 'project/VitaLineClinic/**'
   workflow_dispatch:
@@ -38,7 +37,6 @@ jobs:
           go-version-file: project/VitaLineClinic/go.mod
           cache-dependency-path: |
             project/VitaLineClinic/go.sum
-            lab4/go.sum
             lab6/go.sum
 
       - name: Vet and unit tests

@@ -16,7 +16,7 @@ import (
 )
 
 const (
-	runner      = "../lab4/bin/runner"
+	runner      = "bin/runner"
 	apiImage    = "vitaline-lab6-api:base"
 	clinicDir   = "../project/VitaLineClinic"
 	resultsDir  = "results"
