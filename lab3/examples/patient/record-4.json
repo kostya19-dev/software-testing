@@ -1,0 +1,28 @@
+{
+  "ID": 42,
+  "Name": "Учебный пациент",
+  "Email": "patient@example.invalid",
+  "Active": true,
+  "Visits": [
+    {
+      "Code": "procedure-000",
+      "Duration": 15,
+      "Price": 1200
+    },
+    {
+      "Code": "procedure-001",
+      "Duration": 16,
+      "Price": 1217
+    },
+    {
+      "Code": "procedure-002",
+      "Duration": 17,
+      "Price": 1234
+    },
+    {
+      "Code": "procedure-003",
+      "Duration": 18,
+      "Price": 1251
+    }
+  ]
+}

@@ -1,0 +1,3760 @@
+{
+  "schema": 1,
+  "run_id": "20261113t053903z-816e3c1e",
+  "mode": "full",
+  "expected_trials": 100,
+  "config": {
+    "cpu": 0,
+    "cpus": 1,
+    "memory": "512m",
+    "network": "none",
+    "read_only": true,
+    "pids_limit": 64,
+    "iterations": 256,
+    "samples": 256,
+    "seed": 20261105
+  },
+  "complete": true,
+  "started_utc": "20261113T053903Z",
+  "host": "Linux-6.18.58.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "binary_sha256": "4b3dff7fa7c266bf7d837518245ad2b86c326dd0458c6716cc0185da7a5e9f39",
+  "source_sha256": "b9c506303a203432b70f913ba6a505987b56c57edabf4025c9dff0d52dfea6cd",
+  "trials": [
+    {
+      "number": 1,
+      "image_id": "sha256:4a9e4fc217f27b4735d48f8da07c7ec7ec7b474c13eb8ca028a4fc7aad3168a3",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-001",
+      "container_id": "844918c87a80f252ac6a49d7bfbcd57ed145c9bbbc8c96165318cea6297318ac",
+      "started_at": "2026-11-13T05:39:08.708401693Z",
+      "finished_at": "2026-11-13T05:39:09.995462834Z",
+      "exit_code": 0,
+      "wall_seconds": 1.5043333109999963,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 2,
+      "image_id": "sha256:0ed45c815c6cee5afac517bbbc07ec9552fd5a3d0232e518142d195818b43ce2",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-002",
+      "container_id": "77bc549fbfac0ff9c7761725f8c00361f27280ba4fee34b7c1675c9c5ba40805",
+      "started_at": "2026-11-13T05:39:12.160945249Z",
+      "finished_at": "2026-11-13T05:39:13.319465357Z",
+      "exit_code": 0,
+      "wall_seconds": 1.3635194980000023,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 3,
+      "image_id": "sha256:0cbf7bbbc7bfeb8c375a38921217c8818d4f425217e730be708da16555d8ccc2",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-003",
+      "container_id": "10f5e8dc6718b2a55be4fdd7c4a4b658c739f3cda3246ca715192103de39de3f",
+      "started_at": "2026-11-13T05:39:15.23109447Z",
+      "finished_at": "2026-11-13T05:39:16.292693427Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2814787829999972,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 4,
+      "image_id": "sha256:2bbb6c59f1a41d9fa34dbaa74222c318eba0d2845f8f24e16975828531d13c3a",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-004",
+      "container_id": "ce14f31c399e9103b4b34cbefca77c639817d96226bfcb706def3e1a4dd238ae",
+      "started_at": "2026-11-13T05:39:17.840177254Z",
+      "finished_at": "2026-11-13T05:39:18.911549218Z",
+      "exit_code": 0,
+      "wall_seconds": 1.3447092690000062,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 5,
+      "image_id": "sha256:5218bdc387efe8b403f2eca432f2bd4445f8043c7768ed39a732789b479f2832",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-005",
+      "container_id": "a8e9f2e27f385cf349211a93824f158d5b98b73eed5cf6880704f265aea12045",
+      "started_at": "2026-11-13T05:39:20.503484061Z",
+      "finished_at": "2026-11-13T05:39:21.706310338Z",
+      "exit_code": 0,
+      "wall_seconds": 1.4436498830000062,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 6,
+      "image_id": "sha256:5a83a1626753e4c8f3ebcd1bab8a273265f4cd0b38639572aba8b381ab6b66fd",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-006",
+      "container_id": "e716f1c04f81a97a5a63ec88947aee52a87a8b56c8b1914e5d1bc6f2df7aa67a",
+      "started_at": "2026-11-13T05:39:22.961145623Z",
+      "finished_at": "2026-11-13T05:39:23.998181011Z",
+      "exit_code": 0,
+      "wall_seconds": 1.278527484999998,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 7,
+      "image_id": "sha256:017e519715c6e9455337e82eb281e925f5737638bb9f84941832963cac2f50d6",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-007",
+      "container_id": "dabed18eab17f7fd41cd5b234e55de98fb14e436f79fa6f64d4bd0a6b4129bdb",
+      "started_at": "2026-11-13T05:39:25.523609981Z",
+      "finished_at": "2026-11-13T05:39:26.576733474Z",
+      "exit_code": 0,
+      "wall_seconds": 1.3470927450000119,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 8,
+      "image_id": "sha256:d6b5b8109d39f57e7df3c0831d3cebfbd1702a09cb0174a8c8fc30a59c8ebd75",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-008",
+      "container_id": "3c658019349023f33834057e162045f50f43a7e8349adbea47e6472338a7cfa4",
+      "started_at": "2026-11-13T05:39:27.866320727Z",
+      "finished_at": "2026-11-13T05:39:28.999287784Z",
+      "exit_code": 0,
+      "wall_seconds": 1.3860199969999911,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 9,
+      "image_id": "sha256:e2f7bb3700284494a365b767ff0c4cdb51f0931499c356d491cf4df31a338998",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-009",
+      "container_id": "8ff960c141227778005df7994fd2c0dbbda1890bb016aaeae1e8bd9ed5b6cec9",
+      "started_at": "2026-11-13T05:39:30.583975586Z",
+      "finished_at": "2026-11-13T05:39:31.581129597Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2084084590000117,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 10,
+      "image_id": "sha256:3ee4532a077321abe275a1b20ac3f28aeccfe010680a0aa868533b37f1d38fdb",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-010",
+      "container_id": "73d3f09c8cbecd2a00a8c15f92cb51b7b7e0ef76d2ba1367bc1b284cbe7ef82a",
+      "started_at": "2026-11-13T05:39:32.799505437Z",
+      "finished_at": "2026-11-13T05:39:33.802496969Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2110389449999985,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 11,
+      "image_id": "sha256:1d4afb04e0b0b8ef9f60518f9bfe8ec0f2f083258e2fd70b05eb39c4072f05c9",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-011",
+      "container_id": "3355c81956e70a366f754ee1193b7451de640684e5963d88f541d8b9ee6620a4",
+      "started_at": "2026-11-13T05:39:35.091045777Z",
+      "finished_at": "2026-11-13T05:39:36.243253599Z",
+      "exit_code": 0,
+      "wall_seconds": 1.3583902770000122,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 12,
+      "image_id": "sha256:0fab0c81ddf1d673057c5ebfbe1ac822255c913ab8b2b8d79c292014ce2d0df4",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-012",
+      "container_id": "1b15c93a4e07ee3725af2d5f826371d95884a3afc2186f70d6109245b0e90fd9",
+      "started_at": "2026-11-13T05:39:37.544875504Z",
+      "finished_at": "2026-11-13T05:39:37.956241385Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2625132419999971,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 13,
+      "image_id": "sha256:697ee5d3e5d350c5f2314e200a096275709ed0f8eafd0dfe9fb01b7e933ea30c",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-013",
+      "container_id": "1e37a8c3261b1c1a34ef2a32c02d359fc534a419f3ebe604eef9e4f8db9e2bb2",
+      "started_at": "2026-11-13T05:39:39.19750113Z",
+      "finished_at": "2026-11-13T05:39:40.198650191Z",
+      "exit_code": 0,
+      "wall_seconds": 1.1988749739999918,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 14,
+      "image_id": "sha256:2f1cc629404caf0777edbf3fb877e6146091110938b0f707fa686b9d18f043ab",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-014",
+      "container_id": "94a6335bf943812bcf09552f53445d182facb983c8f9ed4e009cfe993f6e3980",
+      "started_at": "2026-11-13T05:39:41.466415156Z",
+      "finished_at": "2026-11-13T05:39:42.520567923Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2680423399999938,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 15,
+      "image_id": "sha256:15591b3eefc98d52e9006ecc10bc5c77cc9697844abf7ce679ad1b9d892dd698",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-015",
+      "container_id": "b11a2514dc8824e41619c634865dd5bcb8c5bd4703e6f8c42eda6307b65952f1",
+      "started_at": "2026-11-13T05:39:44.180062245Z",
+      "finished_at": "2026-11-13T05:39:45.252850555Z",
+      "exit_code": 0,
+      "wall_seconds": 1.3653686319999991,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 16,
+      "image_id": "sha256:159f687eb93be7d4308bf19d11e6db176e1b3732ca273927ca1030c68625fba7",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-016",
+      "container_id": "db0ed3464c81d703960d156ac2ac354cdea4019619df0cbda2439c14ec7edd69",
+      "started_at": "2026-11-13T05:39:46.682740427Z",
+      "finished_at": "2026-11-13T05:39:47.793046992Z",
+      "exit_code": 0,
+      "wall_seconds": 1.3629846190000023,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 17,
+      "image_id": "sha256:1798cf0e3c9e63778a7346c56c4a6e2f6865507c379302b56390ac1006348884",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-017",
+      "container_id": "1e6c7cef2389de348c47f1abdc11af78a6bb7c5780099b45bb4d0b76639ca1e9",
+      "started_at": "2026-11-13T05:39:49.215399878Z",
+      "finished_at": "2026-11-13T05:39:50.3114933Z",
+      "exit_code": 0,
+      "wall_seconds": 1.3438885770000013,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 18,
+      "image_id": "sha256:7e350fb52da41d40f623cf6611b877647eec524758105cb0d5371a4a1ede64af",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-018",
+      "container_id": "dc9f23ef6dd1de0fe43519ddd7e64a8278e08baa285bdb08506abae1d3af2b86",
+      "started_at": "2026-11-13T05:39:51.781265638Z",
+      "finished_at": "2026-11-13T05:39:52.849923185Z",
+      "exit_code": 0,
+      "wall_seconds": 1.3068614330000088,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 19,
+      "image_id": "sha256:5af8640d772679659ef851c459560adbbf1b805c76517d8b655c6a3d82ebbd22",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-019",
+      "container_id": "80371da8fab2270f0b72091ad804acae4e8d61e188b7eeaf432aaa851d977cb4",
+      "started_at": "2026-11-13T05:39:54.354948293Z",
+      "finished_at": "2026-11-13T05:39:55.768653852Z",
+      "exit_code": 0,
+      "wall_seconds": 1.7661775680000034,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 20,
+      "image_id": "sha256:e42b653385f2d38f4f688d032e6d1aae54beeaf5fd9173e6735aeb47b28472bd",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-020",
+      "container_id": "94d87607b31048181d0d7dbe948198c8eb3103079f433512646fbcad0c804207",
+      "started_at": "2026-11-13T05:39:57.555654435Z",
+      "finished_at": "2026-11-13T05:39:58.859245089Z",
+      "exit_code": 0,
+      "wall_seconds": 1.5480052420000021,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 21,
+      "image_id": "sha256:310548d1a1273e6d9b6f8b33b408616897203fb5e79d6783968c51bb1888a461",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-021",
+      "container_id": "95bd372cee6d11113c00e8f1afffb9e0c84873061c71dbe5e28675c1162ffe4b",
+      "started_at": "2026-11-13T05:40:00.736498163Z",
+      "finished_at": "2026-11-13T05:40:02.149658468Z",
+      "exit_code": 0,
+      "wall_seconds": 1.6882267960000092,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 22,
+      "image_id": "sha256:a671475f0da3cd4ba09a10748b21e33fe8e840d8dc7d41faee6b48639cd286d3",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-022",
+      "container_id": "67108e648019e044038966d8768b84db43fc9956caf411beeca6a975bbf6cd85",
+      "started_at": "2026-11-13T05:40:04.010502642Z",
+      "finished_at": "2026-11-13T05:40:05.314694932Z",
+      "exit_code": 0,
+      "wall_seconds": 1.6838641969999912,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 23,
+      "image_id": "sha256:890d52a07073aa7a192172e4b2102b3fc8deb3df91bad23d99ee14913c61f41a",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-023",
+      "container_id": "a6d2477b94dac799735eea489fa8bc759a85e0ee002de5a644badd6faa7aa8df",
+      "started_at": "2026-11-13T05:40:06.853070254Z",
+      "finished_at": "2026-11-13T05:40:07.445322012Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2914370799999801,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 24,
+      "image_id": "sha256:db970bc90a667d2e6b14bb6135c4cfbc57b8731f2fe91c9c8435891d8a0b9508",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-024",
+      "container_id": "035e827cb2f64517869affe2b88da50467ebfa14871ae528a37627f8299cdf67",
+      "started_at": "2026-11-13T05:40:08.895041419Z",
+      "finished_at": "2026-11-13T05:40:09.948494899Z",
+      "exit_code": 0,
+      "wall_seconds": 1.295699830000018,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 25,
+      "image_id": "sha256:0708c438b749459cbc758ace6a8fee695e0c858cc8b33e67824c0a0445914b46",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-025",
+      "container_id": "7b521a5a1cf625af0b82f4b107c47da0a832441df90ccfcc5f4de9f2d57fc9d9",
+      "started_at": "2026-11-13T05:40:11.180487866Z",
+      "finished_at": "2026-11-13T05:40:12.1916203Z",
+      "exit_code": 0,
+      "wall_seconds": 1.1935398859999964,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 26,
+      "image_id": "sha256:4ac8e2bad6646f078a022966d569b8ef978f3560da9fa95f2a8c55ebabd6d881",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-026",
+      "container_id": "5224e143825888f3e24fa19560456058c4bdaf965729db7d8cf5024dd93757c7",
+      "started_at": "2026-11-13T05:40:13.409450286Z",
+      "finished_at": "2026-11-13T05:40:14.437459236Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2205412759999774,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 27,
+      "image_id": "sha256:21ba18752c4330ea9663907b74b9bf40900cc3b7cb79caace5002e4c389546d1",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-027",
+      "container_id": "d487d904e6806d656ff762519f86580c4be4e5956bd4804c9e51231cfdfbe123",
+      "started_at": "2026-11-13T05:40:15.732480802Z",
+      "finished_at": "2026-11-13T05:40:16.946064134Z",
+      "exit_code": 0,
+      "wall_seconds": 1.421433833000009,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 28,
+      "image_id": "sha256:90d1dd1caa15785d3779f0698be69108a235d85b5e455ad6492b2d1dedd7912b",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-028",
+      "container_id": "93728f088114579427bc1af89abd4a346780548a4b681a5ceec2b9a288dd79e8",
+      "started_at": "2026-11-13T05:40:18.355421988Z",
+      "finished_at": "2026-11-13T05:40:19.358564999Z",
+      "exit_code": 0,
+      "wall_seconds": 1.1988405029999853,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 29,
+      "image_id": "sha256:06c9d57bbe38c972d45c9e85e142404572a42c36ad4bf3ca4f492b3d49738021",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-029",
+      "container_id": "04adee5149837179ccde13c50a3160a7f5e129551e7a26320ebc0c6755d25d6e",
+      "started_at": "2026-11-13T05:40:20.557075355Z",
+      "finished_at": "2026-11-13T05:40:21.60370268Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2300968859999841,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 30,
+      "image_id": "sha256:bb9491ae56174db27ccfee99b3caf8ac99253abd8b99cef72bdd88958ca81ff3",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-030",
+      "container_id": "a9ff431c6b9620c8c4ccd7d6ca21b7bba8a30a872fb6866d44860a9c381a1924",
+      "started_at": "2026-11-13T05:40:22.833662502Z",
+      "finished_at": "2026-11-13T05:40:23.849962829Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2090036870000063,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 31,
+      "image_id": "sha256:afef24323e019dd5985c4240512b08cf82a56a408f761fa75bd10ffa3a8d1cd5",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-031",
+      "container_id": "b81fb1fc938d5816267f429f1f60bfc899f56c790b6270473f2383da88286024",
+      "started_at": "2026-11-13T05:40:25.320650184Z",
+      "finished_at": "2026-11-13T05:40:26.507096764Z",
+      "exit_code": 0,
+      "wall_seconds": 1.4118734360000076,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 32,
+      "image_id": "sha256:d2ccd940c6877eeca99827d74d1339a2aace2c5a85619b2770a6837e90cafa49",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-032",
+      "container_id": "373cc33f436e22409867f1cd324f780f507a4b9a11b1524542e54dc5d3f43f18",
+      "started_at": "2026-11-13T05:40:27.741179361Z",
+      "finished_at": "2026-11-13T05:40:28.813746032Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2914896480000095,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 33,
+      "image_id": "sha256:389d7cda6fd7520a6589dabba81a15c62eed22c265c356d01f466bcab7e43981",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-033",
+      "container_id": "c599fc6852313d0295ed6a870f7b8d8bf70a06b593e7cc3c2c8ed6dd318ad2be",
+      "started_at": "2026-11-13T05:40:30.185975458Z",
+      "finished_at": "2026-11-13T05:40:31.284538891Z",
+      "exit_code": 0,
+      "wall_seconds": 1.396230934000016,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 34,
+      "image_id": "sha256:c0dfa12c8b0bd6bae4889cddb4873cf21e6bbfc4b6dcd685cee9be082ceec45e",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-034",
+      "container_id": "021103fb962899e19f43aa99937927abef2e9c08123d718985c6d100fbedbe46",
+      "started_at": "2026-11-13T05:40:32.639112138Z",
+      "finished_at": "2026-11-13T05:40:33.712145063Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2893126569999822,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 35,
+      "image_id": "sha256:a0cecf5d7c298877ab6365d6a897a1188bde29ffb174132cd01dd42f7703bc7d",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-035",
+      "container_id": "cfcbba44bfd3bf85a72d7f3a8b2e5529c2bbd5a5541b3c63f9c4affc9167f5d3",
+      "started_at": "2026-11-13T05:40:34.95073771Z",
+      "finished_at": "2026-11-13T05:40:35.938071301Z",
+      "exit_code": 0,
+      "wall_seconds": 1.1921264390000204,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 36,
+      "image_id": "sha256:d4c7b5029e4a00e6652f6fcb0395206cda21f076a0b3297ed76bda4992d83819",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-036",
+      "container_id": "8b5a961e36ce70706120105ffb34fe009ef06eca257a32c095d10dd56e58a78c",
+      "started_at": "2026-11-13T05:40:36.429772963Z",
+      "finished_at": "2026-11-13T05:40:37.612332935Z",
+      "exit_code": 0,
+      "wall_seconds": 1.3953729300000077,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 37,
+      "image_id": "sha256:fd0db823c4ab7778b3f06eecaac3a5c96ecd6121d58b77f60c18f49d499e2d77",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-037",
+      "container_id": "0f59bf3064fd7a09b46ae6ee81a2f58ece0cf4e435100b96e82e7367b8987a9e",
+      "started_at": "2026-11-13T05:40:38.835042086Z",
+      "finished_at": "2026-11-13T05:40:39.850148983Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2124411380000026,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 38,
+      "image_id": "sha256:117af924aeebe1b4c6d3d7b5b0b6661ca29f703fd1e05e89a1327a402b960fa7",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-038",
+      "container_id": "602567f3a3bbef763c1354aad2151afce090dc7ebb4824a286d82308b7fdb3e6",
+      "started_at": "2026-11-13T05:40:41.068996244Z",
+      "finished_at": "2026-11-13T05:40:42.060571329Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2036259319999942,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 39,
+      "image_id": "sha256:26b6ccb563ee449edadae685449e1eda1854640d7fcc9a2087af28d463bbd10d",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-039",
+      "container_id": "e87821c6e1825f3f62973951cd44f0d372828de12d3ab97baa9b987f9e0464f3",
+      "started_at": "2026-11-13T05:40:43.306586668Z",
+      "finished_at": "2026-11-13T05:40:44.296189767Z",
+      "exit_code": 0,
+      "wall_seconds": 1.1962446319999742,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 40,
+      "image_id": "sha256:e1621f262e74b14a0f7b0ce5cfc8480c49e42c3b9f6b8ed65c10e4dba7e86f44",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-040",
+      "container_id": "4fd4162cbd7cbb0b0e4de52bd68b96799208060d0ff77323ad2a437ba9f63740",
+      "started_at": "2026-11-13T05:40:45.538289957Z",
+      "finished_at": "2026-11-13T05:40:46.548798364Z",
+      "exit_code": 0,
+      "wall_seconds": 1.1915348229999836,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 41,
+      "image_id": "sha256:2aef5e2ce93d0ebb4f319144da0f412aaef0ed70cdd8f9681f02bbc53df6d3f9",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-041",
+      "container_id": "bd43214d5bb64de137efd2cae69fe74df4ae414b96af0846fb441ea2f2479092",
+      "started_at": "2026-11-13T05:40:47.779304811Z",
+      "finished_at": "2026-11-13T05:40:48.787412992Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2194083610000064,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 42,
+      "image_id": "sha256:1445254f45efb6a01d618d1247327163c59a60eecd6e5ddf552e00df48759609",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-042",
+      "container_id": "3b703d01aafc87965634be3dede9d20c78e2bcd44a8d36a445438ac84173149e",
+      "started_at": "2026-11-13T05:40:50.031045528Z",
+      "finished_at": "2026-11-13T05:40:51.062746144Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2206271720000075,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 43,
+      "image_id": "sha256:eb90df2edb9d3ce11cde0291c322387fd31ffbda86a9ffca36c9d8daa08ce015",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-043",
+      "container_id": "7a076a37a6b071ca4aa7599cff40d082a28761cb3a75ff2607249ab1130a4125",
+      "started_at": "2026-11-13T05:40:52.287648887Z",
+      "finished_at": "2026-11-13T05:40:53.322446339Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2369475090000037,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 44,
+      "image_id": "sha256:c4d3fbcdc41b077cb5abf8512cbb6844d1fc9ba7f0e283a1df2c0d7783d73e07",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-044",
+      "container_id": "b83fe0f3eb0c462933c1ac847d65cb5075251b64f58682b0c60df009892a4548",
+      "started_at": "2026-11-13T05:40:54.581226184Z",
+      "finished_at": "2026-11-13T05:40:55.616349246Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2528340679999985,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 45,
+      "image_id": "sha256:868e9a39ab13771b792ff44ac69e71ee04a9356efd13dbe37f352f93a78971a8",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-045",
+      "container_id": "952723a00ed4d4bb4668827a23a198d8a513461f8a8bc059fac28a086db583c1",
+      "started_at": "2026-11-13T05:40:56.85237569Z",
+      "finished_at": "2026-11-13T05:40:57.936464555Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2803288560000112,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 46,
+      "image_id": "sha256:7f5b200d1d539d508fefa1de3a3f66349a6d65447aaa670c67e9fb8623f8df94",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-046",
+      "container_id": "191a0013eb7a27a917076956d45408a45956b3560abc726e0f05006cff0c7552",
+      "started_at": "2026-11-13T05:40:59.17349877Z",
+      "finished_at": "2026-11-13T05:41:00.154506781Z",
+      "exit_code": 0,
+      "wall_seconds": 1.201500315000004,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 47,
+      "image_id": "sha256:c2dbf826dfa9721583dafe82b2910dfd3894b73bc4ab507d17784cc3e32c9b33",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-047",
+      "container_id": "bd899f1fa74ccefefacddf608d77760ac1e51f04284e39432b515318b4d304c3",
+      "started_at": "2026-11-13T05:41:01.419046147Z",
+      "finished_at": "2026-11-13T05:41:02.415135547Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2075870180000265,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 48,
+      "image_id": "sha256:f639aa8854a43ce41683593d8b8eb42160782ae1a59627b3efc1f9a76b4f6400",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-048",
+      "container_id": "0d6f02115ce1e994c5dc4c8d812d09c3641c8415aba347a1d03782bcec8b9bb3",
+      "started_at": "2026-11-13T05:41:03.651284755Z",
+      "finished_at": "2026-11-13T05:41:04.735882646Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2956252909999932,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 49,
+      "image_id": "sha256:2625ab7fd9bf6d0e81f4c8a763f1e8f619da62febadafdbb14c62e81c40322f0",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-049",
+      "container_id": "16f7586ab5e65433cd2d0109700156479f3faa2d68e79dbfff5f843fc29a1191",
+      "started_at": "2026-11-13T05:41:05.618348287Z",
+      "finished_at": "2026-11-13T05:41:07.318991231Z",
+      "exit_code": 0,
+      "wall_seconds": 1.9630849600000033,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 50,
+      "image_id": "sha256:1bfd8e807fb9de49da4c4a50c25e05ab2ce119fcb0c6856bb28d5881b55f0306",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-050",
+      "container_id": "1a05e543b035a29e592a84f08aedd50c5392ff01d913db758211bec963f43cfc",
+      "started_at": "2026-11-13T05:41:08.881728315Z",
+      "finished_at": "2026-11-13T05:41:09.937363187Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2897758979999878,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 51,
+      "image_id": "sha256:db234d10dcf3ce1008d2f3a5deabb7141f180b47e851ac3d5f7a2841b0ddbe7b",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-051",
+      "container_id": "9456ff8b54d57075118ed6f50f6bb420ba0dbaf8ddd98792eec5c30966e0738a",
+      "started_at": "2026-11-13T05:41:11.355659924Z",
+      "finished_at": "2026-11-13T05:41:12.431004116Z",
+      "exit_code": 0,
+      "wall_seconds": 1.3094021189999978,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 52,
+      "image_id": "sha256:60706607f7c69cc808190e922742c1ede117ec67819f80c2b8f863baa5fba544",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-052",
+      "container_id": "fee75c5d9f4fb15028824cae69620155b48e327ccf36b9a54acd5373656ec7fd",
+      "started_at": "2026-11-13T05:41:13.794340446Z",
+      "finished_at": "2026-11-13T05:41:14.894095966Z",
+      "exit_code": 0,
+      "wall_seconds": 1.3140346520000037,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 53,
+      "image_id": "sha256:9d24c92dc53ef0f797ebff9a168f6743ab5cb9b948fc4b1d851cdca092ceec12",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-053",
+      "container_id": "d47d88ce78a6c6f3903a26cc09032bbd0b7763af1f61923c6bec8942efee3624",
+      "started_at": "2026-11-13T05:41:16.192096807Z",
+      "finished_at": "2026-11-13T05:41:17.375699132Z",
+      "exit_code": 0,
+      "wall_seconds": 1.4325998429999913,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 54,
+      "image_id": "sha256:b130cc4dbdab5eca03f90d6ae8c6ec13a75db167d566dc41a8925cf66fffc47e",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-054",
+      "container_id": "7753c94e7082a1dabde75a0be0900aa8551d1b72dc9c229be734849469f3d5f6",
+      "started_at": "2026-11-13T05:41:18.834237733Z",
+      "finished_at": "2026-11-13T05:41:19.835096595Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2258807549999915,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 55,
+      "image_id": "sha256:6c6b5c1c17d5c00cf9ff30e37f3ea07702358618e1e407379379034ca6937c84",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-055",
+      "container_id": "68f89dc99708f29849118e3b2178d8a6224afe4361cad41acca6485e2c9bde10",
+      "started_at": "2026-11-13T05:41:21.06496567Z",
+      "finished_at": "2026-11-13T05:41:22.104259047Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2337308360000065,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 56,
+      "image_id": "sha256:13acbba2c298f306c9205a70d1c0521a1f9d95fd6eca330c3e1155acbbe1c92b",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-056",
+      "container_id": "1b1e6af1f79ef4a46941d31600f558103453e481b112e63f3f629019934ac154",
+      "started_at": "2026-11-13T05:41:23.347886126Z",
+      "finished_at": "2026-11-13T05:41:24.384612718Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2110354720000203,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 57,
+      "image_id": "sha256:692fe01dc49cf3a1ff8372cf915aace605b4d5ae54614a3b1088eec16e3f363e",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-057",
+      "container_id": "7f3cedb90233412f402eb2fe4f233a987967c72a902a0d70b77a7332b3dc2b4b",
+      "started_at": "2026-11-13T05:41:25.587592747Z",
+      "finished_at": "2026-11-13T05:41:26.615614845Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2273733840000034,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 58,
+      "image_id": "sha256:f43e94b85bf5c4281054a8a78f1b8791c093be8bd92a5851f91818a44ad2a269",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-058",
+      "container_id": "0f91ff3277225501939e756e69c2f2dac99091954047b239c410d3657e665cd0",
+      "started_at": "2026-11-13T05:41:27.845637641Z",
+      "finished_at": "2026-11-13T05:41:28.989550886Z",
+      "exit_code": 0,
+      "wall_seconds": 1.3406299869999998,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 59,
+      "image_id": "sha256:19ca38e1a42fccd1dae0bed6d1cf53a9a9ff1b0e1064870fa0c4b9b97645e6ec",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-059",
+      "container_id": "4a49f8352816f772ec85880ee2099075863617f9a6d442a138f39237593c9e46",
+      "started_at": "2026-11-13T05:41:30.209042224Z",
+      "finished_at": "2026-11-13T05:41:31.213575206Z",
+      "exit_code": 0,
+      "wall_seconds": 1.1952797379999822,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 60,
+      "image_id": "sha256:fce373879a5201332b0587d902f94f161c61ef0959acf4baaca8e830719d2931",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-060",
+      "container_id": "a73ce0aed9db57f77e7acbc360a891740a74b8cb66c9a76c7ad00da90bee5439",
+      "started_at": "2026-11-13T05:41:32.467009727Z",
+      "finished_at": "2026-11-13T05:41:33.488728708Z",
+      "exit_code": 0,
+      "wall_seconds": 1.3419731169999807,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 61,
+      "image_id": "sha256:7e03242b93ee67041b36a428367c37b40b0ceefccf8be5795205acff48343e33",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-061",
+      "container_id": "371f45f62765520a49d7261ebc5b5e95855e2d6c69df0fcde1fa15ca851baa0e",
+      "started_at": "2026-11-13T05:41:34.851948613Z",
+      "finished_at": "2026-11-13T05:41:35.446720116Z",
+      "exit_code": 0,
+      "wall_seconds": 1.35537905999999,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 62,
+      "image_id": "sha256:101377b42e638ebb8530c9e66646cc3128ca99994ebf53413aa949ac0951b4ca",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-062",
+      "container_id": "25be8c6665058c49d28c46921a1f1ffe29df1191cb6900f233ffef4d6959aa59",
+      "started_at": "2026-11-13T05:41:36.884880367Z",
+      "finished_at": "2026-11-13T05:41:38.118788969Z",
+      "exit_code": 0,
+      "wall_seconds": 1.5229302169999812,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 63,
+      "image_id": "sha256:7857fb87e79e7f235189ed2e7bf888da74b0515b010967dc2873887b91789279",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-063",
+      "container_id": "c787748f0befcce2240ec660b8c49f00f21c9452414c3189725c2838beb7371d",
+      "started_at": "2026-11-13T05:41:39.52565658Z",
+      "finished_at": "2026-11-13T05:41:40.565629164Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2884435670000016,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 64,
+      "image_id": "sha256:6bba4a6a2ebe3f3a4a7b2678b7c6a4770efe30fb79729d73d909475af9750d48",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-064",
+      "container_id": "c6adae3932e2b7d7f918b5d8604e54d895381b95d70c06c507261acf0669079c",
+      "started_at": "2026-11-13T05:41:41.813681452Z",
+      "finished_at": "2026-11-13T05:41:42.817868591Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2126366329999883,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 65,
+      "image_id": "sha256:684d816b9fd8cb3fa383919aeaec0690ab1a3c978a0188bc0796e88d40e6a4ed",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-065",
+      "container_id": "d27633bd97ac3e9ec6077ff7f278c74d7f84e96a1a1f1e20837179f12461405a",
+      "started_at": "2026-11-13T05:41:44.078502785Z",
+      "finished_at": "2026-11-13T05:41:45.096916966Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2233490630000006,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 66,
+      "image_id": "sha256:b932a4f4184221a0bffd4612b16a0bf3d6d323a5015d0eed70225eb3cec4c799",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-066",
+      "container_id": "147e02d37b987486f33bf90480cdffb8941db1c39524c026e1e5fe7662bacfab",
+      "started_at": "2026-11-13T05:41:46.417897737Z",
+      "finished_at": "2026-11-13T05:41:47.464290952Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2643255389999979,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 67,
+      "image_id": "sha256:c45dac28304fe18b84ac012694610727c11f66c57e33049b45c59968ba74543b",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-067",
+      "container_id": "0f3ca80474089100c59a80385477578fab215b7949e8b10aae46c2933fcb61e7",
+      "started_at": "2026-11-13T05:41:48.75123697Z",
+      "finished_at": "2026-11-13T05:41:49.800037466Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2929204319999883,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 68,
+      "image_id": "sha256:28421b3e7a81073cfb2ee936debfdcbad91b26b8c30bcef504dc5411508ff403",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-068",
+      "container_id": "a2d29110f5c25689fa7cc2c85b521302036c250952c58dab440d061e19882d3a",
+      "started_at": "2026-11-13T05:41:51.11267043Z",
+      "finished_at": "2026-11-13T05:41:52.169231351Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2655257819999974,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 69,
+      "image_id": "sha256:66d15aa0829c50ffe43352c19c3b1e6fa6d773247a382e55a1d6d31bf7d624c4",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-069",
+      "container_id": "a3b5a64ff609fb83786a2bfb1eb167fe437e5a1f262e05fa83cae48a5ead027b",
+      "started_at": "2026-11-13T05:41:53.465968007Z",
+      "finished_at": "2026-11-13T05:41:54.548223224Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2957806699999992,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 70,
+      "image_id": "sha256:12a603c1a1f10a9e0970f577e39bf2ecc2d61db80bfe02d9da5ec0908ed80188",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-070",
+      "container_id": "e97d4d4e75022b1f422974f4a8f12c8ecd39c71e7c2e2f50d6e627867b594cee",
+      "started_at": "2026-11-13T05:41:55.804504676Z",
+      "finished_at": "2026-11-13T05:41:56.905226703Z",
+      "exit_code": 0,
+      "wall_seconds": 1.3026339120000046,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 71,
+      "image_id": "sha256:11c1ca6822757b1e4227dc4726772facc003d3c696e4b1db2d85ced76b2d3044",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-071",
+      "container_id": "0a2879c5ee3870d1663daaae05d1509545dff6ada6e3a36e8b1943eaa2acc05e",
+      "started_at": "2026-11-13T05:41:58.18892804Z",
+      "finished_at": "2026-11-13T05:41:59.347853799Z",
+      "exit_code": 0,
+      "wall_seconds": 1.3599648529999797,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 72,
+      "image_id": "sha256:6153d037d416a7f1b3710c6e15e908355347efe1318bd2a2782594031a190d04",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-072",
+      "container_id": "9baf54f240d6feff48d2affd6fb42337c029000fae2161542d13812e5adae78d",
+      "started_at": "2026-11-13T05:42:00.595851377Z",
+      "finished_at": "2026-11-13T05:42:01.640116241Z",
+      "exit_code": 0,
+      "wall_seconds": 1.235546439000018,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 73,
+      "image_id": "sha256:bb00e6012955ab1933d89686f941dfd25da50fa08fabd3235dbdcc6ba76221c3",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-073",
+      "container_id": "0f4f66d23fbccddb0ba783b9de310e9a24b83843d707e9db57514869e104f728",
+      "started_at": "2026-11-13T05:42:02.872667722Z",
+      "finished_at": "2026-11-13T05:42:04.112811847Z",
+      "exit_code": 0,
+      "wall_seconds": 1.4784303190000117,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 74,
+      "image_id": "sha256:2c3e6874c41897f45389bee9ff303c797fe0ea39a400958102519a8bd1ead3db",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-074",
+      "container_id": "6be5f9d86d9cc2eb90fe1c80244d9db8f1d82441b4a41cc1525a4546e019fe2f",
+      "started_at": "2026-11-13T05:42:05.15012647Z",
+      "finished_at": "2026-11-13T05:42:06.245562611Z",
+      "exit_code": 0,
+      "wall_seconds": 1.3495770850000213,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 75,
+      "image_id": "sha256:b803d825ac9bf9d7f85181b1a9fff0259304632ec8d5b7f2f9195c84c6de986e",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-075",
+      "container_id": "53312f4cd45bd9b43ac700c5edd83fe0d32e33f85afd6562b8b43fb987909f98",
+      "started_at": "2026-11-13T05:42:08.419549617Z",
+      "finished_at": "2026-11-13T05:42:09.952299943Z",
+      "exit_code": 0,
+      "wall_seconds": 1.8431171419999828,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 76,
+      "image_id": "sha256:05165c471244bef540ea0c41153ad075de6ab64405a9f86e27f587093d36a76e",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-076",
+      "container_id": "73870623ea801cd29adb3219f0339421fb6ac04ae1bb0f0aca84bf70b62c7fb3",
+      "started_at": "2026-11-13T05:42:11.613251001Z",
+      "finished_at": "2026-11-13T05:42:12.777656302Z",
+      "exit_code": 0,
+      "wall_seconds": 1.419158111999991,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 77,
+      "image_id": "sha256:5d7d7d2d18158a7614ea7e8659142b53446cfbcffb059789bd6f16ef380b9e9e",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-077",
+      "container_id": "d11d3ea51de5aaee54b6ead2bcccb2fc1b9d7a514e5abcc484a6b7db19149a0a",
+      "started_at": "2026-11-13T05:42:14.281624011Z",
+      "finished_at": "2026-11-13T05:42:15.433959773Z",
+      "exit_code": 0,
+      "wall_seconds": 1.4022771059999855,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 78,
+      "image_id": "sha256:f8d2d9ae56966876a96204921aeae1fdbc6cb61a55de6208b5a60c54a3439a21",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-078",
+      "container_id": "30e9fc6971536cc25e6d81d42aebb034af8154d238d13baeb768a0d0389fff96",
+      "started_at": "2026-11-13T05:42:16.9215589Z",
+      "finished_at": "2026-11-13T05:42:18.105065246Z",
+      "exit_code": 0,
+      "wall_seconds": 1.4190474449999897,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 79,
+      "image_id": "sha256:6eed4c522aaa1b6e789ff43f6c20b8114a4ba94d1c48998a54e90c0e9a7ccc41",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-079",
+      "container_id": "0dc38fbceea3e0d7298cb3d6957dadabe1823ab4bdf01f3c2c223f458ade5759",
+      "started_at": "2026-11-13T05:42:19.908146007Z",
+      "finished_at": "2026-11-13T05:42:21.18138727Z",
+      "exit_code": 0,
+      "wall_seconds": 1.5246868680000034,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 80,
+      "image_id": "sha256:f81e8bf45177402c305277cec0ffc462cb2f26ea485c3126bb41a844018f4ec1",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-080",
+      "container_id": "bbd6957cb7de6e6cc5bdaa83f8b7048d16d93f5d161c5dc5060adfba27adfe91",
+      "started_at": "2026-11-13T05:42:22.877429919Z",
+      "finished_at": "2026-11-13T05:42:24.056447626Z",
+      "exit_code": 0,
+      "wall_seconds": 1.4302489389999664,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 81,
+      "image_id": "sha256:38b4646f26f131b2b69b9a2a3cdc3111244dab5ea75e2c261822458a61bdac4b",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-081",
+      "container_id": "72eb1fb3bede878bcfe044d6ca344e71a90f6eaf1eddc7169ca6b3530ba8f204",
+      "started_at": "2026-11-13T05:42:26.164233314Z",
+      "finished_at": "2026-11-13T05:42:27.290557963Z",
+      "exit_code": 0,
+      "wall_seconds": 1.4138103409999871,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 82,
+      "image_id": "sha256:c4f3055cf8d989689cd9091459fd88d0064e3f7f3ed6e27a25e2ea147d880486",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-082",
+      "container_id": "a16e61c06c221e9258c8464a5a0513b5e44b5dfa612c0bf38debaaaa01494473",
+      "started_at": "2026-11-13T05:42:28.87008592Z",
+      "finished_at": "2026-11-13T05:42:29.861149545Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2256026700000007,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 83,
+      "image_id": "sha256:16420a5167269689dda7edaacf78ecc30eb9020b7bb77de4877f9626d6be5dce",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-083",
+      "container_id": "fbd48846a2abe2482a67be1327449ee7d6367955cb25ac0b895851f42a6434fc",
+      "started_at": "2026-11-13T05:42:31.109537132Z",
+      "finished_at": "2026-11-13T05:42:32.161603958Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2663022880000199,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 84,
+      "image_id": "sha256:cae4419282e7e5161f1a7763a0ff08941bea4fd10607dd96b1a9e7b0f64b21cd",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-084",
+      "container_id": "0aa111f2c1a3070648b7c5a1409bc0a3c4c67ae4f8bfd9aae601ce124ec31940",
+      "started_at": "2026-11-13T05:42:33.396330832Z",
+      "finished_at": "2026-11-13T05:42:33.873823063Z",
+      "exit_code": 0,
+      "wall_seconds": 1.26434802,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 85,
+      "image_id": "sha256:c22eef956398d96c5afe39ce2fe155f7f1444c5e97d217965b5bd5120fc8c0c9",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-085",
+      "container_id": "deecf3eeae4f2d23e1d2691de83303ea63ec4907b9c8bf15305e376e855d6b93",
+      "started_at": "2026-11-13T05:42:35.180072866Z",
+      "finished_at": "2026-11-13T05:42:36.18810006Z",
+      "exit_code": 0,
+      "wall_seconds": 1.227283897999996,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 86,
+      "image_id": "sha256:948eccc8b5c03e9ebdc050296c3c32b015d06d079e55bf80bee8012d37132dcd",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-086",
+      "container_id": "f10b594b273004ec3a20a9a28710aa2ebb0ec8c1d282ca21f0972e08b0bf5079",
+      "started_at": "2026-11-13T05:42:37.447379362Z",
+      "finished_at": "2026-11-13T05:42:38.459262999Z",
+      "exit_code": 0,
+      "wall_seconds": 1.1994974309999975,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 87,
+      "image_id": "sha256:c8868e93414a1448cd0e05ee99dd4a6795a92450ae24ef90aeba6a6e6b4f89c3",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-087",
+      "container_id": "d0fb53d7243f0e3c7772e8a256b93ebee1b772a57d1ed81ec5075d6d0489f1a9",
+      "started_at": "2026-11-13T05:42:39.797483522Z",
+      "finished_at": "2026-11-13T05:42:40.802076957Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2200405370000453,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 88,
+      "image_id": "sha256:afebf560ca0bc72d9139accbd728350b861273de7a4ffba12702973bc3f8eca3",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-088",
+      "container_id": "d4534dd685330dd1179e7b5720737640b1b29936a96967d6ab3a06bb0da15d99",
+      "started_at": "2026-11-13T05:42:42.089292123Z",
+      "finished_at": "2026-11-13T05:42:43.119223152Z",
+      "exit_code": 0,
+      "wall_seconds": 1.3108513259999768,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 89,
+      "image_id": "sha256:6c2bcbdfc91338cac74cae6edcbfbf74f9333028c1ff37c78846e83f0edbd5af",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-089",
+      "container_id": "77dbbc51477e33d21be1c613ff836b5504d251d372e33ad7fb056f2e9318398a",
+      "started_at": "2026-11-13T05:42:44.450447002Z",
+      "finished_at": "2026-11-13T05:42:45.438325916Z",
+      "exit_code": 0,
+      "wall_seconds": 1.1938662510000313,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 90,
+      "image_id": "sha256:458bc35232a7f7c6045fe79b29fd345e69b83437b85887312bad49bfcbb456a3",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-090",
+      "container_id": "50ee731ea406a46cbf62af5223753b43c1fc7ed64a766a17e8d5cff219b8a956",
+      "started_at": "2026-11-13T05:42:46.706010065Z",
+      "finished_at": "2026-11-13T05:42:47.719755077Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2301487350000002,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 91,
+      "image_id": "sha256:57959f8eb038961b90d962e0493c31dbf326c74f592c5b813f0c3016e885ab46",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-091",
+      "container_id": "f9adcd2cf20635eaab444646e6cca2d95ebfcbaa25b54a89df1b22c7027c255f",
+      "started_at": "2026-11-13T05:42:48.978870686Z",
+      "finished_at": "2026-11-13T05:42:49.972231863Z",
+      "exit_code": 0,
+      "wall_seconds": 1.1962915170000201,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 92,
+      "image_id": "sha256:4266eb024b55f3839ac4e017e8e08288e7bc2ffaf1eda4c8aac74a384e8ed0f5",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-092",
+      "container_id": "71ce917a60f63ffb98fd4870402907622b6a23fb4aa3accbda28ff947d146e62",
+      "started_at": "2026-11-13T05:42:51.227016595Z",
+      "finished_at": "2026-11-13T05:42:52.239000712Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2140718850000098,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 93,
+      "image_id": "sha256:e69eecb3616d16f27e6d52c0b1e4b3e768e03400f23eb3f96982128d173705cb",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-093",
+      "container_id": "c43e61a7399f28888f02f60437986544d94c1c609565b117740729de1975b8d3",
+      "started_at": "2026-11-13T05:42:53.478533009Z",
+      "finished_at": "2026-11-13T05:42:54.502029851Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2283568560000049,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 94,
+      "image_id": "sha256:1ecf5fea6a89ff04455a0baf8216609afdd5441222bfd650015a578cb6099729",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-094",
+      "container_id": "8fe150c505d98b9721a294b2793f868a03db5abf7e9ae80044e99da18f025c33",
+      "started_at": "2026-11-13T05:42:55.833046201Z",
+      "finished_at": "2026-11-13T05:42:56.808035349Z",
+      "exit_code": 0,
+      "wall_seconds": 1.206272107000018,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 95,
+      "image_id": "sha256:70ea3739b841e07a7a5c23dbd88510f69306e9fe3c52368e15dca68c6e8ccfb5",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-095",
+      "container_id": "23daf758a6aa60819fec855e81c02c2df2a78da7205d5f4e7842ad66076dbbd5",
+      "started_at": "2026-11-13T05:42:58.085990433Z",
+      "finished_at": "2026-11-13T05:42:59.086002374Z",
+      "exit_code": 0,
+      "wall_seconds": 1.2302424700000074,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 96,
+      "image_id": "sha256:881167e22df8fdf30b31d4b510bd6cabbb71b65620a53680932c8e24446962d8",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-096",
+      "container_id": "e73574c647d4334ef181d6d4ad151c436b0bb8d989a3e51faf9acca12a4f0945",
+      "started_at": "2026-11-13T05:43:00.653414175Z",
+      "finished_at": "2026-11-13T05:43:02.031981644Z",
+      "exit_code": 0,
+      "wall_seconds": 1.7151434219999828,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 97,
+      "image_id": "sha256:6e5d713c18647dc5ec984e6da7f9d43736d03fa471500b70b74a8ed2eacb0c32",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-097",
+      "container_id": "3719905b7aa6227994aa5aef611b39696e931ec0c0d98f4edf461cf99bf8854f",
+      "started_at": "2026-11-13T05:43:03.37572683Z",
+      "finished_at": "2026-11-13T05:43:04.63907964Z",
+      "exit_code": 0,
+      "wall_seconds": 1.5292719029999944,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 98,
+      "image_id": "sha256:60b959eb0aece60bd93dc442ba74ec281410376c73ce43617889e86e28a914af",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-098",
+      "container_id": "d727ccd33df0efcb1ca43e278e0e2cefe326ee28548f3cc401219495bfffb40d",
+      "started_at": "2026-11-13T05:43:06.743029043Z",
+      "finished_at": "2026-11-13T05:43:08.240891709Z",
+      "exit_code": 0,
+      "wall_seconds": 1.7699138489999768,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 99,
+      "image_id": "sha256:e5fb4b62cd9fbf17f2fcd763f3e52052c89853528a987bdccb24f9126e58da30",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-099",
+      "container_id": "a786aa8524ecde6510cc0db9531ca03710519b1f1ec98e0c362055106de3e531",
+      "started_at": "2026-11-13T05:43:10.844379669Z",
+      "finished_at": "2026-11-13T05:43:12.103754579Z",
+      "exit_code": 0,
+      "wall_seconds": 1.524983059999954,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    },
+    {
+      "number": 100,
+      "image_id": "sha256:d2eeff7a193b5f587787620de0e33a0d86fb562b6b7cf3604514a228c7bc2951",
+      "image_tag": "tiopo-lab3-trial:20261113t053903z-816e3c1e-100",
+      "container_id": "8b23cf9234c2252969ab368e6329a980010719782c169f7eee16b55885a27547",
+      "started_at": "2026-11-13T05:43:14.283822325Z",
+      "finished_at": "2026-11-13T05:43:15.575874125Z",
+      "exit_code": 0,
+      "wall_seconds": 1.5257375179999713,
+      "rootfs": {
+        "Type": "layers",
+        "Layers": [
+          "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+        ]
+      },
+      "environment": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "GOMAXPROCS=1",
+        "GOGC=100",
+        "GOMEMLIMIT=384MiB"
+      ],
+      "host_config": {
+        "CpusetCpus": "0",
+        "NanoCpus": 1000000000,
+        "Memory": 536870912,
+        "MemorySwap": 536870912,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true,
+        "PidsLimit": 64,
+        "CapDrop": [
+          "ALL"
+        ],
+        "SecurityOpt": [
+          "no-new-privileges"
+        ]
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "file": "inputs/compact-100.json",
+      "visits": 4,
+      "depth": 100,
+      "sha256": "ac1809c49d507ad0ca9371d448c6a21e3d6071792cbf602cb16eb23811f0722c",
+      "format": "compact",
+      "nodes": 109
+    },
+    {
+      "file": "inputs/pretty-100.json",
+      "visits": 4,
+      "depth": 100,
+      "sha256": "9b8305704532bee9fa8119d476910da08074ea9153daa4ad5494ca1ba85868ca",
+      "format": "pretty",
+      "nodes": 109
+    }
+  ],
+  "profile": "formats",
+  "docker": {
+    "ServerVersion": "29.8.2",
+    "NCPU": 8,
+    "MemTotal": 8243535872,
+    "Architecture": "x86_64",
+    "OSType": "linux",
+    "KernelVersion": "6.18.58.1-microsoft-standard-WSL2"
+  },
+  "base_image": "sha256:aee417608f279eeee92658bcde2922553a534bfaead9f9283b304474a81b5000",
+  "rootfs": {
+    "Type": "layers",
+    "Layers": [
+      "sha256:e48a486f9e697f749b65a4a4d795e3a07ab96e168da0d62b265c4511cf6941f8"
+    ]
+  },
+  "binary_build": "/mnt/c/ITS/tiopo/lab3/.build/bench: go1.27.4\n\tpath\ttiopo/lab3/bench\n\tmod\ttiopo/lab3\t(devel)\t\n\tbuild\t-buildmode=exe\n\tbuild\t-compiler=gc\n\tbuild\t-trimpath=true\n\tbuild\tDefaultGODEBUG=containermaxprocs=0,cryptocustomrand=1,decoratemappings=0,gotestjsonbuildtext=1,httpcookiemaxnum=0,httpservecontentmaxranges=1,multipathtcp=0,randseednop=0,rsa1024min=0,tlsmlkem=0,tlssecpmlkem=0,tlssha1=1,tracebacklabels=0,updatemaxprocs=0,urlmaxqueryparams=0,urlstrictcolons=0,x509rsacrt=0,x509sha256skid=0,x509sslcertoverrideplatform=0,x509usepolicies=0\n\tbuild\tCGO_ENABLED=0\n\tbuild\tGOARCH=amd64\n\tbuild\tGOOS=linux\n\tbuild\tGOAMD64=v1",
+  "wall_seconds": 257.68241791599996
+}
