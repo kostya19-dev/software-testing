@@ -4,7 +4,6 @@ on:
   push:
     paths:
       - '.github/workflows/lab2.yml'
-      - 'lab1/**'
       - 'lab2/**'
       - 'project/VitaLineClinic/**'
   workflow_dispatch:

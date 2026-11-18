@@ -168,7 +168,7 @@ make recover RUN_ID=debug-01
 
 ## GitHub Actions
 
-Workflow находится в `../.github/workflows/lab2.yml` относительно `lab2`. Каталог `.github` должен находиться в корне GitHub-репозитория рядом с `lab1`, `lab2` и `project`.
+Workflow находится в `../.github/workflows/lab2.yml` относительно `lab2`. При подготовке прогона в тестовый снимок добавляются unit-тесты из коммита `7dfd875` ветки `lab1`. Если в локальной истории нет этого коммита, Git скачивает его с GitHub.
 
 Для запуска зарегистрируйте в настройках GitHub-репозитория **Settings → Actions → Runners → New self-hosted runner** один Linux x64 runner с меткой `tiopo-lab2`. На его машине должны быть Docker Compose, Python 3, Make и Git; пользователь runner должен иметь доступ к Docker. Рабочий каталог runner должен сохраняться между сборками. Не размещайте несколько runner с разными checkout на одном Docker-стенде: его bind mounts привязаны к постоянному пути проекта. Для демонстрации одновременных тестировщиков используйте `make parallel` на этом стенде.
 

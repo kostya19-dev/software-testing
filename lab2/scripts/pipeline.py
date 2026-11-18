@@ -34,6 +34,24 @@ def command(args, *, env=None, cwd=None, capture=False):
     ).stdout
 
 
+def add_unit_tests(checkout):
+    revision = "7dfd8754f2b676c7b224e641e1c7dea1b812de2d"
+    tree = revision + ":lab1"
+    with tempfile.TemporaryDirectory(prefix="lab2-unit-") as temporary:
+        repo = ROOT
+        if sp.run(["git", "-C", repo, "cat-file", "-e", tree], stderr=sp.DEVNULL).returncode:
+            repo = Path(temporary) / "repository.git"
+            command(["git", "init", "--quiet", "--bare", repo])
+            command(["git", "-C", repo, "fetch", "--quiet", "--depth=1", "--no-tags",
+                     "https://github.com/kostya19-dev/software-testing.git", revision])
+        archive = Path(temporary) / "unit.tar"
+        command(["git", "-C", repo, "archive", "-o", archive, tree, "--",
+                 "go.mod", "go.sum", "domain", "usecase", "storage", "testutil"])
+        destination = checkout / "lab1"
+        destination.mkdir()
+        command(["tar", "-xf", archive, "-C", destination])
+
+
 def junit(path, stage, status, message):
     suite = ET.Element(
         "testsuite",
@@ -160,8 +178,9 @@ class Run:
                 "*.png",
                 "*.exe",
             )
-            for source in ("project/VitaLineClinic", "lab1", "lab2"):
+            for source in ("project/VitaLineClinic", "lab2"):
                 shutil.copytree(ROOT / source, checkout / source, ignore=ignore)
+            add_unit_tests(checkout)
             command(["git", "init", "-q", "-b", "main", checkout])
             command(["git", "add", "."], cwd=checkout)
             command(
