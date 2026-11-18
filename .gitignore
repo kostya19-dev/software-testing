@@ -1,0 +1,12 @@
+**/.runs/
+**/.tools/
+**/reports/
+**/__pycache__/
+**/node_modules/
+**/.env
+**/.env.*
+!**/.env.example
+**/logs/
+**/dist/
+*.log
+*.exe
