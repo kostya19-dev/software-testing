@@ -10,6 +10,7 @@ import (
 	"vitaline-clinic/internal/logging"
 	mongostorage "vitaline-clinic/internal/storage/mongodb"
 	"vitaline-clinic/internal/storage/postgres"
+	"vitaline-clinic/internal/tracing"
 	"vitaline-clinic/internal/usecase"
 )
 
@@ -80,6 +81,7 @@ type App struct {
 	Logger        *slog.Logger
 	UseCases      UseCases
 	Health        HealthChecker
+	Tracer        *tracing.Tracer
 
 	closers []closer
 }
@@ -97,16 +99,17 @@ func New(ctx context.Context, opts Options) (*App, error) {
 		return nil, err
 	}
 
+	app := &App{
+		ConfigPath:    configPath,
+		AppName:       cfg.App.Name,
+		APIAddress:    cfg.API.Address,
+		GUIAddress:    cfg.GUI.Address,
+		GUIAPIBaseURL: cfg.GUI.APIBaseURL,
+		Logger:        logs.Logger,
+		closers:       []closer{logs},
+	}
+
 	if opts.SkipDatabase {
-		app := &App{
-			ConfigPath:    configPath,
-			AppName:       cfg.App.Name,
-			APIAddress:    cfg.API.Address,
-			GUIAddress:    cfg.GUI.Address,
-			GUIAPIBaseURL: cfg.GUI.APIBaseURL,
-			Logger:        logs.Logger,
-			closers:       []closer{logs},
-		}
 		app.Logger.Info(
 			"application bootstrap completed",
 			"config_path", app.ConfigPath,
@@ -120,73 +123,9 @@ func New(ctx context.Context, opts Options) (*App, error) {
 		return app, nil
 	}
 
-	var patientRepo usecase.PatientRepository
-	var appointmentRepo usecase.AppointmentRepository
-	var scheduleRepo usecase.ScheduleRepository
-	var visitRepo usecase.VisitRepository
-	var emergencyRepo usecase.EmergencyRepository
-	var health HealthChecker
-	closers := []closer{logs}
-
-	switch cfg.Database.Driver {
-	case "postgres":
-		db, err := postgres.Open(ctx, cfg.Database.URL)
-		if err != nil {
-			_ = logs.Close()
-			return nil, err
-		}
-		patientRepo = postgres.NewPatientRepository(db)
-		appointmentRepo = postgres.NewAppointmentRepository(db)
-		scheduleRepo = postgres.NewScheduleRepository(db)
-		visitRepo = postgres.NewVisitRepository(db)
-		emergencyRepo = postgres.NewEmergencyRepository(db)
-		health = &databaseHealthChecker{ping: db.PingContext}
-		closers = append(closers, db)
-	case "mongodb":
-		store, err := mongostorage.Open(ctx, cfg.Database.URL, cfg.Database.Name)
-		if err != nil {
-			_ = logs.Close()
-			return nil, err
-		}
-		patientRepo = mongostorage.NewPatientRepository(store.Database())
-		appointmentRepo = mongostorage.NewAppointmentRepository(store.Database())
-		scheduleRepo = mongostorage.NewScheduleRepository(store.Database())
-		visitRepo = mongostorage.NewVisitRepository(store.Database())
-		emergencyRepo = mongostorage.NewEmergencyRepository(store.Database())
-		health = &databaseHealthChecker{ping: store.Ping}
-		closers = append(closers, store)
-	default:
+	if err := app.connect(ctx, cfg, logs); err != nil {
 		_ = logs.Close()
-		return nil, fmt.Errorf("unsupported database driver: %s", cfg.Database.Driver)
-	}
-
-	minLeadTime := time.Duration(cfg.Business.AppointmentMinLeadTimeMinutes) * time.Minute
-
-	patientSvc := usecase.NewPatientService(patientRepo)
-	appointmentSvc := usecase.NewAppointmentService(
-		appointmentRepo,
-		usecase.WithAppointmentMinLeadTime(minLeadTime),
-	)
-	scheduleSvc := usecase.NewScheduleService(scheduleRepo)
-	visitSvc := usecase.NewVisitService(visitRepo, appointmentRepo)
-	emergencySvc := usecase.NewEmergencyService(emergencyRepo, appointmentRepo)
-
-	app := &App{
-		ConfigPath:    configPath,
-		AppName:       cfg.App.Name,
-		APIAddress:    cfg.API.Address,
-		GUIAddress:    cfg.GUI.Address,
-		GUIAPIBaseURL: cfg.GUI.APIBaseURL,
-		Logger:        logs.Logger,
-		UseCases: &useCases{
-			patients:     patientSvc,
-			appointments: appointmentSvc,
-			schedule:     scheduleSvc,
-			visits:       visitSvc,
-			emergencies:  emergencySvc,
-		},
-		Health:  health,
-		closers: closers,
+		return nil, err
 	}
 
 	app.Logger.Info(
@@ -199,10 +138,102 @@ func New(ctx context.Context, opts Options) (*App, error) {
 		"gui_address", cfg.GUI.Address,
 		"database_driver", cfg.Database.Driver,
 		"database_name", cfg.Database.Name,
+		"tracing", cfg.Tracing.Enabled,
+		"log_extended", cfg.Logging.Extended,
 		"appointment_min_lead_time_minutes", cfg.Business.AppointmentMinLeadTimeMinutes,
 	)
 
 	return app, nil
+}
+
+func (a *App) connect(ctx context.Context, cfg appconfig.Config, logs *logging.Instance) error {
+	tracer, err := tracing.Start(ctx, cfg.Tracing)
+	if err != nil {
+		return err
+	}
+
+	store, err := openStorage(ctx, cfg.Database, tracer, logs.Logger)
+	if err != nil {
+		return err
+	}
+
+	a.Tracer = tracer
+	a.Health = store.health
+	a.closers = append(a.closers, tracer, store.closer)
+
+	a.UseCases = newUseCases(store, cfg.Business)
+	return nil
+}
+
+type storage struct {
+	patients     usecase.PatientRepository
+	appointments usecase.AppointmentRepository
+	schedule     usecase.ScheduleRepository
+	visits       usecase.VisitRepository
+	emergencies  usecase.EmergencyRepository
+	health       HealthChecker
+	closer       closer
+}
+
+func openStorage(ctx context.Context, cfg appconfig.DatabaseConfig, tracer *tracing.Tracer, logger *slog.Logger) (storage, error) {
+	switch cfg.Driver {
+	case "postgres":
+		return openPostgres(ctx, cfg)
+	case "mongodb":
+		return openMongo(ctx, cfg, tracer, logger)
+	default:
+		return storage{}, fmt.Errorf("unsupported database driver: %s", cfg.Driver)
+	}
+}
+
+func openPostgres(ctx context.Context, cfg appconfig.DatabaseConfig) (storage, error) {
+	db, err := postgres.Open(ctx, cfg.URL)
+	if err != nil {
+		return storage{}, err
+	}
+	return storage{
+		patients:     postgres.NewPatientRepository(db),
+		appointments: postgres.NewAppointmentRepository(db),
+		schedule:     postgres.NewScheduleRepository(db),
+		visits:       postgres.NewVisitRepository(db),
+		emergencies:  postgres.NewEmergencyRepository(db),
+		health:       &databaseHealthChecker{ping: db.PingContext},
+		closer:       db,
+	}, nil
+}
+
+func openMongo(ctx context.Context, cfg appconfig.DatabaseConfig, tracer *tracing.Tracer, logger *slog.Logger) (storage, error) {
+	store, err := mongostorage.Open(ctx, cfg.URL, cfg.Name,
+		tracer.CommandMonitor(),
+		logging.CommandMonitor(logger),
+	)
+	if err != nil {
+		return storage{}, err
+	}
+	db := store.Database()
+	return storage{
+		patients:     mongostorage.NewPatientRepository(db),
+		appointments: mongostorage.NewAppointmentRepository(db),
+		schedule:     mongostorage.NewScheduleRepository(db),
+		visits:       mongostorage.NewVisitRepository(db),
+		emergencies:  mongostorage.NewEmergencyRepository(db),
+		health:       &databaseHealthChecker{ping: store.Ping},
+		closer:       store,
+	}, nil
+}
+
+func newUseCases(store storage, business appconfig.BusinessConfig) *useCases {
+	minLeadTime := time.Duration(business.AppointmentMinLeadTimeMinutes) * time.Minute
+	return &useCases{
+		patients: usecase.NewPatientService(store.patients),
+		appointments: usecase.NewAppointmentService(
+			store.appointments,
+			usecase.WithAppointmentMinLeadTime(minLeadTime),
+		),
+		schedule:    usecase.NewScheduleService(store.schedule),
+		visits:      usecase.NewVisitService(store.visits, store.appointments),
+		emergencies: usecase.NewEmergencyService(store.emergencies, store.appointments),
+	}
 }
 
 func (a *App) Close() error {

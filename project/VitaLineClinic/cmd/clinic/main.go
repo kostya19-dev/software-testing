@@ -89,6 +89,7 @@ func runAPI(app *bootstrap.App) error {
 		},
 		app.Logger,
 	)
+	server.Wrap(app.Tracer.Handler)
 	return serve(app, server)
 }
 
