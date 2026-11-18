@@ -5,6 +5,13 @@ ITERATIONS ?= 256
 SAMPLES ?= 256
 
 .PHONY: build test run smoke report
+.PHONY: setup
+setup:
+	mkdir -p .tools
+	GOBIN="$(CURDIR)/.tools" go install gotest.tools/gotestsum@v1.13.0
+	npm install --prefix .tools/allure-cli --no-audit --no-fund --no-save allure-commandline@2.34.1
+
+.DEFAULT_GOAL := build
 build:
 	mkdir -p .build
 	CGO_ENABLED=0 go build -trimpath -buildvcs=false -o .build/bench ./bench

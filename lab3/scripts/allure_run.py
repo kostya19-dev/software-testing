@@ -18,7 +18,7 @@ from xml.etree import ElementTree as ET
 from report import read_summary, chart_source
 
 ROOT = Path(__file__).resolve().parents[1]
-TOOLS = ROOT.parent / "lab1/.tools"
+TOOLS = ROOT / ".tools"
 
 
 class PythonResults(unittest.TextTestResult):
@@ -167,7 +167,7 @@ def main():
     allure = shutil.which("allure") or str(TOOLS/"allure-cli/node_modules/.bin/allure")
     gotestsum = shutil.which("gotestsum") or str(TOOLS/"gotestsum")
     if not all(os.access(tool, os.X_OK) for tool in (allure,gotestsum)):
-        sys.exit("Установите инструменты: make -C ../lab1 setup")
+        sys.exit("Установите инструменты: make -C lab3 setup из корня репозитория")
     parent = ROOT/"results/allure"
     parent.mkdir(parents=True, exist_ok=True)
     run = Path(tempfile.mkdtemp(prefix=dt.datetime.now().strftime("%Y%m%d-%H%M%S-"),dir=parent))
