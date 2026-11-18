@@ -1,0 +1,49 @@
+services:
+  mongo:
+    image: mongo:7
+    tmpfs: [/data/db, /data/configdb]
+    healthcheck:
+      test: [CMD, mongosh, --quiet, --eval, 'quit(db.adminCommand({ping:1}).ok ? 0 : 1)']
+      interval: 2s
+      timeout: 5s
+      retries: 40
+  mail:
+    image: axllent/mailpit:v1.27.10
+    environment:
+      MP_MAX_MESSAGES: '500'
+  api:
+    build: ../project/VitaLineClinic
+    command: [api]
+    depends_on:
+      mongo:
+        condition: service_healthy
+      mail:
+        condition: service_started
+    environment:
+      VITALINE_DATABASE_DRIVER: mongodb
+      DATABASE_URL: mongodb://mongo:27017
+      MONGODB_DATABASE: lab5_auth
+      VITALINE_HTTP_ADDRESS: ':8080'
+      VITALINE_AUTH_ENABLED: '1'
+      VITALINE_AUTH_SMTP: mail:1025
+    healthcheck:
+      test: [CMD, wget, -qO-, 'http://127.0.0.1:8080/health']
+      interval: 2s
+      timeout: 3s
+      retries: 40
+  tests:
+    build: .
+    profiles: [test]
+    environment:
+      LAB5_E2E: '1'
+      LAB5_TEST_PASSWORD: ${LAB5_TEST_PASSWORD:?Run make test}
+      API_URL: http://api:8080
+      MAIL_URL: http://mail:8025
+      MONGODB_URI: mongodb://mongo:27017
+      MONGODB_DATABASE: lab5_auth
+    volumes:
+      - ${LAB5_RESULTS:?Run make test}:/suite/results
+
+networks:
+  default:
+    internal: true

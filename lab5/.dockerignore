@@ -1,0 +1,4 @@
+results
+scripts
+*.test
+__pycache__

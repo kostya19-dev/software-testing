@@ -1,0 +1,61 @@
+name: Lab 5 - authentication BDD
+
+on:
+  push:
+    paths:
+      - '.github/workflows/lab5.yml'
+      - 'lab5/**'
+      - 'project/VitaLineClinic/**'
+  pull_request:
+    paths:
+      - '.github/workflows/lab5.yml'
+      - 'lab5/**'
+      - 'project/VitaLineClinic/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: project/VitaLineClinic/go.mod
+          cache-dependency-path: |
+            project/VitaLineClinic/go.sum
+            lab5/go.sum
+      - name: Check API and BDD code
+        run: |
+          cd project/VitaLineClinic
+          go vet ./internal/auth ./internal/delivery/http ./cmd/clinic
+          go test ./internal/auth ./internal/delivery/http ./cmd/clinic
+          cd ../../lab5
+          make check
+
+  e2e:
+    needs: check
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Run isolated authentication scenarios
+        working-directory: lab5
+        env:
+          LAB5_TEST_PASSWORD: ${{ secrets.LAB5_TEST_PASSWORD }}
+        run: make test
+      - name: Upload BDD reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lab5-bdd-${{ github.run_id }}-${{ github.run_attempt }}
+          path: lab5/results/
+          if-no-files-found: warn
+          retention-days: 14
