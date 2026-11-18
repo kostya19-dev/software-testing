@@ -13,54 +13,54 @@ type Visit struct {
 	Duration int
 	Price    int64
 }
-type Record struct {
-	ID     int64
-	Name   string
-	Email  string
-	Active bool
-	Visits []Visit
-}
-
-func fixture(size int) Record {
-	r := Record{ID: 42, Name: "Учебный пациент", Email: "patient@example.invalid", Active: true}
-	for i := 0; i < size; i++ {
-		r.Visits = append(r.Visits, Visit{fmt.Sprintf("procedure-%03d", i), 15 + i%5, int64(1200 + i*17)})
-	}
-	return r
-}
-
 type codec struct {
-	name   string
-	encode func(Record) ([]byte, error)
-	decode func([]byte) (Record, error)
+	name        string
+	serialize   func(Record) ([]byte, error)
+	deserialize func([]byte) (Record, error)
+}
+
+func serializeJSON(r Record) ([]byte, error) {
+	return json.Marshal(r)
+}
+
+func deserializeJSON(data []byte) (Record, error) {
+	var r Record
+	err := json.Unmarshal(data, &r)
+	return r, err
+}
+
+func serializeGob(r Record) ([]byte, error) {
+	var buf bytes.Buffer
+	err := gob.NewEncoder(&buf).Encode(r)
+	return buf.Bytes(), err
+}
+
+func deserializeGob(data []byte) (Record, error) {
+	var r Record
+	err := gob.NewDecoder(bytes.NewReader(data)).Decode(&r)
+	return r, err
 }
 
 var codecs = []codec{
-	{"json", func(r Record) ([]byte, error) { return json.Marshal(r) }, func(b []byte) (r Record, err error) { err = json.Unmarshal(b, &r); return }},
-	{"gob", func(r Record) ([]byte, error) {
-		var b bytes.Buffer
-		err := gob.NewEncoder(&b).Encode(r)
-		return b.Bytes(), err
-	},
-		func(b []byte) (r Record, err error) { err = gob.NewDecoder(bytes.NewReader(b)).Decode(&r); return }},
+	{"json", serializeJSON, deserializeJSON},
+	{"gob", serializeGob, deserializeGob},
 }
 
-// Observable sinks prevent dead-code elimination. No I/O in timed code.
 var sinkBytes []byte
 var sinkRecord Record
 var sinkError error
 
 func operation(c codec, scenario string, r Record, encoded []byte) func() {
 	switch scenario {
-	case "write":
-		return func() { sinkBytes, sinkError = c.encode(r) }
-	case "read":
-		return func() { sinkRecord, sinkError = c.decode(encoded) }
+	case "serialize":
+		return func() { sinkBytes, sinkError = c.serialize(r) }
+	case "deserialize":
+		return func() { sinkRecord, sinkError = c.deserialize(encoded) }
 	case "roundtrip":
 		return func() {
-			sinkBytes, sinkError = c.encode(r)
+			sinkBytes, sinkError = c.serialize(r)
 			if sinkError == nil {
-				sinkRecord, sinkError = c.decode(sinkBytes)
+				sinkRecord, sinkError = c.deserialize(sinkBytes)
 			}
 		}
 	default:
@@ -68,11 +68,11 @@ func operation(c codec, scenario string, r Record, encoded []byte) func() {
 	}
 }
 func validate(c codec, r Record) ([]byte, error) {
-	b, err := c.encode(r)
+	b, err := c.serialize(r)
 	if err != nil {
 		return nil, err
 	}
-	got, err := c.decode(b)
+	got, err := c.deserialize(b)
 	if err != nil {
 		return nil, err
 	}

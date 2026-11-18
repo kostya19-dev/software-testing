@@ -15,6 +15,7 @@ type Sample struct {
 	LatencyNS int64 `json:"latency_ns"`
 }
 type Result struct {
+	Format       string   `json:"format,omitempty"`
 	Codec        string   `json:"codec"`
 	Scenario     string   `json:"scenario"`
 	Size         int      `json:"size"`
@@ -40,7 +41,6 @@ func batch(fn func(), n int) Phase {
 }
 func measure(fn func(), n, samples int, epoch time.Time) Result {
 	start := time.Now()
-	// Collection before warmup. Normal GC stays enabled during measurement.
 	runtime.GC()
 	warmup := batch(fn, n)
 	main := batch(fn, n)

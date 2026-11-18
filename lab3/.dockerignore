@@ -3,3 +3,4 @@
 !Dockerfile.trial
 !.build/
 !.build/bench
+!.build/bench-baseline

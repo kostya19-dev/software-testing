@@ -1,5 +1,6 @@
 FROM scratch
-COPY .build/bench /bench
+ARG BINARY=bench
+COPY .build/${BINARY} /bench
 ENV GOMAXPROCS=1 GOGC=100 GOMEMLIMIT=384MiB
 USER 65532:65532
 ENTRYPOINT ["/bench"]

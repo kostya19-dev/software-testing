@@ -7,29 +7,33 @@ import (
 )
 
 func TestCodecsPreserveData(t *testing.T) {
+	records, _, err := loadPatients()
+	if err != nil {
+		t.Fatal(err)
+	}
 	for _, size := range []int{4, 64} {
 		for _, c := range codecs {
-			r := fixture(size)
+			r := records[size]
 			b, err := validate(c, r)
 			if err != nil {
 				t.Fatal(err)
 			}
-			for _, scenario := range []string{"write", "read", "roundtrip"} {
+			for _, scenario := range []string{"serialize", "deserialize", "roundtrip"} {
 				operation(c, scenario, r, b)()
 				if sinkError != nil {
 					t.Fatal(sinkError)
 				}
-				if scenario != "write" && !reflect.DeepEqual(r, sinkRecord) {
+				if scenario != "serialize" && !reflect.DeepEqual(r, sinkRecord) {
 					t.Fatal("decoded data mismatch")
 				}
-				if scenario != "read" {
-					got, err := c.decode(sinkBytes)
+				if scenario != "deserialize" {
+					got, err := c.deserialize(sinkBytes)
 					if err != nil || !reflect.DeepEqual(got, r) {
 						t.Fatalf("invalid output: %v", err)
 					}
 				}
 			}
-			if _, err := c.decode([]byte("corrupt")); err == nil {
+			if _, err := c.deserialize([]byte("corrupt")); err == nil {
 				t.Fatal("corrupt input accepted")
 			}
 		}
