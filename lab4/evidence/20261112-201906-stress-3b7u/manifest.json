@@ -1,0 +1,45 @@
+{
+  "id": "20261112-201906-stress-3b7u",
+  "scenario": "stress",
+  "scale": 1,
+  "started_at": "2026-11-12T20:19:20+03:00",
+  "finished_at": "2026-11-12T20:28:53+03:00",
+  "load_exit_code": 0,
+  "services": {
+    "api": {
+      "image": "vitaline-lab4-api:20261112-201906-stress-3b7u",
+      "image_id": "sha256:16af504a74d4906eb515b98817cad41da86b298b133329a55ec00db1c165bcca",
+      "cpuset": "0,1",
+      "cpus": 1,
+      "memory_mb": 512
+    },
+    "exporter": {
+      "image": "vitaline-lab4-exporter:1",
+      "image_id": "sha256:ddc3666118d5e585a35ff807bb5b17a1acf93e39b3be381088404f01cc17264f",
+      "cpuset": "6,7",
+      "cpus": 0,
+      "memory_mb": 64
+    },
+    "loadgen": {
+      "image": "vitaline-lab4-loadgen:1",
+      "image_id": "sha256:8cd130a6110d929f61383d8e5a78214509a879a51850c293ecee5aa049d79b67",
+      "cpuset": "4,5",
+      "cpus": 0,
+      "memory_mb": 2048
+    },
+    "mongo": {
+      "image": "mongo:7",
+      "image_id": "sha256:9896df581dfd0718b7abe112f4c37598d0986c54060e4ec1384997e6503c8c71",
+      "cpuset": "2,3",
+      "cpus": 1,
+      "memory_mb": 1024
+    },
+    "prometheus": {
+      "image": "prom/prometheus:v3.5.0",
+      "image_id": "sha256:63805ebb8d2b3920190daf1cb14a60871b16fd38bed42b857a3182bc621f4996",
+      "cpuset": "6,7",
+      "cpus": 0,
+      "memory_mb": 768
+    }
+  }
+}

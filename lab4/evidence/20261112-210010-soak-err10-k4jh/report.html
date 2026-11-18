@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ЛР4 · soak-err10</title>
+<style>
+:root { --bg: #f8f9fa; --panel: #fff; --text: #212529; --muted: #6c757d; --line: #dee2e6; --head: #f1f3f5; --accent: #2a6fdb; --bad: #fff5f5; }
+body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; background: var(--bg); color: var(--text); }
+main { max-width: 1180px; margin: 0 auto; padding: 24px 16px 64px; }
+h1 { font-size: 24px; margin: 0 0 4px; }
+h2 { font-size: 18px; margin: 32px 0 12px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+a { color: #1c4fa3; }
+.meta { color: var(--muted); font-size: 13px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-top: 16px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
+.card span { color: var(--muted); font-size: 12px; }
+.card b { display: block; font-size: 20px; margin-top: 4px; }
+.verdict { background: var(--panel); border-left: 4px solid var(--accent); padding: 12px 16px; margin-top: 16px; border-radius: 4px; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; background: var(--panel); font-size: 13px; margin-bottom: 8px; }
+th, td { border: 1px solid var(--line); padding: 5px 8px; text-align: right; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { background: var(--head); }
+tr.bad td { background: var(--bad); }
+figure { margin: 16px 0; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px; }
+figure img { width: 100%; height: auto; }
+figcaption { color: var(--muted); font-size: 12px; margin-top: 4px; }
+code { background: #e9ecef; padding: 1px 4px; border-radius: 3px; }
+</style>
+</head>
+<body>
+<main>
+
+
+<h1>Длительная нагрузка, 10% ошибочных операций</h1>
+<div class="meta">Прогон <code>20261112-210010-soak-err10-k4jh</code> · 2026-11-12T21:00:19&#43;03:00 — 2026-11-12T21:30:15&#43;03:00 · масштаб времени 1 · код завершения генератора 0</div>
+
+<div class="cards">
+  <div class="card"><span>Запросов</span><b>493997</b></div>
+  <div class="card"><span>RPS среднее / медиана</span><b>274 / 296</b></div>
+  <div class="card"><span>p50 / p95 задержки</span><b>10.8 / 746 мс</b></div>
+  <div class="card"><span>p99 задержки</span><b>1501 мс</b></div>
+  <div class="card"><span>Отказы</span><b>1.46%</b></div>
+  <div class="card"><span>Ошибочные операции</span><b>10.04%</b></div>
+</div>
+<div class="verdict">Ошибочных операций: задано 10%, фактически 10.0%. Отказы 1.46%. Дрейф p95 между первым и последним отрезком ×48.2, RPS ×0.65. Тренд памяти: api 31.0 МБ/ч, exporter 0.15 МБ/ч, loadgen 13.4 МБ/ч, mongo 299 МБ/ч, prometheus 5.37 МБ/ч.<br><span class="meta">SLO: p95 ≤ 500 мс и доля отказов ≤ 1%.</span></div>
+
+<h2>Задержка</h2>
+<div class="scroll"><table>
+  <thead><tr><th>Задержка, мс</th><th>count</th><th>min</th><th>mean</th><th>p50</th><th>p75</th><th>p90</th><th>p95</th><th>p99</th><th>max</th></tr></thead>
+  <tbody>
+    <tr><td>Все запросы</td><td>493997</td><td>0.14</td><td>127</td><td>10.8</td><td>97.9</td><td>382</td><td>746</td><td>1501</td><td>1514</td></tr>
+    <tr><td>Корректные операции</td><td>444399</td><td>0.44</td><td>138</td><td>14.8</td><td>114</td><td>420</td><td>800</td><td>1501</td><td>1514</td></tr>
+    <tr><td>Ошибочные операции</td><td>49598</td><td>0.14</td><td>31.9</td><td>0.65</td><td>5.79</td><td>79.2</td><td>174</td><td>599</td><td>1412</td></tr>
+  </tbody>
+</table></div>
+<figure><img src="charts/latency_timeline.png" alt="Задержка во времени"><figcaption>Задержка во времени</figcaption></figure>
+<figure><img src="charts/latency_percentiles.png" alt="Задержка по перцентилям"><figcaption>Задержка по перцентилям</figcaption></figure>
+<figure><img src="charts/latency_histogram.png" alt="Гистограмма задержки"><figcaption>Гистограмма задержки</figcaption></figure>
+
+<h2>Операции пользовательского сценария</h2>
+<div class="scroll"><table>
+  <thead><tr><th>Операция</th><th>count</th><th>min</th><th>mean</th><th>p50</th><th>p75</th><th>p90</th><th>p95</th><th>p99</th><th>max</th><th>Отказы</th><th>Ошибочные</th></tr></thead>
+  <tbody>
+    <tr><td>book_appointment</td><td>75188</td><td>0.20</td><td>329</td><td>48.4</td><td>496</td><td>1257</td><td>1501</td><td>1502</td><td>1514</td><td>7.02%</td><td>9.97%</td></tr>
+    <tr><td>browse_schedule</td><td>75209</td><td>0.16</td><td>58.3</td><td>2.81</td><td>52.9</td><td>170</td><td>284</td><td>737</td><td>1471</td><td>0.00%</td><td>10.10%</td></tr>
+    <tr><td>cancel_appointment</td><td>18561</td><td>0.47</td><td>98.5</td><td>10.5</td><td>97.9</td><td>288</td><td>455</td><td>1237</td><td>1502</td><td>0.73%</td><td>9.67%</td></tr>
+    <tr><td>complete_visit</td><td>38876</td><td>0.46</td><td>80.8</td><td>7.09</td><td>79.9</td><td>242</td><td>373</td><td>895</td><td>1503</td><td>0.42%</td><td>10.13%</td></tr>
+    <tr><td>login</td><td>75220</td><td>0.44</td><td>55.5</td><td>4.60</td><td>51.6</td><td>157</td><td>257</td><td>739</td><td>1472</td><td>0.00%</td><td>10.14%</td></tr>
+    <tr><td>my_appointments</td><td>75152</td><td>0.42</td><td>85.4</td><td>8.75</td><td>75.1</td><td>237</td><td>448</td><td>991</td><td>1473</td><td>0.00%</td><td>9.88%</td></tr>
+    <tr><td>register</td><td>16868</td><td>0.24</td><td>44.2</td><td>1.75</td><td>43.1</td><td>115</td><td>197</td><td>566</td><td>1332</td><td>0.00%</td><td>10.20%</td></tr>
+    <tr><td>start_visit</td><td>43804</td><td>0.46</td><td>134</td><td>12.5</td><td>147</td><td>421</td><td>646</td><td>1501</td><td>1504</td><td>1.15%</td><td>10.10%</td></tr>
+    <tr><td>visit_history</td><td>75119</td><td>0.14</td><td>155</td><td>8.62</td><td>160</td><td>515</td><td>838</td><td>1501</td><td>1508</td><td>1.52%</td><td>10.09%</td></tr>
+  </tbody>
+</table></div>
+<figure><img src="charts/operations.png" alt="Задержка по операциям"><figcaption>Задержка по операциям</figcaption></figure>
+
+<h2>Пропускная способность</h2>
+<div class="scroll"><table>
+  <thead><tr><th>Показатель</th><th>count</th><th>min</th><th>mean</th><th>p50</th><th>p75</th><th>p90</th><th>p95</th><th>p99</th><th>max</th></tr></thead>
+  <tbody><tr><td>RPS за секунду</td><td>1800</td><td>0.00</td><td>274</td><td>296</td><td>316</td><td>327</td><td>334</td><td>368</td><td>487</td></tr></tbody>
+</table></div>
+<figure><img src="charts/throughput_timeline.png" alt="Пропускная способность во времени"><figcaption>Пропускная способность во времени</figcaption></figure>
+<figure><img src="charts/throughput_distribution.png" alt="Распределение RPS"><figcaption>Распределение RPS</figcaption></figure>
+
+<h2>Фазы нагрузки</h2>
+<div class="scroll"><table>
+  <thead><tr><th>Участок</th><th>VU</th><th>RPS ср.</th><th>RPS p50</th><th>RPS p5</th><th>p50 мс</th><th>p95 мс</th><th>p99 мс</th><th>Отказы</th><th>CPU api</th><th>CPU mongo</th><th>RAM api, МБ</th><th>SLO</th></tr></thead>
+  <tbody><tr><td>прогрев</td><td>250</td><td>325</td><td>320</td><td>275</td><td>1.27</td><td>14.3</td><td>68.6</td><td>0.00%</td><td>0.21</td><td>0.42</td><td>15.2</td><td>да</td></tr><tr class="bad"><td>стабильная нагрузка</td><td>250</td><td>273</td><td>294</td><td>150</td><td>13.2</td><td>770</td><td>1501</td><td>1.52%</td><td>0.18</td><td>0.87</td><td>16.0</td><td>нет</td></tr></tbody>
+</table></div>
+
+
+
+
+
+
+<h2>Динамика длительной нагрузки</h2>
+<div class="scroll"><table>
+  <thead><tr><th>Участок</th><th>VU</th><th>RPS ср.</th><th>RPS p50</th><th>RPS p5</th><th>p50 мс</th><th>p95 мс</th><th>p99 мс</th><th>Отказы</th><th>CPU api</th><th>CPU mongo</th><th>RAM api, МБ</th><th>SLO</th></tr></thead>
+  <tbody><tr><td>1/5</td><td>250</td><td>320</td><td>318</td><td>301</td><td>1.41</td><td>31.2</td><td>61.6</td><td>0.00%</td><td>0.22</td><td>0.59</td><td>10.8</td><td>да</td></tr><tr><td>2/5</td><td>250</td><td>309</td><td>310</td><td>275</td><td>3.97</td><td>155</td><td>343</td><td>0.00%</td><td>0.21</td><td>0.84</td><td>12.1</td><td>да</td></tr><tr><td>3/5</td><td>250</td><td>284</td><td>292</td><td>214</td><td>28.9</td><td>488</td><td>914</td><td>0.25%</td><td>0.18</td><td>0.93</td><td>15.5</td><td>да</td></tr><tr class="bad"><td>4/5</td><td>250</td><td>245</td><td>251</td><td>157</td><td>95.0</td><td>1115</td><td>1501</td><td>1.82%</td><td>0.16</td><td>0.98</td><td>19.4</td><td>нет</td></tr><tr class="bad"><td>5/5</td><td>250</td><td>206</td><td>214</td><td>88.3</td><td>175</td><td>1501</td><td>1502</td><td>7.55%</td><td>0.14</td><td>0.99</td><td>22.1</td><td>нет</td></tr></tbody>
+</table></div>
+<div class="scroll"><table>
+  <thead><tr><th>Компонент</th><th>Тренд памяти на установившемся участке, МБ/ч</th></tr></thead>
+  <tbody><tr><td>api</td><td>31.0</td></tr><tr><td>exporter</td><td>0.15</td></tr><tr><td>loadgen</td><td>13.4</td></tr><tr><td>mongo</td><td>299</td></tr><tr><td>prometheus</td><td>5.37</td></tr></tbody>
+</table></div>
+
+
+<h2>Использование ресурсов</h2>
+<div class="scroll"><table>
+  <thead><tr><th>Компонент</th><th>Метрика</th><th>min</th><th>max</th><th>mean</th><th>median</th><th>p95</th></tr></thead>
+  <tbody>
+    <tr><td>api</td><td>CPU, ядер</td><td>0.01</td><td>0.24</td><td>0.18</td><td>0.19</td><td>0.23</td></tr>
+    <tr><td>api</td><td>Троттлинг CPU, с/с</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td></tr>
+    <tr><td>api</td><td>Чтение с диска, КБ/с</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td></tr>
+    <tr><td>api</td><td>Запись на диск, КБ/с</td><td>0.00</td><td>352</td><td>38.6</td><td>0.00</td><td>323</td></tr>
+    <tr><td>api</td><td>RAM (working set), МБ</td><td>9.46</td><td>27.9</td><td>15.9</td><td>15.2</td><td>23.8</td></tr>
+    <tr><td>api</td><td>Сеть, приём КБ/с</td><td>0.05</td><td>346</td><td>255</td><td>270</td><td>303</td></tr>
+    <tr><td>api</td><td>Сеть, передача КБ/с</td><td>0.11</td><td>375</td><td>283</td><td>303</td><td>340</td></tr>
+    <tr><td>api</td><td>Процессы и потоки</td><td>8.00</td><td>17.0</td><td>9.59</td><td>10.0</td><td>10.0</td></tr>
+    <tr><td>exporter</td><td>CPU, ядер</td><td>0.00</td><td>0.01</td><td>0.00</td><td>0.00</td><td>0.00</td></tr>
+    <tr><td>exporter</td><td>Троттлинг CPU, с/с</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td></tr>
+    <tr><td>exporter</td><td>Чтение с диска, КБ/с</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td></tr>
+    <tr><td>exporter</td><td>Запись на диск, КБ/с</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td></tr>
+    <tr><td>exporter</td><td>RAM (working set), МБ</td><td>2.69</td><td>8.13</td><td>7.39</td><td>7.44</td><td>7.60</td></tr>
+    <tr><td>exporter</td><td>Сеть, приём КБ/с</td><td>0.43</td><td>0.58</td><td>0.48</td><td>0.48</td><td>0.50</td></tr>
+    <tr><td>exporter</td><td>Сеть, передача КБ/с</td><td>2.34</td><td>4.21</td><td>4.03</td><td>4.01</td><td>4.19</td></tr>
+    <tr><td>exporter</td><td>Процессы и потоки</td><td>4.00</td><td>6.00</td><td>5.05</td><td>5.00</td><td>6.00</td></tr>
+    <tr><td>loadgen</td><td>CPU, ядер</td><td>0.04</td><td>0.15</td><td>0.11</td><td>0.11</td><td>0.13</td></tr>
+    <tr><td>loadgen</td><td>Троттлинг CPU, с/с</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td></tr>
+    <tr><td>loadgen</td><td>Чтение с диска, КБ/с</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td></tr>
+    <tr><td>loadgen</td><td>Запись на диск, КБ/с</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td></tr>
+    <tr><td>loadgen</td><td>RAM (working set), МБ</td><td>13.4</td><td>22.3</td><td>17.5</td><td>17.7</td><td>21.2</td></tr>
+    <tr><td>loadgen</td><td>Сеть, приём КБ/с</td><td>42.8</td><td>166</td><td>126</td><td>132</td><td>148</td></tr>
+    <tr><td>loadgen</td><td>Сеть, передача КБ/с</td><td>26.6</td><td>108</td><td>86.1</td><td>91.3</td><td>98.4</td></tr>
+    <tr><td>loadgen</td><td>Процессы и потоки</td><td>7.00</td><td>9.00</td><td>8.24</td><td>8.00</td><td>9.00</td></tr>
+    <tr><td>mongo</td><td>CPU, ядер</td><td>0.15</td><td>1.06</td><td>0.85</td><td>0.91</td><td>1.02</td></tr>
+    <tr><td>mongo</td><td>Троттлинг CPU, с/с</td><td>0.01</td><td>1.08</td><td>0.62</td><td>0.64</td><td>1.01</td></tr>
+    <tr><td>mongo</td><td>Чтение с диска, КБ/с</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td></tr>
+    <tr><td>mongo</td><td>Запись на диск, КБ/с</td><td>1.05</td><td>3949</td><td>286</td><td>90.0</td><td>1615</td></tr>
+    <tr><td>mongo</td><td>RAM (working set), МБ</td><td>181</td><td>466</td><td>324</td><td>298</td><td>446</td></tr>
+    <tr><td>mongo</td><td>Сеть, приём КБ/с</td><td>0.11</td><td>213</td><td>158</td><td>171</td><td>192</td></tr>
+    <tr><td>mongo</td><td>Сеть, передача КБ/с</td><td>0.05</td><td>252</td><td>172</td><td>181</td><td>211</td></tr>
+    <tr><td>mongo</td><td>Процессы и потоки</td><td>59.0</td><td>156</td><td>113</td><td>123</td><td>148</td></tr>
+    <tr><td>prometheus</td><td>CPU, ядер</td><td>0.01</td><td>0.03</td><td>0.01</td><td>0.01</td><td>0.02</td></tr>
+    <tr><td>prometheus</td><td>Троттлинг CPU, с/с</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td></tr>
+    <tr><td>prometheus</td><td>Чтение с диска, КБ/с</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td><td>0.00</td></tr>
+    <tr><td>prometheus</td><td>Запись на диск, КБ/с</td><td>0.00</td><td>9.00</td><td>0.94</td><td>0.00</td><td>7.00</td></tr>
+    <tr><td>prometheus</td><td>RAM (working set), МБ</td><td>16.6</td><td>28.7</td><td>23.4</td><td>23.9</td><td>24.5</td></tr>
+    <tr><td>prometheus</td><td>Сеть, приём КБ/с</td><td>2.77</td><td>7.51</td><td>6.92</td><td>6.87</td><td>7.28</td></tr>
+    <tr><td>prometheus</td><td>Сеть, передача КБ/с</td><td>0.47</td><td>1.19</td><td>0.97</td><td>0.96</td><td>1.01</td></tr>
+    <tr><td>prometheus</td><td>Процессы и потоки</td><td>8.00</td><td>15.0</td><td>8.06</td><td>8.00</td><td>8.00</td></tr>
+  </tbody>
+</table></div>
+<figure><img src="charts/resources.png" alt="Ресурсы во времени"><figcaption>Ресурсы во времени</figcaption></figure>
+
+<h2>Коды ответов</h2>
+<div class="scroll"><table>
+  <thead><tr><th>Код</th><th>Запросов</th></tr></thead>
+  <tbody><tr><td>200</td><td>320742</td></tr><tr><td>201</td><td>116439</td></tr><tr><td>400</td><td>16890</td></tr><tr><td>404</td><td>25209</td></tr><tr><td>409</td><td>7499</td></tr><tr><td>500</td><td>7218</td></tr></tbody>
+</table></div>
+
+<h2>Окружение прогона</h2>
+<div class="scroll"><table>
+  <thead><tr><th>Компонент</th><th>Логические CPU</th><th>Квота CPU</th><th>Резерв RAM, МБ</th><th>Лимит RAM, МБ</th><th>Образ</th><th>ID образа</th></tr></thead>
+  <tbody><tr><td>api</td><td>0,1</td><td>1</td><td>—</td><td>512</td><td>vitaline-lab4-api:20261112-210010-soak-err10-k4jh</td><td>6a4010bb2944</td></tr><tr><td>exporter</td><td>6,7</td><td>—</td><td>—</td><td>64</td><td>vitaline-lab4-exporter:1</td><td>b58c2ecc0ca2</td></tr><tr><td>loadgen</td><td>4,5</td><td>—</td><td>—</td><td>2048</td><td>vitaline-lab4-loadgen:1</td><td>0b0105a43a6d</td></tr><tr><td>mongo</td><td>2,3</td><td>1</td><td>—</td><td>1024</td><td>mongo:7</td><td>9896df581dfd</td></tr><tr><td>prometheus</td><td>6,7</td><td>—</td><td>—</td><td>768</td><td>prom/prometheus:v3.5.0</td><td>63805ebb8d2b</td></tr></tbody>
+</table></div>
+</main>
+</body>
+</html>

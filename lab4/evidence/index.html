@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ЛР4 · прогоны</title>
+<style>
+:root { --bg: #f8f9fa; --panel: #fff; --text: #212529; --muted: #6c757d; --line: #dee2e6; --head: #f1f3f5; --accent: #2a6fdb; --bad: #fff5f5; }
+body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; background: var(--bg); color: var(--text); }
+main { max-width: 1180px; margin: 0 auto; padding: 24px 16px 64px; }
+h1 { font-size: 24px; margin: 0 0 4px; }
+h2 { font-size: 18px; margin: 32px 0 12px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+a { color: #1c4fa3; }
+.meta { color: var(--muted); font-size: 13px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-top: 16px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
+.card span { color: var(--muted); font-size: 12px; }
+.card b { display: block; font-size: 20px; margin-top: 4px; }
+.verdict { background: var(--panel); border-left: 4px solid var(--accent); padding: 12px 16px; margin-top: 16px; border-radius: 4px; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; background: var(--panel); font-size: 13px; margin-bottom: 8px; }
+th, td { border: 1px solid var(--line); padding: 5px 8px; text-align: right; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { background: var(--head); }
+tr.bad td { background: var(--bad); }
+figure { margin: 16px 0; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px; }
+figure img { width: 100%; height: auto; }
+figcaption { color: var(--muted); font-size: 12px; margin-top: 4px; }
+code { background: #e9ecef; padding: 1px 4px; border-radius: 3px; }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Нагрузочное тестирование VitaLine Clinic</h1>
+<p class="meta">Все прогоны, новые сверху.</p>
+<div class="scroll"><table>
+  <thead><tr><th>Прогон</th><th>Сценарий</th><th>Масштаб</th><th>Запросов</th><th>RPS ср.</th><th>p50 мс</th><th>p95 мс</th><th>p99 мс</th><th>Отказы</th><th>Итог</th></tr></thead>
+  <tbody>
+    <tr><td><a href="20261113-120458-stable-c2iz/report.html">20261113-120458-stable-c2iz</a></td><td>stable</td><td>1</td><td>103221</td><td>287</td><td>226</td><td>1502</td><td>1504</td><td>13.70%</td><td>дрейф p95 ×1.03, ошибочных 0.0%</td></tr>
+    <tr><td><a href="20261113-115801-stable-mitz/report.html">20261113-115801-stable-mitz</a></td><td>stable</td><td>1</td><td>98412</td><td>328</td><td>164</td><td>1502</td><td>1503</td><td>11.30%</td><td>дрейф p95 ×1.88, ошибочных 0.0%</td></tr>
+    <tr><td><a href="20261113-094849-ramp-txsz/report.html">20261113-094849-ramp-txsz</a></td><td>ramp</td><td>0.25</td><td>81852</td><td>426</td><td>440</td><td>1502</td><td>1504</td><td>19.20%</td><td>стабильно до 400 VU, нарушение SLO с 500 VU, пик 666 RPS</td></tr>
+    <tr><td><a href="20261112-213021-soak-err20-5g4i/report.html">20261112-213021-soak-err20-5g4i</a></td><td>soak-err20</td><td>1</td><td>525041</td><td>292</td><td>2.72</td><td>369</td><td>988</td><td>0.40%</td><td>дрейф p95 ×50.8, ошибочных 20.1%</td></tr>
+    <tr><td><a href="20261112-210010-soak-err10-k4jh/report.html">20261112-210010-soak-err10-k4jh</a></td><td>soak-err10</td><td>1</td><td>493997</td><td>274</td><td>10.8</td><td>746</td><td>1501</td><td>1.50%</td><td>дрейф p95 ×48.2, ошибочных 10.0%</td></tr>
+    <tr><td><a href="20261112-202959-soak-c5gr/report.html">20261112-202959-soak-c5gr</a></td><td>soak</td><td>1</td><td>442337</td><td>246</td><td>15.3</td><td>1501</td><td>1502</td><td>5.60%</td><td>дрейф p95 ×38.6, ошибочных 0.0%</td></tr>
+    <tr><td><a href="20261112-201906-stress-3b7u/report.html">20261112-201906-stress-3b7u</a></td><td>stress</td><td>1</td><td>195632</td><td>343</td><td>17.2</td><td>1501</td><td>1501</td><td>8.20%</td><td>восстановление за 10.0 с</td></tr>
+    <tr><td><a href="20261112-200633-ramp-mvcx/report.html">20261112-200633-ramp-mvcx</a></td><td>ramp</td><td>1</td><td>291929</td><td>405</td><td>555</td><td>1501</td><td>1502</td><td>24.50%</td><td>стабильно до 400 VU, нарушение SLO с 500 VU, пик 642 RPS</td></tr>
+  </tbody>
+</table></div>
+</main>
+</body>
+</html>
