@@ -1,0 +1,71 @@
+# Local env overrides
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Logs
+*.log
+VitaLineClinic/logs/
+VitaLineClinic/dist/logs/
+logs/
+docs/archive/*.log
+
+# Build artifacts
+dist/
+VitaLineClinic/dist/
+VitaLineClinic/dist/clinic
+VitaLineClinic/dist/clinic-*
+VitaLineClinic/dist/*.exe
+VitaLineClinic/dist/*.dll
+VitaLineClinic/dist/*.so
+VitaLineClinic/dist/*.dylib
+
+# Test and coverage output
+*.test
+coverage.out
+coverage.html
+*.coverprofile
+test-results/
+
+# Editor and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary and backup files
+*.tmp
+*.bak
+*.bkp
+*~
+*.swp
+*.swo
+~$*
+docs/archive*.html
+docs/archive/
+docs/**/*.html
+
+# Frontend dependencies if a separate UI build is added later
+node_modules/
+ui/node_modules/
+ui/dist/
+ui/build/
+ui/
+
+# Generated docs/report artifacts and theory drafts
+*.aux
+*.toc
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+theory/
+reports/
+lab_reports/
+docs/theory/
+docs/reports/
+docs/examples/
