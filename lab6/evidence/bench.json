@@ -1,0 +1,71 @@
+{
+  "cpu": "Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz",
+  "count": 10,
+  "benchtime": "3000x",
+  "results": [
+    {
+      "variant": "baseline",
+      "samples": 10,
+      "ns_per_op": {
+        "mean": 117692.3,
+        "stdev": 28355.407158463135
+      },
+      "bytes_per_op": {
+        "mean": 34156,
+        "stdev": 78.46301322562398
+      },
+      "allocs_per_op": {
+        "mean": 201,
+        "stdev": 0
+      }
+    },
+    {
+      "variant": "tracing",
+      "samples": 10,
+      "ns_per_op": {
+        "mean": 204521.2,
+        "stdev": 8107.532242715207
+      },
+      "bytes_per_op": {
+        "mean": 62183.7,
+        "stdev": 84.44597220840213
+      },
+      "allocs_per_op": {
+        "mean": 390,
+        "stdev": 0
+      }
+    },
+    {
+      "variant": "logging",
+      "samples": 10,
+      "ns_per_op": {
+        "mean": 145776.7,
+        "stdev": 2289.1720992533524
+      },
+      "bytes_per_op": {
+        "mean": 42172.4,
+        "stdev": 73.8996316334226
+      },
+      "allocs_per_op": {
+        "mean": 290,
+        "stdev": 0
+      }
+    },
+    {
+      "variant": "tracing+logging",
+      "samples": 10,
+      "ns_per_op": {
+        "mean": 256598.4,
+        "stdev": 6968.714120186657
+      },
+      "bytes_per_op": {
+        "mean": 70233.8,
+        "stdev": 116.29636470863757
+      },
+      "allocs_per_op": {
+        "mean": 480,
+        "stdev": 0
+      }
+    }
+  ]
+}
