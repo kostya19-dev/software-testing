@@ -1,0 +1,10 @@
+{{define "index.html"}}{{template "head" "ЛР4 · прогоны"}}
+<h1>Нагрузочное тестирование VitaLine Clinic</h1>
+<p class="meta">Все прогоны, новые сверху.</p>
+<div class="scroll"><table>
+  <thead><tr><th>Прогон</th><th>Сценарий</th><th>Масштаб</th><th>Запросов</th><th>RPS ср.</th><th>p50 мс</th><th>p95 мс</th><th>p99 мс</th><th>Отказы</th><th>Итог</th></tr></thead>
+  <tbody>{{range .}}
+    <tr><td><a href="{{.ID}}/report.html">{{.ID}}</a></td><td>{{.Scenario}}</td><td>{{.Scale}}</td><td>{{.Requests}}</td><td>{{num .RPS}}</td><td>{{num .P50}}</td><td>{{num .P95}}</td><td>{{num .P99}}</td><td>{{pct .FailureRate}}</td><td>{{.Headline}}</td></tr>{{end}}
+  </tbody>
+</table></div>
+{{template "foot"}}{{end}}
