@@ -37,7 +37,7 @@ type Scenario struct {
 	VUs         int     `json:"vus,omitempty"`
 	DurationS   float64 `json:"duration_s,omitempty"`
 	ErrorRate   float64 `json:"error_rate"`
-	Slo          Slo     `json:"-"`
+	Slo         Slo     `json:"-"`
 }
 
 type Catalog struct {
