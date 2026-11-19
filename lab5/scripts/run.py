@@ -30,6 +30,9 @@ def main():
     run_id = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%d-%H%M%S") + "-" + uuid.uuid4().hex[:10]
     results = ROOT / "results" / run_id
     results.mkdir(parents=True)
+    if env.get("GITHUB_OUTPUT"):
+        with open(env["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+            print(f"results={results}", file=output)
     env["LAB5_RESULTS"] = str(results)
     project = "lab5-" + run_id
     compose = ["docker", "compose", "-p", project, "-f", str(ROOT / "compose.yaml")]
