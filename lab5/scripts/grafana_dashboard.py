@@ -59,7 +59,7 @@ def build(report, output):
     })
     panels.append({
         "id": 6, "type": "table", "title": "Результаты сценариев",
-        "gridPos": {"x": 0, "y": 20, "w": 24, "h": 13},
+        "gridPos": {"x": 0, "y": 20, "w": 24, "h": max(13, len(rows) + 2)},
         "targets": [query(["Сценарий", "Результат", "Время, с"], rows)],
         "fieldConfig": {"defaults": {}, "overrides": [
             {"matcher": {"id": "byName", "options": col}, "properties": [{"id": "custom.width", "value": 145}]}
