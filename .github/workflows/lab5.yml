@@ -47,10 +47,17 @@ jobs:
         with:
           persist-credentials: false
       - name: Run isolated authentication scenarios
+        id: bdd
         working-directory: lab5
         env:
           LAB5_TEST_PASSWORD: ${{ secrets.LAB5_TEST_PASSWORD }}
         run: make test
+      - name: Publish scenario summary
+        if: always()
+        working-directory: lab5
+        env:
+          RESULT_DIR: ${{ steps.bdd.outputs.results }}
+        run: python3 scripts/summary.py "$RESULT_DIR" >> "$GITHUB_STEP_SUMMARY"
       - name: Upload BDD reports
         if: always()
         uses: actions/upload-artifact@v4

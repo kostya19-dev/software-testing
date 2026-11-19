@@ -31,7 +31,7 @@ th{background:#e8eef5}.PASS{color:#08734d;font-weight:700}.FAIL{color:#b12732;fo
     if not tests:
         document += "<p>BDD не завершён или стенд не подготовлен. Смотрите вывод команды.</p>"
     document += "<table><thead><tr><th>Сценарий</th><th>Результат</th><th>Секунды</th><th>Причина</th></tr></thead><tbody>" + "".join(rows) + "</tbody></table>"
-    document += '<p><a href="junit.xml">JUnit</a> · <a href="cucumber.json">Cucumber JSON</a> · <a href="bdd.log">Вывод BDD</a> · <a href="cleanup.txt">Очистка</a></p></html>'
+    document += "</html>"
     (directory / "report.html").write_text(document, encoding="utf-8")
 
 
