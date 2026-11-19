@@ -52,12 +52,40 @@ jobs:
         env:
           LAB5_TEST_PASSWORD: ${{ secrets.LAB5_TEST_PASSWORD }}
         run: make test
-      - name: Publish scenario summary
-        if: always()
+      - name: Prepare Grafana dashboard
+        id: grafana
+        if: ${{ !cancelled() && steps.bdd.outputs.results != '' }}
         working-directory: lab5
         env:
           RESULT_DIR: ${{ steps.bdd.outputs.results }}
-        run: python3 scripts/summary.py "$RESULT_DIR" >> "$GITHUB_STEP_SUMMARY"
+        run: |
+          if [ -s "$RESULT_DIR/junit.xml" ]; then
+            python3 scripts/grafana_dashboard.py "$RESULT_DIR/junit.xml" "$RUNNER_TEMP/lab5-grafana"
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Capture Grafana dashboard
+        if: ${{ !cancelled() && steps.grafana.outputs.ready == 'true' }}
+        working-directory: lab5
+        run: |
+          cd "$RUNNER_TEMP/lab5-grafana"
+          trap 'docker compose down -v' EXIT
+          docker compose up -d
+          curl --retry 60 --retry-delay 2 --retry-all-errors --fail --silent http://127.0.0.1:3055/api/health > /dev/null
+          python3 -m pip install --quiet playwright==1.56.0
+          python3 "$GITHUB_WORKSPACE/lab5/scripts/grafana_capture.py" http://127.0.0.1:3055 grafana.png
+      - name: Upload Grafana dashboard
+        id: dashboard
+        if: ${{ !cancelled() && steps.grafana.outputs.ready == 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: lab5-grafana-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/lab5-grafana/
+          retention-days: 14
+      - name: Link Grafana dashboard
+        if: ${{ !cancelled() && steps.dashboard.outputs.artifact-url != '' }}
+        env:
+          DASHBOARD_URL: ${{ steps.dashboard.outputs.artifact-url }}
+        run: printf '[Grafana — дашборд и снимок](%s)\n' "$DASHBOARD_URL" >> "$GITHUB_STEP_SUMMARY"
       - name: Upload BDD reports
         if: always()
         uses: actions/upload-artifact@v4
