@@ -20,10 +20,10 @@ jobs:
   check:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           persist-credentials: false
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v6
         with:
           go-version-file: project/VitaLineClinic/go.mod
           cache-dependency-path: |
@@ -42,8 +42,10 @@ jobs:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-24.04
     timeout-minutes: 20
+    outputs:
+      dashboard: ${{ steps.dashboard.outputs.artifact-id }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           persist-credentials: false
       - name: Run isolated authentication scenarios
@@ -76,21 +78,45 @@ jobs:
       - name: Upload Grafana dashboard
         id: dashboard
         if: ${{ !cancelled() && steps.grafana.outputs.ready == 'true' }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: lab5-grafana-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/lab5-grafana/
           retention-days: 14
-      - name: Link Grafana dashboard
-        if: ${{ !cancelled() && steps.dashboard.outputs.artifact-url != '' }}
-        env:
-          DASHBOARD_URL: ${{ steps.dashboard.outputs.artifact-url }}
-        run: printf '[Grafana — дашборд и снимок](%s)\n' "$DASHBOARD_URL" >> "$GITHUB_STEP_SUMMARY"
       - name: Upload BDD reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: lab5-bdd-${{ github.run_id }}-${{ github.run_attempt }}
           path: lab5/results/
           if-no-files-found: warn
           retention-days: 14
+
+  grafana:
+    needs: e2e
+    if: ${{ !cancelled() && needs.e2e.outputs.dashboard != '' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/lab5') }}
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          artifact-ids: ${{ needs.e2e.outputs.dashboard }}
+          merge-multiple: true
+      - name: Show Grafana dashboard
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          file="runs/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT.png"
+          endpoint="repos/$GITHUB_REPOSITORY/contents/$file"
+          base64 -w0 grafana.png | jq -Rs '{branch:"lab5-reports", message:"Dashboard", content:.}' > "$RUNNER_TEMP/image.json"
+          for delay in 1 2 4; do
+            if revision=$(gh api --method PUT "$endpoint" --input "$RUNNER_TEMP/image.json" --jq .commit.sha); then
+              break
+            fi
+            sleep "$delay"
+          done
+          test -n "$revision"
+          printf '![Результаты сценариев аутентификации](https://raw.githubusercontent.com/%s/%s/%s)\n' \
+            "$GITHUB_REPOSITORY" "$revision" "$file" >> "$GITHUB_STEP_SUMMARY"
