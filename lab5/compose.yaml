@@ -44,6 +44,15 @@ services:
     volumes:
       - ${LAB5_RESULTS:?Run make test}:/suite/results
 
+  report:
+    build:
+      context: .
+      dockerfile: allure.Dockerfile
+    profiles: [report]
+    network_mode: none
+    volumes:
+      - ${LAB5_RESULTS:?Run make test}:/results
+
 networks:
   default:
     internal: true
