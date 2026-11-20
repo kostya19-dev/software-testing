@@ -1,7 +1,0 @@
-apiVersion: 1
-datasources:
-  - name: Godog JUnit
-    uid: godog-junit
-    type: grafana-testdata-datasource
-    access: proxy
-    editable: false

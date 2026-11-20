@@ -1,40 +1,46 @@
-import html
+import json
+import uuid
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
 
-def render(directory: Path, exit_code: int, cleanup: int):
-    junit = directory / "junit.xml"
-    rows = []
-    tests = failures = 0
-    if junit.exists():
-        root = ET.parse(junit).getroot()
-        tests = int(root.get("tests", 0))
-        failures = int(root.get("failures", 0)) + int(root.get("errors", 0))
-        for case in root.findall(".//testcase"):
-            failed = case.find("failure")
-            message = "" if failed is None else failed.get("message", "")
-            status = "PASS" if failed is None and case.get("status") == "passed" else "FAIL"
-            rows.append("<tr><td>" + html.escape(case.get("name", "")) + "</td><td class='" + status + "'>"
-                        + status + "</td><td>" + html.escape(case.get("time", "")) + "</td><td>"
-                        + html.escape(message) + "</td></tr>")
-    status = "PASS" if exit_code == 0 and cleanup == 0 and tests > 0 and failures == 0 else "FAIL"
-    document = """<!doctype html><html lang="ru"><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ЛР5 — Аутентификация VitaLine Clinic</title>
-<style>body{font:16px/1.55 system-ui,sans-serif;max-width:1150px;margin:40px auto;padding:0 24px;color:#183047;background:#f6f8fb}
-h1{font-size:30px}table{width:100%;border-collapse:collapse;background:white}th,td{text-align:left;padding:14px;border-bottom:1px solid #d9e1e9}
-th{background:#e8eef5}.PASS{color:#08734d;font-weight:700}.FAIL{color:#b12732;font-weight:700}code{overflow-wrap:anywhere}a{color:#145ead}</style>
-<h1>ЛР5 · Аутентификация VitaLine Clinic</h1>"""
-    document += f"<p>Прогон <code>{html.escape(directory.name)}</code> · <strong class='{status}'>{status}</strong></p>"
-    document += f"<p>Сценариев: {tests}. Ошибок сценариев: {failures}. Очистка стенда: {'успешна' if cleanup == 0 else 'ошибка'}.</p>"
-    if not tests:
-        document += "<p>BDD не завершён или стенд не подготовлен. Смотрите вывод команды.</p>"
-    document += "<table><thead><tr><th>Сценарий</th><th>Результат</th><th>Секунды</th><th>Причина</th></tr></thead><tbody>" + "".join(rows) + "</tbody></table>"
-    document += "</html>"
-    (directory / "report.html").write_text(document, encoding="utf-8")
-
-
-if __name__ == "__main__":
-    import sys
-    render(Path(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]))
+def render(directory: Path, started_ns: int):
+    cases = {case.get("name"): case for case in ET.parse(directory / "junit.xml").iter("testcase")}
+    target = directory / "allure-results"
+    target.mkdir(exist_ok=True)
+    features = json.loads((directory / "cucumber.json").read_text(encoding="utf-8"))
+    for feature in features:
+        for scenario in feature["elements"]:
+            case = cases.pop(scenario["name"])
+            start = started_ns
+            steps = []
+            for step in scenario["steps"]:
+                result = step["result"]
+                end = started_ns + int(result.get("duration") or 0)
+                status = result["status"]
+                if status not in ("passed", "failed", "skipped"):
+                    status = "broken"
+                steps.append({"name": (step["keyword"] + step["name"]).strip(), "status": status,
+                              "statusDetails": {"message": result.get("error_message", "")},
+                              "start": started_ns // 1_000_000, "stop": end // 1_000_000})
+                started_ns = end
+            failure = case.find("failure")
+            error = case.find("error")
+            status = case.get("status", "passed")
+            if failure is not None:
+                status = "failed"
+            elif error is not None:
+                status = "broken"
+            elif case.find("skipped") is not None:
+                status = "skipped"
+            problem = failure if failure is not None else error
+            uid = str(uuid.uuid4())
+            started_ns = max(started_ns, start + round(float(case.get("time", 0)) * 1_000_000_000))
+            data = {"uuid": uid, "historyId": scenario["id"], "fullName": scenario["id"],
+                    "name": scenario["name"], "status": status, "steps": steps,
+                    "statusDetails": {"message": problem.get("message", "") if problem is not None else ""},
+                    "labels": [{"name": "suite", "value": feature["name"]}],
+                    "start": start // 1_000_000, "stop": started_ns // 1_000_000}
+            (target / f"{uid}-result.json").write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+    if cases or not any(target.glob("*-result.json")):
+        raise ValueError("Incomplete Godog scenario results")

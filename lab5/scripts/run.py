@@ -5,6 +5,7 @@ import secrets
 import signal
 import subprocess
 import sys
+import time
 import uuid
 
 from report import render
@@ -49,6 +50,7 @@ def main():
         if code == 0:
             code = call(["up", "-d", "--wait", "--wait-timeout", "120", "mongo", "mail", "api"])
         if code == 0:
+            started_ns = time.time_ns()
             with (results / "bdd.log").open("w") as log:
                 code = call(["run", "--rm", "--no-deps", "-T", "tests"], log)
             content = (results / "bdd.log").read_text()
@@ -68,7 +70,16 @@ def main():
                 path.write_bytes(data.replace(password.encode(), b"[REDACTED]"))
     if leaked:
         print("Secret detected in test output; redacted, run failed", file=sys.stderr)
-    render(results, 1 if code or leaked else 0, cleanup)
+    if (results / "cucumber.json").is_file() and (results / "junit.xml").is_file():
+        render(results, started_ns)
+        report_code = call(["run", "--build", "--rm", "--no-deps", "-T", "report"])
+        if report_code or not (results / "allure-report" / "index.html").is_file():
+            return 1
+        if env.get("GITHUB_OUTPUT"):
+            with open(env["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+                print("report=true", file=output)
+    elif code == 0:
+        return 1
     print("Reports:", results)
     return 1 if code or cleanup or leaked else 0
 

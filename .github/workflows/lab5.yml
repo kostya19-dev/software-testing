@@ -42,8 +42,6 @@ jobs:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-24.04
     timeout-minutes: 20
-    outputs:
-      dashboard: ${{ steps.dashboard.outputs.artifact-id }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -54,69 +52,28 @@ jobs:
         env:
           LAB5_TEST_PASSWORD: ${{ secrets.LAB5_TEST_PASSWORD }}
         run: make test
-      - name: Prepare Grafana dashboard
-        id: grafana
-        if: ${{ !cancelled() && steps.bdd.outputs.results != '' }}
-        working-directory: lab5
-        env:
-          RESULT_DIR: ${{ steps.bdd.outputs.results }}
-        run: |
-          if [ -s "$RESULT_DIR/junit.xml" ]; then
-            python3 scripts/grafana_dashboard.py "$RESULT_DIR/junit.xml" "$RUNNER_TEMP/lab5-grafana"
-            echo "ready=true" >> "$GITHUB_OUTPUT"
-          fi
-      - name: Capture Grafana dashboard
-        if: ${{ !cancelled() && steps.grafana.outputs.ready == 'true' }}
-        working-directory: lab5
-        run: |
-          cd "$RUNNER_TEMP/lab5-grafana"
-          trap 'docker compose down -v' EXIT
-          docker compose up -d
-          curl --retry 60 --retry-delay 2 --retry-all-errors --fail --silent http://127.0.0.1:3055/api/health > /dev/null
-          python3 -m pip install --quiet playwright==1.56.0
-          python3 "$GITHUB_WORKSPACE/lab5/scripts/grafana_capture.py" http://127.0.0.1:3055 grafana.png
-      - name: Upload Grafana dashboard
-        id: dashboard
-        if: ${{ !cancelled() && steps.grafana.outputs.ready == 'true' }}
+      - name: Upload Allure report
+        id: report
+        if: ${{ !cancelled() && steps.bdd.outputs.report == 'true' }}
         uses: actions/upload-artifact@v7
         with:
-          name: lab5-grafana-${{ github.run_id }}-${{ github.run_attempt }}
-          path: ${{ runner.temp }}/lab5-grafana/
+          path: ${{ steps.bdd.outputs.results }}/allure-report/index.html
+          archive: false
           retention-days: 14
-      - name: Upload BDD reports
+      - name: Link Allure report
+        if: ${{ !cancelled() && steps.report.outputs.artifact-url != '' }}
+        env:
+          REPORT_URL: ${{ steps.report.outputs.artifact-url }}
+        run: printf '[Открыть отчёт Allure](%s)\n' "$REPORT_URL" >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload BDD results
         if: always()
         uses: actions/upload-artifact@v7
         with:
           name: lab5-bdd-${{ github.run_id }}-${{ github.run_attempt }}
-          path: lab5/results/
-          if-no-files-found: warn
+          path: |
+            lab5/results/*/bdd.log
+            lab5/results/*/junit.xml
+            lab5/results/*/cucumber.json
+            lab5/results/*/cleanup.txt
+          if-no-files-found: ignore
           retention-days: 14
-
-  grafana:
-    needs: e2e
-    if: ${{ !cancelled() && needs.e2e.outputs.dashboard != '' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/lab5') }}
-    runs-on: ubuntu-24.04
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/download-artifact@v7
-        with:
-          artifact-ids: ${{ needs.e2e.outputs.dashboard }}
-          merge-multiple: true
-      - name: Show Grafana dashboard
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          file="runs/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT.png"
-          endpoint="repos/$GITHUB_REPOSITORY/contents/$file"
-          base64 -w0 grafana.png | jq -Rs '{branch:"lab5-reports", message:"Dashboard", content:.}' > "$RUNNER_TEMP/image.json"
-          for delay in 1 2 4; do
-            if revision=$(gh api --method PUT "$endpoint" --input "$RUNNER_TEMP/image.json" --jq .commit.sha); then
-              break
-            fi
-            sleep "$delay"
-          done
-          test -n "$revision"
-          printf '![Результаты сценариев аутентификации](https://raw.githubusercontent.com/%s/%s/%s)\n' \
-            "$GITHUB_REPOSITORY" "$revision" "$file" >> "$GITHUB_STEP_SUMMARY"

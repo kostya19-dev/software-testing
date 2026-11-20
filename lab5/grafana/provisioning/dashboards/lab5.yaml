@@ -1,7 +1,0 @@
-apiVersion: 1
-providers:
-  - name: lab5
-    type: file
-    disableDeletion: true
-    options:
-      path: /reports
