@@ -1,5 +1,0 @@
-schema: spec-driven
-
-context: |
-  ЛР5 проверяет аутентификацию VitaLine Clinic через HTTP с помощью Godog, MongoDB и Mailpit.
-  Пишите требования на русском, сохраняя структурные заголовки OpenSpec и ключевые слова SHALL/MUST.
