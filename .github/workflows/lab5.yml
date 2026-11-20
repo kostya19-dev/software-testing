@@ -38,6 +38,9 @@ jobs:
           make check
 
   e2e:
+    permissions:
+      actions: read
+      contents: read
     needs: check
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-24.04
@@ -46,6 +49,17 @@ jobs:
       - uses: actions/checkout@v6
         with:
           persist-credentials: false
+      - name: Read previous BDD results
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run list --repo "$GITHUB_REPOSITORY" --workflow lab5.yml --branch "$GITHUB_REF_NAME" \
+            --status completed --limit 20 --json number,databaseId,attempt \
+            --jq ".[] | select(.number < $GITHUB_RUN_NUMBER) | [.number,.databaseId,.attempt] | @tsv" > "$RUNNER_TEMP/lab5-runs"
+          while read -r number id attempt; do
+            gh run download "$id" --repo "$GITHUB_REPOSITORY" --name "lab5-bdd-$id-$attempt" \
+              --dir "$RUNNER_TEMP/lab5-history/$number" || echo "No BDD artifact for run $number"
+          done < "$RUNNER_TEMP/lab5-runs"
       - name: Run isolated authentication scenarios
         id: bdd
         working-directory: lab5
