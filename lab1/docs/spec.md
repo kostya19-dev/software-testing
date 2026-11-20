@@ -280,13 +280,13 @@ make check-docs
 | TC-16-02 | Записи в памяти | Сохранение, изменение, удаление, выборки и занятость времени | [TestAppointmentRepositoryContract](../storage/memory/repository_test.go) |
 | TC-16-03 | Слоты в памяти | Сохранение, изменение, удаление, выборки по врачу и свободных слотов | [TestScheduleRepositoryContract](../storage/memory/repository_test.go) |
 | TC-16-04 | Визиты в памяти | Сохранение, изменение, удаление, поиск по ID и записи | [TestVisitRepositoryContract](../storage/memory/repository_test.go) |
-| TC-16-05 | MongoDB: пациенты | Обработка успешных, пустых и ошибочных ответов | [TestPatientMongoRepository](../storage/mongodb/repository_test.go) |
-| TC-16-06 | MongoDB: записи | Обработка успешных, пустых и ошибочных ответов, включая занятость | [TestAppointmentMongoRepository](../storage/mongodb/repository_test.go) |
-| TC-16-07 | MongoDB: слоты | Обработка успешных, пустых и ошибочных ответов | [TestScheduleMongoRepository](../storage/mongodb/repository_test.go) |
-| TC-16-08 | MongoDB: визиты | Обработка успешных, пустых и ошибочных ответов | [TestVisitMongoRepository](../storage/mongodb/repository_test.go) |
-| TC-16-09 | MongoDB: срочные заявки | Обработка успешных, пустых и ошибочных ответов | [TestEmergencyRequestMongoRepository](../storage/mongodb/repository_test.go) |
-| TC-16-10 | MongoDB: предложения | Обработка успешных, пустых и ошибочных ответов | [TestRescheduleOfferMongoRepository](../storage/mongodb/repository_test.go) |
-| TC-16-11 | MongoDB возвращает ошибку команды при сохранении пациента | require.ErrorAs извлекает mongo.CommandError; код равен 123 | [TestPatientMongoRepository/Save/server_error](../storage/mongodb/repository_test.go) |
+| TC-16-05 | MongoDB: пациенты | Обработка успешных, пустых и ошибочных ответов | [TestPatientMongoRepository](../storage/mongodb/patient_test.go) |
+| TC-16-06 | MongoDB: записи | Обработка успешных, пустых и ошибочных ответов, включая занятость | [TestAppointmentMongoRepository](../storage/mongodb/appointment_test.go) |
+| TC-16-07 | MongoDB: слоты | Обработка успешных, пустых и ошибочных ответов | [TestScheduleMongoRepository](../storage/mongodb/schedule_test.go) |
+| TC-16-08 | MongoDB: визиты | Обработка успешных, пустых и ошибочных ответов | [TestVisitMongoRepository](../storage/mongodb/visit_test.go) |
+| TC-16-09 | MongoDB: срочные заявки | Обработка успешных, пустых и ошибочных ответов | [TestEmergencyRequestMongoRepository](../storage/mongodb/emergency_request_test.go) |
+| TC-16-10 | MongoDB: предложения | Обработка успешных, пустых и ошибочных ответов | [TestRescheduleOfferMongoRepository](../storage/mongodb/reschedule_offer_test.go) |
+| TC-16-11 | MongoDB возвращает ошибку команды при сохранении пациента | require.ErrorAs извлекает mongo.CommandError; код равен 123 | [TestPatientMongoRepository/Save/server_error](../storage/mongodb/patient_test.go) |
 
 ## Границы подтверждения
 

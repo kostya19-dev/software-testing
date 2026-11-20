@@ -2,7 +2,7 @@ FROM golang:1.26-alpine AS build
 WORKDIR /suite
 COPY go.mod go.sum ./
 RUN go mod download
-COPY auth_test.go ./
+COPY *_test.go ./
 RUN go test -c -o /suite/auth.test .
 
 FROM alpine:3.21
