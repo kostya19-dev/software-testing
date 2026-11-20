@@ -1,7 +1,44 @@
 import json
+import os
 import uuid
 from pathlib import Path
 import xml.etree.ElementTree as ET
+
+
+def write_trend(directory: Path):
+    target = directory / "allure-results"
+    history = target / "history"
+    history.mkdir(parents=True, exist_ok=True)
+    points = []
+    if os.environ.get("GITHUB_RUN_NUMBER"):
+        build = int(os.environ["GITHUB_RUN_NUMBER"])
+        archive = Path(os.environ["RUNNER_TEMP"], "lab5-history")
+        records = []
+        for run in archive.glob("*"):
+            reports = sorted(run.rglob("junit.xml"))
+            if reports:
+                records.append((int(run.name), reports[-1]))
+        title = f"GitHub Actions #{build}"
+    else:
+        previous = sorted(path for path in directory.parent.glob("*/junit.xml") if path.parent.name < directory.name)
+        records = list(enumerate(previous, 1))
+        build = len(records) + 1
+        title = directory.name
+    for order, path in sorted(records, reverse=True)[:19]:
+        suite = ET.parse(path).getroot()
+        total = int(suite.attrib["tests"])
+        if total == 0:
+            continue
+        failed = int(suite.get("failures", 0))
+        broken = int(suite.get("errors", 0))
+        skipped = int(suite.get("skipped", 0))
+        points.append({"buildOrder": order, "reportName": path.parent.name,
+                       "data": {"passed": total - failed - broken - skipped, "failed": failed,
+                                "broken": broken, "skipped": skipped, "unknown": 0, "total": total}})
+    (history / "history-trend.json").write_text(json.dumps(points), encoding="utf-8")
+    print(f"Allure trend: {len(points)} previous runs and the current run")
+    (target / "executor.json").write_text(json.dumps({"name": "GitHub Actions" if os.getenv("GITHUB_ACTIONS") else "Local",
+                                                     "reportName": title, "buildOrder": build}), encoding="utf-8")
 
 
 def render(directory: Path, started_ns: int):
@@ -44,3 +81,4 @@ def render(directory: Path, started_ns: int):
             (target / f"{uid}-result.json").write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
     if cases or not any(target.glob("*-result.json")):
         raise ValueError("Incomplete Godog scenario results")
+    write_trend(directory)
