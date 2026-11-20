@@ -1,0 +1,21 @@
+<style>
+.widget[data-id="environment"], .widget[data-id="executors"],
+.widget[data-id="behaviors"], .widget[data-id="categories"] { display: none; }
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const selector = '.widget[data-id="history-trend"] .tick text';
+    function formatTicks() {
+        for (const label of document.querySelectorAll(selector)) {
+            if (!/^#\d+$/.test(label.textContent)) continue;
+            label.textContent = label.textContent.slice(1);
+            label.removeAttribute("transform");
+            label.setAttribute("dx", "0");
+            label.setAttribute("dy", "0.75em");
+            label.style.textAnchor = "middle";
+        }
+    }
+    new MutationObserver(formatTicks).observe(document.body, { childList: true, subtree: true });
+    formatTicks();
+});
+</script>
