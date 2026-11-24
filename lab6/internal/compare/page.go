@@ -93,6 +93,9 @@ func Build(resultsDir string, variants variant.Set) (string, error) {
 	if report, ok := bench.Load(filepath.Join(resultsDir, bench.ResultFile)); ok {
 		page.Bench, page.BenchRows = &report, benchRows(report)
 	}
+	if _, err := page.writeMarkdown(resultsDir); err != nil {
+		return "", err
+	}
 	return page.write(resultsDir)
 }
 

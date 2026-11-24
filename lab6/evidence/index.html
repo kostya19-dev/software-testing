@@ -29,7 +29,7 @@ a { color: var(--accent); }
 <body>
 <main>
 <h1>Трассировка и логирование: сравнение ресурсов</h1>
-<div class="meta">VitaLine Clinic · сценарии ЛР4 на одинаковом стенде · отчёт собран 15.11.2026 21:42</div>
+<div class="meta">VitaLine Clinic · сценарии ЛР4 на одинаковом стенде, нагрузка — k6 · отчёт собран 24.11.2026 23:48</div>
 
 <h2>Варианты конфигурации</h2>
 <div class="scroll"><table>
@@ -42,35 +42,35 @@ a { color: var(--accent); }
 <div class="scroll"><table>
   <thead><tr><th>Вариант</th><th>RPS</th><th>p50 мс</th><th>p95 мс</th><th>p99 мс</th><th>Отказы</th><th>CPU api ср.</th><th>CPU api max</th><th>RAM api ср., МБ</th><th>RAM api max</th><th>Запись api, КБ/с</th><th>CPU mongo</th><th>CPU jaeger</th><th>RAM jaeger max</th><th>CPU мониторинга</th><th>RAM мониторинга max</th><th>Итог</th></tr></thead>
   <tbody><tr>
-    <td><a href="baseline/20261115-200132-ramp-r4an/report.html">baseline</a></td>
-    <td>709</td><td>1.61</td><td>106</td><td>264</td><td>0.00%</td>
-    <td>0.37 <span class="delta"></span></td><td>0.75</td>
-    <td>18.3 <span class="delta"></span></td><td>79.9</td>
-    <td>86.9 <span class="delta"></span></td>
-    <td>0.57</td>
+    <td><a href="baseline/20261124-222015-ramp-mqcf/report.html">baseline</a></td>
+    <td>749</td><td>2.48</td><td>176</td><td>388</td><td>0.00%</td>
+    <td>0.44 <span class="delta"></span></td><td>1.04</td>
+    <td>46.0 <span class="delta"></span></td><td>128</td>
+    <td>109 <span class="delta"></span></td>
+    <td>0.65</td>
     <td>—</td><td>—</td>
-    <td>0.02</td><td>39.0</td>
-    <td class="text">SLO выполнено на всех ступенях, до 1500 VU / 1516 RPS</td>
+    <td>0.02</td><td>42.9</td>
+    <td class="text">SLO выполнено на всех ступенях, до 1500 VU / 681 RPS</td>
   </tr><tr>
-    <td><a href="tracing/20261115-201441-ramp-4d67/report.html">tracing</a></td>
-    <td>656</td><td>4.60</td><td>458</td><td>946</td><td>0.10%</td>
-    <td>0.46 <span class="delta">&#43;25%</span></td><td>0.94</td>
-    <td>30.1 <span class="delta">&#43;64%</span></td><td>113</td>
-    <td>120 <span class="delta">&#43;38%</span></td>
-    <td>0.60</td>
-    <td>0.02</td><td>709</td>
-    <td>0.02</td><td>48.4</td>
-    <td class="text">предел 1200 VU / 1174 RPS, нарушение SLO с 1500 VU</td>
-  </tr><tr>
-    <td><a href="logging/20261115-202919-ramp-ps2k/report.html">logging</a></td>
-    <td>643</td><td>17.2</td><td>492</td><td>1054</td><td>0.30%</td>
-    <td>0.51 <span class="delta">&#43;39%</span></td><td>0.96</td>
-    <td>29.4 <span class="delta">&#43;61%</span></td><td>101</td>
-    <td>1431 <span class="delta">&#43;1548%</span></td>
+    <td><a href="tracing/20261124-223213-ramp-q4k5/report.html">tracing</a></td>
+    <td>752</td><td>2.58</td><td>155</td><td>320</td><td>0.00%</td>
+    <td>0.51 <span class="delta">&#43;16%</span></td><td>1.25</td>
+    <td>40.1 <span class="delta">-13%</span></td><td>111</td>
+    <td>140 <span class="delta">&#43;29%</span></td>
     <td>0.64</td>
+    <td>0.03</td><td>687</td>
+    <td>0.02</td><td>43.1</td>
+    <td class="text">SLO выполнено на всех ступенях, до 1500 VU / 682 RPS</td>
+  </tr><tr>
+    <td><a href="logging/20261124-224410-ramp-so4y/report.html">logging</a></td>
+    <td>728</td><td>4.92</td><td>273</td><td>598</td><td>0.10%</td>
+    <td>0.56 <span class="delta">&#43;26%</span></td><td>1.32</td>
+    <td>49.3 <span class="delta">&#43;7%</span></td><td>130</td>
+    <td>1777 <span class="delta">&#43;1537%</span></td>
+    <td>0.66</td>
     <td>—</td><td>—</td>
-    <td>0.02</td><td>33.6</td>
-    <td class="text">предел 1200 VU / 1149 RPS, нарушение SLO с 1500 VU</td>
+    <td>0.02</td><td>33.8</td>
+    <td class="text">SLO выполнено на всех ступенях, до 1500 VU / 671 RPS</td>
   </tr></tbody>
 </table></div>
 <figure><img src="charts/ramp.png" alt="Ресурсы по вариантам: ramp"></figure>
@@ -79,35 +79,35 @@ a { color: var(--accent); }
 <div class="scroll"><table>
   <thead><tr><th>Вариант</th><th>RPS</th><th>p50 мс</th><th>p95 мс</th><th>p99 мс</th><th>Отказы</th><th>CPU api ср.</th><th>CPU api max</th><th>RAM api ср., МБ</th><th>RAM api max</th><th>Запись api, КБ/с</th><th>CPU mongo</th><th>CPU jaeger</th><th>RAM jaeger max</th><th>CPU мониторинга</th><th>RAM мониторинга max</th><th>Итог</th></tr></thead>
   <tbody><tr>
-    <td><a href="baseline/20261115-204231-stress-nkzn/report.html">baseline</a></td>
-    <td>410</td><td>14.9</td><td>435</td><td>1007</td><td>0.20%</td>
-    <td>0.35 <span class="delta"></span></td><td>0.82</td>
-    <td>24.9 <span class="delta"></span></td><td>68.0</td>
-    <td>56.0 <span class="delta"></span></td>
-    <td>0.59</td>
+    <td><a href="baseline/20261124-225604-stress-vuyq/report.html">baseline</a></td>
+    <td>465</td><td>3.17</td><td>270</td><td>589</td><td>0.00%</td>
+    <td>0.38 <span class="delta"></span></td><td>1.12</td>
+    <td>49.0 <span class="delta"></span></td><td>92.7</td>
+    <td>67.0 <span class="delta"></span></td>
+    <td>0.62</td>
     <td>—</td><td>—</td>
-    <td>0.03</td><td>33.2</td>
-    <td class="text">восстановление за 20 с</td>
+    <td>0.03</td><td>32.5</td>
+    <td class="text">восстановление за 0 с</td>
   </tr><tr>
-    <td><a href="tracing/20261115-205304-stress-gpyb/report.html">tracing</a></td>
-    <td>439</td><td>6.68</td><td>170</td><td>360</td><td>0.00%</td>
-    <td>0.41 <span class="delta">&#43;19%</span></td><td>0.93</td>
-    <td>19.7 <span class="delta">-21%</span></td><td>43.1</td>
-    <td>76.6 <span class="delta">&#43;37%</span></td>
-    <td>0.59</td>
-    <td>0.03</td><td>674</td>
-    <td>0.03</td><td>33.1</td>
-    <td class="text">восстановление за 20 с</td>
+    <td><a href="tracing/20261124-230528-stress-fs5l/report.html">tracing</a></td>
+    <td>434</td><td>9.80</td><td>501</td><td>913</td><td>0.00%</td>
+    <td>0.47 <span class="delta">&#43;22%</span></td><td>1.33</td>
+    <td>48.6 <span class="delta">-1%</span></td><td>91.8</td>
+    <td>82.3 <span class="delta">&#43;23%</span></td>
+    <td>0.64</td>
+    <td>0.02</td><td>683</td>
+    <td>0.03</td><td>31.1</td>
+    <td class="text">восстановление за 55 с</td>
   </tr><tr>
-    <td><a href="logging/20261115-210338-stress-kq4g/report.html">logging</a></td>
-    <td>424</td><td>6.04</td><td>358</td><td>738</td><td>0.10%</td>
-    <td>0.42 <span class="delta">&#43;20%</span></td><td>0.96</td>
-    <td>30.7 <span class="delta">&#43;23%</span></td><td>71.6</td>
-    <td>995 <span class="delta">&#43;1676%</span></td>
-    <td>0.57</td>
+    <td><a href="logging/20261124-231457-stress-rlgw/report.html">logging</a></td>
+    <td>442</td><td>7.60</td><td>457</td><td>1031</td><td>0.40%</td>
+    <td>0.47 <span class="delta">&#43;22%</span></td><td>1.38</td>
+    <td>57.3 <span class="delta">&#43;17%</span></td><td>108</td>
+    <td>1077 <span class="delta">&#43;1508%</span></td>
+    <td>0.62</td>
     <td>—</td><td>—</td>
-    <td>0.02</td><td>35.2</td>
-    <td class="text">восстановление за 25 с</td>
+    <td>0.03</td><td>38.6</td>
+    <td class="text">восстановление за 0 с</td>
   </tr></tbody>
 </table></div>
 <figure><img src="charts/stress.png" alt="Ресурсы по вариантам: stress"></figure>
@@ -116,35 +116,35 @@ a { color: var(--accent); }
 <div class="scroll"><table>
   <thead><tr><th>Вариант</th><th>RPS</th><th>p50 мс</th><th>p95 мс</th><th>p99 мс</th><th>Отказы</th><th>CPU api ср.</th><th>CPU api max</th><th>RAM api ср., МБ</th><th>RAM api max</th><th>Запись api, КБ/с</th><th>CPU mongo</th><th>CPU jaeger</th><th>RAM jaeger max</th><th>CPU мониторинга</th><th>RAM мониторинга max</th><th>Итог</th></tr></thead>
   <tbody><tr>
-    <td><a href="baseline/20261115-211412-stable-acok/report.html">baseline</a></td>
-    <td>361</td><td>1.36</td><td>29.0</td><td>54.5</td><td>0.00%</td>
-    <td>0.29 <span class="delta"></span></td><td>0.49</td>
-    <td>10.7 <span class="delta"></span></td><td>15.6</td>
-    <td>52.0 <span class="delta"></span></td>
-    <td>0.49</td>
+    <td><a href="baseline/20261124-232425-stable-mcvl/report.html">baseline</a></td>
+    <td>382</td><td>1.58</td><td>22.2</td><td>50.2</td><td>0.00%</td>
+    <td>0.33 <span class="delta"></span></td><td>0.63</td>
+    <td>25.9 <span class="delta"></span></td><td>30.7</td>
+    <td>58.4 <span class="delta"></span></td>
+    <td>0.55</td>
     <td>—</td><td>—</td>
-    <td>0.02</td><td>33.4</td>
-    <td class="text">173215 запросов</td>
+    <td>0.02</td><td>35.9</td>
+    <td class="text">173990 запросов</td>
   </tr><tr>
-    <td><a href="tracing/20261115-212304-stable-htyx/report.html">tracing</a></td>
-    <td>362</td><td>1.37</td><td>24.0</td><td>47.2</td><td>0.00%</td>
-    <td>0.32 <span class="delta">&#43;12%</span></td><td>0.62</td>
-    <td>12.3 <span class="delta">&#43;15%</span></td><td>18.2</td>
-    <td>64.9 <span class="delta">&#43;25%</span></td>
-    <td>0.47</td>
-    <td>0.01</td><td>653</td>
-    <td>0.02</td><td>35.5</td>
-    <td class="text">173885 запросов</td>
+    <td><a href="tracing/20261124-233226-stable-gyoy/report.html">tracing</a></td>
+    <td>383</td><td>1.72</td><td>23.4</td><td>51.3</td><td>0.00%</td>
+    <td>0.40 <span class="delta">&#43;20%</span></td><td>0.93</td>
+    <td>23.3 <span class="delta">-10%</span></td><td>28.1</td>
+    <td>74.9 <span class="delta">&#43;28%</span></td>
+    <td>0.56</td>
+    <td>0.02</td><td>658</td>
+    <td>0.02</td><td>35.3</td>
+    <td class="text">174014 запросов</td>
   </tr><tr>
-    <td><a href="logging/20261115-213200-stable-drwr/report.html">logging</a></td>
-    <td>360</td><td>1.60</td><td>27.7</td><td>53.0</td><td>0.00%</td>
-    <td>0.35 <span class="delta">&#43;24%</span></td><td>0.59</td>
-    <td>16.9 <span class="delta">&#43;58%</span></td><td>24.4</td>
-    <td>895 <span class="delta">&#43;1622%</span></td>
-    <td>0.49</td>
+    <td><a href="logging/20261124-234027-stable-rtbw/report.html">logging</a></td>
+    <td>382</td><td>1.89</td><td>20.3</td><td>41.2</td><td>0.00%</td>
+    <td>0.41 <span class="delta">&#43;23%</span></td><td>0.58</td>
+    <td>30.3 <span class="delta">&#43;17%</span></td><td>36.4</td>
+    <td>959 <span class="delta">&#43;1544%</span></td>
+    <td>0.55</td>
     <td>—</td><td>—</td>
-    <td>0.02</td><td>32.6</td>
-    <td class="text">173619 запросов</td>
+    <td>0.02</td><td>34.5</td>
+    <td class="text">173938 запросов</td>
   </tr></tbody>
 </table></div>
 <figure><img src="charts/stable.png" alt="Ресурсы по вариантам: stable"></figure>
@@ -164,18 +164,25 @@ a { color: var(--accent); }
 <h2>Трейсы</h2>
 <p class="meta">Трейсы выгружаются из Jaeger перед удалением стенда в <code>traces/jaeger.json</code> каталога прогона. Файл открывается в любом Jaeger UI: Search → Upload JSON.</p>
 
-<h3>stress · <a href="tracing/20261115-205304-stress-gpyb/traces/jaeger.json">traces/jaeger.json</a></h3>
-<div class="meta">Трейсов в выгрузке: 1000 · спанов: 2939 · спанов на трейс: 2.94</div>
+<h3>ramp · <a href="tracing/20261124-223213-ramp-q4k5/traces/jaeger.json">traces/jaeger.json</a></h3>
+<div class="meta">Трейсов в выгрузке: 1000 · спанов: 3176 · спанов на трейс: 3.18</div>
 <div class="scroll"><table>
   <thead><tr><th>Операция</th><th>Спанов</th><th>Среднее, мс</th><th>p95, мс</th></tr></thead>
-  <tbody><tr><td>visits.find</td><td>539</td><td>1.65</td><td>5.11</td></tr><tr><td>appointments.find</td><td>449</td><td>2.69</td><td>13.1</td></tr><tr><td>appointments.update</td><td>154</td><td>1.07</td><td>3.75</td></tr><tr><td>GET /api/visits</td><td>153</td><td>6.79</td><td>24.3</td></tr><tr><td>GET /api/appointments</td><td>142</td><td>2.99</td><td>11.8</td></tr><tr><td>GET /api/patients/{id}</td><td>142</td><td>4.29</td><td>28.0</td></tr><tr><td>patients.find</td><td>142</td><td>3.95</td><td>27.8</td></tr><tr><td>schedule_slots.find</td><td>141</td><td>4.50</td><td>26.7</td></tr><tr><td>GET /api/schedule/free</td><td>141</td><td>4.84</td><td>26.9</td></tr><tr><td>appointments.insert</td><td>140</td><td>2.65</td><td>9.46</td></tr><tr><td>appointments.aggregate</td><td>140</td><td>3.74</td><td>25.0</td></tr><tr><td>POST /api/appointments</td><td>140</td><td>6.84</td><td>45.1</td></tr><tr><td>visits.insert</td><td>106</td><td>1.40</td><td>5.46</td></tr><tr><td>POST /api/visits</td><td>106</td><td>6.19</td><td>33.1</td></tr><tr><td>visits.update</td><td>104</td><td>2.24</td><td>7.45</td></tr><tr><td>POST /api/visits/{id}/complete</td><td>104</td><td>5.96</td><td>35.9</td></tr><tr><td>POST /api/appointments/{id}/cancel</td><td>48</td><td>3.84</td><td>14.3</td></tr><tr><td>patients.insert</td><td>20</td><td>1.84</td><td>19.7</td></tr><tr><td>POST /api/patients</td><td>20</td><td>2.24</td><td>19.9</td></tr><tr><td>ping</td><td>4</td><td>0.35</td><td>0.43</td></tr><tr><td>GET /health</td><td>4</td><td>0.67</td><td>0.85</td></tr></tbody>
+  <tbody><tr><td>visits.find</td><td>649</td><td>15.5</td><td>56.5</td></tr><tr><td>appointments.find</td><td>573</td><td>19.9</td><td>57.8</td></tr><tr><td>appointments.update</td><td>214</td><td>17.7</td><td>62.4</td></tr><tr><td>GET /api/appointments</td><td>207</td><td>22.9</td><td>62.0</td></tr><tr><td>appointments.aggregate</td><td>163</td><td>20.1</td><td>62.5</td></tr><tr><td>POST /api/appointments</td><td>163</td><td>39.3</td><td>92.8</td></tr><tr><td>appointments.insert</td><td>163</td><td>13.1</td><td>48.4</td></tr><tr><td>GET /api/visits</td><td>152</td><td>79.9</td><td>166</td></tr><tr><td>POST /api/visits</td><td>150</td><td>54.5</td><td>118</td></tr><tr><td>visits.insert</td><td>150</td><td>11.9</td><td>36.2</td></tr><tr><td>visits.update</td><td>136</td><td>12.6</td><td>49.1</td></tr><tr><td>POST /api/visits/{id}/complete</td><td>136</td><td>36.0</td><td>85.3</td></tr><tr><td>GET /api/schedule/free</td><td>96</td><td>28.2</td><td>68.8</td></tr><tr><td>schedule_slots.find</td><td>96</td><td>20.4</td><td>55.6</td></tr><tr><td>POST /api/appointments/{id}/cancel</td><td>64</td><td>47.0</td><td>83.5</td></tr><tr><td>patients.find</td><td>29</td><td>24.3</td><td>70.2</td></tr><tr><td>GET /api/patients/{id}</td><td>29</td><td>31.5</td><td>72.9</td></tr><tr><td>GET /health</td><td>3</td><td>7.65</td><td>21.1</td></tr><tr><td>ping</td><td>3</td><td>7.25</td><td>20.9</td></tr></tbody>
 </table></div>
 
-<h3>stable · <a href="tracing/20261115-212304-stable-htyx/traces/jaeger.json">traces/jaeger.json</a></h3>
-<div class="meta">Трейсов в выгрузке: 1000 · спанов: 2917 · спанов на трейс: 2.92</div>
+<h3>stress · <a href="tracing/20261124-230528-stress-fs5l/traces/jaeger.json">traces/jaeger.json</a></h3>
+<div class="meta">Трейсов в выгрузке: 1000 · спанов: 3029 · спанов на трейс: 3.03</div>
 <div class="scroll"><table>
   <thead><tr><th>Операция</th><th>Спанов</th><th>Среднее, мс</th><th>p95, мс</th></tr></thead>
-  <tbody><tr><td>visits.find</td><td>508</td><td>0.87</td><td>3.86</td></tr><tr><td>appointments.find</td><td>430</td><td>2.25</td><td>17.2</td></tr><tr><td>POST /api/appointments</td><td>149</td><td>3.57</td><td>25.5</td></tr><tr><td>appointments.update</td><td>149</td><td>1.29</td><td>3.83</td></tr><tr><td>appointments.insert</td><td>149</td><td>1.27</td><td>4.29</td></tr><tr><td>appointments.aggregate</td><td>149</td><td>2.03</td><td>8.01</td></tr><tr><td>GET /api/patients/{id}</td><td>146</td><td>2.89</td><td>22.9</td></tr><tr><td>patients.find</td><td>146</td><td>2.71</td><td>22.7</td></tr><tr><td>GET /api/schedule/free</td><td>142</td><td>2.27</td><td>7.27</td></tr><tr><td>schedule_slots.find</td><td>142</td><td>2.05</td><td>5.67</td></tr><tr><td>GET /api/appointments</td><td>142</td><td>2.12</td><td>3.65</td></tr><tr><td>GET /api/visits</td><td>139</td><td>4.75</td><td>29.8</td></tr><tr><td>POST /api/visits/{id}/complete</td><td>113</td><td>2.74</td><td>13.7</td></tr><tr><td>visits.update</td><td>113</td><td>0.91</td><td>3.85</td></tr><tr><td>POST /api/visits</td><td>111</td><td>5.32</td><td>25.9</td></tr><tr><td>visits.insert</td><td>111</td><td>0.92</td><td>4.58</td></tr><tr><td>POST /api/appointments/{id}/cancel</td><td>38</td><td>2.70</td><td>26.4</td></tr><tr><td>POST /api/patients</td><td>16</td><td>0.89</td><td>4.57</td></tr><tr><td>patients.insert</td><td>16</td><td>0.69</td><td>4.39</td></tr><tr><td>ping</td><td>4</td><td>0.48</td><td>0.66</td></tr><tr><td>GET /health</td><td>4</td><td>0.81</td><td>1.20</td></tr></tbody>
+  <tbody><tr><td>visits.find</td><td>619</td><td>0.85</td><td>1.95</td></tr><tr><td>appointments.find</td><td>457</td><td>1.53</td><td>5.38</td></tr><tr><td>GET /api/appointments</td><td>157</td><td>1.75</td><td>6.05</td></tr><tr><td>appointments.update</td><td>152</td><td>0.84</td><td>2.58</td></tr><tr><td>appointments.insert</td><td>151</td><td>0.96</td><td>3.37</td></tr><tr><td>POST /api/appointments</td><td>151</td><td>3.54</td><td>18.7</td></tr><tr><td>appointments.aggregate</td><td>151</td><td>2.19</td><td>11.6</td></tr><tr><td>GET /api/visits</td><td>148</td><td>4.60</td><td>11.6</td></tr><tr><td>GET /api/schedule/free</td><td>137</td><td>1.95</td><td>7.55</td></tr><tr><td>schedule_slots.find</td><td>137</td><td>1.65</td><td>7.31</td></tr><tr><td>GET /api/patients/{id}</td><td>111</td><td>2.79</td><td>17.1</td></tr><tr><td>patients.find</td><td>111</td><td>2.38</td><td>15.5</td></tr><tr><td>visits.update</td><td>108</td><td>1.15</td><td>2.33</td></tr><tr><td>POST /api/visits/{id}/complete</td><td>108</td><td>2.95</td><td>18.2</td></tr><tr><td>POST /api/visits</td><td>107</td><td>3.98</td><td>21.4</td></tr><tr><td>visits.insert</td><td>107</td><td>0.58</td><td>1.56</td></tr><tr><td>POST /api/appointments/{id}/cancel</td><td>45</td><td>1.53</td><td>4.90</td></tr><tr><td>patients.insert</td><td>32</td><td>2.45</td><td>19.9</td></tr><tr><td>POST /api/patients</td><td>32</td><td>2.78</td><td>20.2</td></tr><tr><td>ping</td><td>4</td><td>0.40</td><td>0.57</td></tr><tr><td>GET /health</td><td>4</td><td>0.60</td><td>0.79</td></tr></tbody>
+</table></div>
+
+<h3>stable · <a href="tracing/20261124-233226-stable-gyoy/traces/jaeger.json">traces/jaeger.json</a></h3>
+<div class="meta">Трейсов в выгрузке: 1000 · спанов: 2995 · спанов на трейс: 3.00</div>
+<div class="scroll"><table>
+  <thead><tr><th>Операция</th><th>Спанов</th><th>Среднее, мс</th><th>p95, мс</th></tr></thead>
+  <tbody><tr><td>visits.find</td><td>579</td><td>0.73</td><td>1.93</td></tr><tr><td>appointments.find</td><td>454</td><td>1.50</td><td>5.05</td></tr><tr><td>GET /api/appointments</td><td>156</td><td>1.65</td><td>4.33</td></tr><tr><td>appointments.aggregate</td><td>152</td><td>1.38</td><td>2.81</td></tr><tr><td>appointments.insert</td><td>152</td><td>0.67</td><td>2.39</td></tr><tr><td>POST /api/appointments</td><td>152</td><td>2.40</td><td>9.07</td></tr><tr><td>appointments.update</td><td>150</td><td>1.20</td><td>2.33</td></tr><tr><td>GET /api/visits</td><td>148</td><td>4.24</td><td>15.1</td></tr><tr><td>schedule_slots.find</td><td>139</td><td>1.71</td><td>10.4</td></tr><tr><td>GET /api/schedule/free</td><td>139</td><td>1.98</td><td>10.6</td></tr><tr><td>visits.update</td><td>115</td><td>0.53</td><td>1.38</td></tr><tr><td>POST /api/visits/{id}/complete</td><td>115</td><td>1.72</td><td>3.42</td></tr><tr><td>POST /api/visits</td><td>114</td><td>3.06</td><td>7.78</td></tr><tr><td>visits.insert</td><td>114</td><td>0.67</td><td>2.12</td></tr><tr><td>patients.find</td><td>112</td><td>2.19</td><td>16.3</td></tr><tr><td>GET /api/patients/{id}</td><td>112</td><td>2.43</td><td>16.4</td></tr><tr><td>POST /api/appointments/{id}/cancel</td><td>36</td><td>5.70</td><td>24.2</td></tr><tr><td>POST /api/patients</td><td>25</td><td>4.16</td><td>18.7</td></tr><tr><td>patients.insert</td><td>25</td><td>3.69</td><td>18.5</td></tr><tr><td>ping</td><td>3</td><td>0.37</td><td>0.45</td></tr><tr><td>GET /health</td><td>3</td><td>0.61</td><td>0.77</td></tr></tbody>
 </table></div>
 
 

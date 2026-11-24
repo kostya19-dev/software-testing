@@ -1,0 +1,9 @@
+apiVersion: 1
+
+providers:
+  - name: lab6
+    folder: ЛР6
+    type: file
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards

@@ -1,0 +1,71 @@
+# Local dashboard over finished lab6 runs: `make grafana`, then http://localhost:3000.
+# Prometheus is backfilled from results/grafana/metrics.om (bin/lab6 grafana), Jaeger receives
+# results/grafana/traces/*.json over OTLP (bin/lab6 grafana-traces). Nothing here scrapes live data.
+
+name: lab6-grafana
+
+services:
+  backfill:
+    image: prom/prometheus:v3.5.0
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - rm -rf /prometheus/* && promtool tsdb create-blocks-from openmetrics /data/metrics.om /prometheus
+    volumes:
+      - ../results/grafana:/data:ro
+      - prometheus-data:/prometheus
+
+  prometheus:
+    image: prom/prometheus:v3.5.0
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=50y
+      # Samples are one second apart; a short lookback keeps lines from running on after a run ends.
+      - --query.lookback-delta=5s
+    depends_on:
+      backfill:
+        condition: service_completed_successfully
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:9090/-/ready"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  jaeger:
+    image: jaegertracing/jaeger:2.11.0
+    ports:
+      - "127.0.0.1:${JAEGER_UI_PORT:-16687}:16686"
+      - "127.0.0.1:${JAEGER_OTLP_PORT:-4319}:4318"
+
+  grafana:
+    image: grafana/grafana:13.3.1
+    depends_on:
+      prometheus:
+        condition: service_healthy
+      jaeger:
+        condition: service_started
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: /var/lib/grafana/dashboards/lab6.json
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+      GF_ANALYTICS_CHECK_FOR_PLUGIN_UPDATES: "false"
+      GF_NEWS_NEWS_FEED_ENABLED: "false"
+    ports:
+      - "127.0.0.1:${GRAFANA_PORT:-3000}:3000"
+    volumes:
+      - ./provisioning:/etc/grafana/provisioning:ro
+      - ./dashboards:/var/lib/grafana/dashboards:ro
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+      interval: 2s
+      timeout: 3s
+      retries: 60
+
+volumes:
+  prometheus-data:

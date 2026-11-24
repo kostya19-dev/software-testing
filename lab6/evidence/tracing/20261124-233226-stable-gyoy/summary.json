@@ -1,0 +1,453 @@
+{
+  "run": {
+    "id": "20261124-233226-stable-gyoy",
+    "scenario": "stable",
+    "scale": 1,
+    "started_at": "2026-11-24T23:32:35+03:00",
+    "finished_at": "2026-11-24T23:40:21+03:00",
+    "load_exit_code": 0,
+    "variant": "tracing",
+    "settings": {
+      "VITALINE_LOG_EXTENDED": "false",
+      "VITALINE_TRACING_ENABLED": "true"
+    },
+    "services": {
+      "api": {
+        "image": "vitaline-lab6-api:20261124-233226-stable-gyoy",
+        "image_id": "sha256:34bab9a88d5dd6aac6d82de9fe4900d86a1548be1e0f2d113f8a9a9b2cfb1455",
+        "cpuset": "0,1",
+        "cpus": 1,
+        "memory_mb": 512,
+        "memory_reserved_mb": 512
+      },
+      "exporter": {
+        "image": "vitaline-lab4-exporter:1",
+        "image_id": "sha256:5d8e679d55a38a86b6ea0eb17407fbc16954be055fd1dcd22d07948c4eb41226",
+        "cpuset": "6,7",
+        "cpus": 0,
+        "memory_mb": 64,
+        "memory_reserved_mb": 64
+      },
+      "jaeger": {
+        "image": "jaegertracing/jaeger:2.11.0",
+        "image_id": "sha256:b585df1b6299bbbd16bf7c679da30389349736e4b6bc8f4f500142a75bf26ca8",
+        "cpuset": "6,7",
+        "cpus": 0,
+        "memory_mb": 1536,
+        "memory_reserved_mb": 1536
+      },
+      "loadgen": {
+        "image": "grafana/k6:1.3.0",
+        "image_id": "sha256:3ddc8b1a33a2c3d8edc6e99b6a762ae36cba08788463458f5e6a7703e14eb77d",
+        "cpuset": "4,5",
+        "cpus": 0,
+        "memory_mb": 2048,
+        "memory_reserved_mb": 2048
+      },
+      "mongo": {
+        "image": "mongo:7",
+        "image_id": "sha256:41e8195b2791692695e1dc9bd21cd51d0a3af05fff8ace9304a5c1acf94f1ae1",
+        "cpuset": "2,3",
+        "cpus": 1,
+        "memory_mb": 1024,
+        "memory_reserved_mb": 1024
+      },
+      "prometheus": {
+        "image": "prom/prometheus:v3.5.0",
+        "image_id": "sha256:63805ebb8d2b3920190daf1cb14a60871b16fd38bed42b857a3182bc621f4996",
+        "cpuset": "6,7",
+        "cpus": 0,
+        "memory_mb": 768,
+        "memory_reserved_mb": 768
+      }
+    }
+  },
+  "scenario": {
+    "title": "Фиксированная нагрузка",
+    "kind": "constant",
+    "ramp_s": 60,
+    "warmup_s": 30,
+    "vus": 300,
+    "duration_s": 480,
+    "error_rate": 0
+  },
+  "slo": {
+    "p95_ms": 500,
+    "failure_rate": 0.01
+  },
+  "overall": {
+    "window_s": [
+      0,
+      480
+    ],
+    "requests": 174014,
+    "rps": {
+      "count": 480,
+      "min": 0,
+      "mean": 362.529,
+      "max": 797,
+      "stdev": 124.862,
+      "p50": 383,
+      "p75": 394,
+      "p90": 407,
+      "p95": 475,
+      "p99": 744.93
+    },
+    "latency_ms": {
+      "count": 174014,
+      "min": -1417.785,
+      "mean": 4.719,
+      "max": 473.24,
+      "stdev": 12.228,
+      "p50": 1.703,
+      "p75": 2.819,
+      "p90": 9.446,
+      "p95": 22.15,
+      "p99": 48.524
+    },
+    "latency_valid_ms": {
+      "count": 174014,
+      "min": -1417.785,
+      "mean": 4.719,
+      "max": 473.24,
+      "stdev": 12.228,
+      "p50": 1.703,
+      "p75": 2.819,
+      "p90": 9.446,
+      "p95": 22.15,
+      "p99": 48.524
+    },
+    "latency_invalid_ms": {
+      "count": 0,
+      "min": null,
+      "mean": null,
+      "max": null,
+      "stdev": null,
+      "p50": null,
+      "p75": null,
+      "p90": null,
+      "p95": null,
+      "p99": null
+    },
+    "failed_requests": 0,
+    "failure_rate": 0,
+    "invalid_share": 0,
+    "status_codes": [
+      {
+        "status": "200",
+        "count": 126020
+      },
+      {
+        "status": "201",
+        "count": 47994
+      }
+    ]
+  },
+  "operations": [
+    {
+      "name": "book_appointment",
+      "latency_ms": {
+        "count": 25252,
+        "min": 0.071,
+        "mean": 5.109,
+        "max": 290.958,
+        "stdev": 11.337,
+        "p50": 1.889,
+        "p75": 2.904,
+        "p90": 10.678,
+        "p95": 24.328,
+        "p99": 50.187
+      },
+      "failure_rate": 0,
+      "invalid_share": 0
+    },
+    {
+      "name": "browse_schedule",
+      "latency_ms": {
+        "count": 25273,
+        "min": 0.306,
+        "mean": 3.465,
+        "max": 186.028,
+        "stdev": 8.053,
+        "p50": 1.339,
+        "p75": 1.91,
+        "p90": 5.672,
+        "p95": 16.752,
+        "p99": 38.413
+      },
+      "failure_rate": 0,
+      "invalid_share": 0
+    },
+    {
+      "name": "cancel_appointment",
+      "latency_ms": {
+        "count": 7609,
+        "min": 0.879,
+        "mean": 4.986,
+        "max": 254.524,
+        "stdev": 11.638,
+        "p50": 1.723,
+        "p75": 2.709,
+        "p90": 10.793,
+        "p95": 23.274,
+        "p99": 49.579
+      },
+      "failure_rate": 0,
+      "invalid_share": 0
+    },
+    {
+      "name": "complete_visit",
+      "latency_ms": {
+        "count": 17539,
+        "min": 0.837,
+        "mean": 4.873,
+        "max": 304.411,
+        "stdev": 11.574,
+        "p50": 1.707,
+        "p75": 2.695,
+        "p90": 10.226,
+        "p95": 22.67,
+        "p99": 49.311
+      },
+      "failure_rate": 0,
+      "invalid_share": 0
+    },
+    {
+      "name": "login",
+      "latency_ms": {
+        "count": 25279,
+        "min": 0.152,
+        "mean": 3.222,
+        "max": 179.373,
+        "stdev": 7.613,
+        "p50": 1.149,
+        "p75": 1.666,
+        "p90": 5.696,
+        "p95": 16.012,
+        "p99": 36.585
+      },
+      "failure_rate": 0,
+      "invalid_share": 0
+    },
+    {
+      "name": "my_appointments",
+      "latency_ms": {
+        "count": 25210,
+        "min": 0.074,
+        "mean": 3.431,
+        "max": 216.515,
+        "stdev": 7.949,
+        "p50": 1.314,
+        "p75": 1.871,
+        "p90": 5.749,
+        "p95": 16.727,
+        "p99": 38.06
+      },
+      "failure_rate": 0,
+      "invalid_share": 0
+    },
+    {
+      "name": "register",
+      "latency_ms": {
+        "count": 5175,
+        "min": 0.607,
+        "mean": 3.255,
+        "max": 156.796,
+        "stdev": 7.617,
+        "p50": 1.191,
+        "p75": 1.714,
+        "p90": 5.645,
+        "p95": 15.688,
+        "p99": 35.889
+      },
+      "failure_rate": 0,
+      "invalid_share": 0
+    },
+    {
+      "name": "start_visit",
+      "latency_ms": {
+        "count": 17567,
+        "min": 1.151,
+        "mean": 6.257,
+        "max": 428.125,
+        "stdev": 14.8,
+        "p50": 2.208,
+        "p75": 3.543,
+        "p90": 14.128,
+        "p95": 28.565,
+        "p99": 61.04
+      },
+      "failure_rate": 0,
+      "invalid_share": 0
+    },
+    {
+      "name": "visit_history",
+      "latency_ms": {
+        "count": 25110,
+        "min": -1417.785,
+        "mean": 7.424,
+        "max": 473.24,
+        "stdev": 20.124,
+        "p50": 2.811,
+        "p75": 4.696,
+        "p90": 16.238,
+        "p95": 31.596,
+        "p99": 72.002
+      },
+      "failure_rate": 0,
+      "invalid_share": 0
+    }
+  ],
+  "phases": [
+    {
+      "phase": "разгон",
+      "vus": 300,
+      "rps_mean": 212.15,
+      "rps_p50": 219.5,
+      "rps_p5": 26.7,
+      "p50_ms": 1.578,
+      "p95_ms": 8.81,
+      "p99_ms": 28.77,
+      "failure_rate": 0,
+      "api_cpu": 0.195,
+      "mongo_cpu": 0.368,
+      "api_memory_mb": 14.923,
+      "within_slo": true
+    },
+    {
+      "phase": "прогрев",
+      "vus": 300,
+      "rps_mean": 394.667,
+      "rps_p50": 385.5,
+      "rps_p5": 370.45,
+      "p50_ms": 1.654,
+      "p95_ms": 18.159,
+      "p99_ms": 36.867,
+      "failure_rate": 0,
+      "api_cpu": 0.377,
+      "mongo_cpu": 0.516,
+      "api_memory_mb": 22.493,
+      "within_slo": true
+    },
+    {
+      "phase": "стабильная нагрузка",
+      "vus": 300,
+      "rps_mean": 383.192,
+      "rps_p50": 385,
+      "rps_p5": 321,
+      "p50_ms": 1.721,
+      "p95_ms": 23.389,
+      "p99_ms": 51.293,
+      "failure_rate": 0,
+      "api_cpu": 0.402,
+      "mongo_cpu": 0.558,
+      "api_memory_mb": 23.305,
+      "within_slo": true
+    }
+  ],
+  "stability": {
+    "steady": {
+      "phase": "стабильная нагрузка",
+      "vus": 300,
+      "rps_mean": 383.192,
+      "rps_p50": 385,
+      "rps_p5": 321,
+      "p50_ms": 1.721,
+      "p95_ms": 23.389,
+      "p99_ms": 51.293,
+      "failure_rate": 0,
+      "api_cpu": 0.402,
+      "mongo_cpu": 0.558,
+      "api_memory_mb": 23.305,
+      "within_slo": true
+    },
+    "slices": [
+      {
+        "phase": "1/5",
+        "vus": 300,
+        "rps_mean": 405.141,
+        "rps_p50": 384,
+        "rps_p5": 360.85,
+        "p50_ms": 2.25,
+        "p95_ms": 41.671,
+        "p99_ms": 95.793,
+        "failure_rate": 0,
+        "api_cpu": 0.49,
+        "mongo_cpu": 0.666,
+        "api_memory_mb": 23.235,
+        "within_slo": true
+      },
+      {
+        "phase": "2/5",
+        "vus": 300,
+        "rps_mean": 407.103,
+        "rps_p50": 387,
+        "rps_p5": 364.7,
+        "p50_ms": 1.669,
+        "p95_ms": 21.077,
+        "p99_ms": 47.018,
+        "failure_rate": 0,
+        "api_cpu": 0.388,
+        "mongo_cpu": 0.537,
+        "api_memory_mb": 23.021,
+        "within_slo": true
+      },
+      {
+        "phase": "3/5",
+        "vus": 300,
+        "rps_mean": 398.885,
+        "rps_p50": 385,
+        "rps_p5": 370.85,
+        "p50_ms": 1.615,
+        "p95_ms": 16.262,
+        "p99_ms": 34.878,
+        "failure_rate": 0,
+        "api_cpu": 0.377,
+        "mongo_cpu": 0.525,
+        "api_memory_mb": 23.471,
+        "within_slo": true
+      },
+      {
+        "phase": "4/5",
+        "vus": 300,
+        "rps_mean": 407.615,
+        "rps_p50": 389,
+        "rps_p5": 368.85,
+        "p50_ms": 1.657,
+        "p95_ms": 16.884,
+        "p99_ms": 39.044,
+        "failure_rate": 0,
+        "api_cpu": 0.386,
+        "mongo_cpu": 0.536,
+        "api_memory_mb": 23.324,
+        "within_slo": true
+      },
+      {
+        "phase": "5/5",
+        "vus": 300,
+        "rps_mean": 297.218,
+        "rps_p50": 380,
+        "rps_p5": 0,
+        "p50_ms": 1.626,
+        "p95_ms": 16.688,
+        "p99_ms": 36.763,
+        "failure_rate": 0,
+        "api_cpu": 0.363,
+        "mongo_cpu": 0.517,
+        "api_memory_mb": 23.512,
+        "within_slo": true
+      }
+    ],
+    "p95_drift": 0.4,
+    "rps_drift": 0.734,
+    "memory_growth_mb_per_hour": {
+      "api": 3.861,
+      "exporter": 1.119,
+      "jaeger": 5600.811,
+      "loadgen": 250.445,
+      "mongo": 39.601,
+      "prometheus": 50.295
+    },
+    "configured_error_rate": 0
+  }
+}

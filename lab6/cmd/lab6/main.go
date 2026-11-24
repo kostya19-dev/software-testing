@@ -11,7 +11,9 @@ import (
 
 	"lab6/internal/bench"
 	"lab6/internal/compare"
+	"lab6/internal/grafana"
 	"lab6/internal/jaeger"
+	"lab6/internal/k6"
 	"lab6/internal/variant"
 )
 
@@ -20,6 +22,8 @@ const (
 	apiImage    = "vitaline-lab6-api:base"
 	clinicDir   = "../project/VitaLineClinic"
 	resultsDir  = "results"
+	evidenceDir = "evidence"
+	grafanaDir  = "results/grafana"
 	jaegerURL   = "http://127.0.0.1:16686"
 	service     = "vitaline-clinic-api"
 	traceLimit  = 1000
@@ -34,7 +38,10 @@ const usage = `lab6 — трассировка и логирование VitaLin
   lab6 suite [-scale 1]                                  все сценарии во всех вариантах, затем сравнение
   lab6 bench [-count 10] [-benchtime 3000x]              бенчмарки стоимости трассировки и логирования
   lab6 compare                                           собрать results/index.html
-  lab6 traces                                            выгрузить трейсы из Jaeger в $RUN_DIR (вызывается стендом)
+  lab6 after-load [-traces]                              перевести вывод k6 в формат отчёта ЛР4 и выгрузить трейсы (вызывается стендом)
+  lab6 traces                                            выгрузить трейсы из Jaeger в $RUN_DIR
+  lab6 grafana [-results results]                        подготовить метрики и трейсы для дашборда в results/grafana
+  lab6 grafana-traces [-otlp http://127.0.0.1:4319]      загрузить трейсы в Jaeger дашборда
 `
 
 func main() {
@@ -92,6 +99,35 @@ func dispatch(args []string) error {
 		return report(variants)
 	case "traces":
 		return exportTraces()
+	case "after-load":
+		traces := flags.Bool("traces", false, "также выгрузить трейсы из Jaeger")
+		flags.Parse(rest)
+		return afterLoad(*traces)
+	case "grafana":
+		source := flags.String("results", "", "каталог с прогонами: results, а если в нём пусто — evidence")
+		flags.Parse(rest)
+		from := *source
+		if from == "" {
+			from = resultsDir
+			if runs, _ := compare.LoadRuns(resultsDir); len(runs) == 0 {
+				from = evidenceDir
+			}
+		}
+		result, err := grafana.Export(from, grafanaDir, variants)
+		if err != nil {
+			return err
+		}
+		fmt.Printf("Grafana: %d прогонов из %s, %d точек, %d трейсов → %s\n", result.Runs, from, result.Samples, result.Traces, result.Dir)
+		return nil
+	case "grafana-traces":
+		endpoint := flags.String("otlp", "http://127.0.0.1:4319", "OTLP/HTTP Jaeger из grafana/compose.yaml")
+		flags.Parse(rest)
+		files, err := grafana.PushTraces(grafanaDir, *endpoint)
+		if err != nil {
+			return fmt.Errorf("загрузка трейсов в Jaeger: %w", err)
+		}
+		fmt.Printf("Трейсы загружены в Jaeger: %d запросов OTLP\n", files)
+		return nil
 	default:
 		fmt.Print(usage)
 		return fmt.Errorf("неизвестная команда %q", command)
@@ -114,13 +150,15 @@ func run(v variant.Variant, scale float64, scenarios []string) error {
 	for _, profile := range v.Profiles {
 		args = append(args, "-profile", profile)
 	}
-	if v.Traces {
-		self, err := filepath.Abs(os.Args[0])
-		if err != nil {
-			return err
-		}
-		args = append(args, "-after-load", strconv.Quote(self)+" traces")
+	self, err := filepath.Abs(os.Args[0])
+	if err != nil {
+		return err
 	}
+	hook := strconv.Quote(self) + " after-load"
+	if v.Traces {
+		hook += " -traces"
+	}
+	args = append(args, "-after-load", hook)
 	args = append(args, "run", "-scale", strconv.FormatFloat(scale, 'g', -1, 64))
 	args = append(args, scenarios...)
 
@@ -129,6 +167,23 @@ func run(v variant.Variant, scale float64, scenarios []string) error {
 	cmd.Stdout, cmd.Stderr = os.Stdout, os.Stderr
 	if err := cmd.Run(); err != nil {
 		return fmt.Errorf("вариант %s: %w", v.Name, err)
+	}
+	return nil
+}
+
+// afterLoad runs on the host after k6 has finished and before the lab4 report is built.
+func afterLoad(traces bool) error {
+	runDir := os.Getenv("RUN_DIR")
+	if runDir == "" {
+		return errors.New("RUN_DIR не задан")
+	}
+	result, err := k6.Convert(filepath.Join(runDir, "load"))
+	if err != nil {
+		return fmt.Errorf("вывод k6: %w", err)
+	}
+	fmt.Printf("k6: %d запросов, неожиданных ответов %d, намеренно ошибочных %d\n", result.Requests, result.Failed, result.Invalid)
+	if traces {
+		return exportTraces()
 	}
 	return nil
 }

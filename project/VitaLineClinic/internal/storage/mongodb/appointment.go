@@ -122,7 +122,7 @@ func activeAppointmentFilter(doctorID uuid.UUID, date time.Time) bson.M {
 	return bson.M{
 		"doctor_id":        uuidString(doctorID),
 		"appointment_date": date,
-		"status":           bson.M{"$ne": string(domain.StatusCancelled)},
+		"status":           bson.M{"$in": bson.A{string(domain.StatusCreated), string(domain.StatusCompleted)}},
 	}
 }
 

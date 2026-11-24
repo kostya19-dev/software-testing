@@ -1,0 +1,122 @@
+{
+  "service": "vitaline-clinic-api",
+  "traces": 1000,
+  "spans": 3176,
+  "spans_per_trace": 3.176,
+  "operations": [
+    {
+      "name": "visits.find",
+      "spans": 649,
+      "mean_ms": 15.54090138674884,
+      "p95_ms": 56.519
+    },
+    {
+      "name": "appointments.find",
+      "spans": 573,
+      "mean_ms": 19.86459162303666,
+      "p95_ms": 57.834
+    },
+    {
+      "name": "appointments.update",
+      "spans": 214,
+      "mean_ms": 17.71107943925234,
+      "p95_ms": 62.378
+    },
+    {
+      "name": "GET /api/appointments",
+      "spans": 207,
+      "mean_ms": 22.91985507246376,
+      "p95_ms": 62.02
+    },
+    {
+      "name": "appointments.aggregate",
+      "spans": 163,
+      "mean_ms": 20.05803680981595,
+      "p95_ms": 62.489
+    },
+    {
+      "name": "POST /api/appointments",
+      "spans": 163,
+      "mean_ms": 39.25448466257668,
+      "p95_ms": 92.751
+    },
+    {
+      "name": "appointments.insert",
+      "spans": 163,
+      "mean_ms": 13.107447852760732,
+      "p95_ms": 48.413
+    },
+    {
+      "name": "GET /api/visits",
+      "spans": 152,
+      "mean_ms": 79.85741447368424,
+      "p95_ms": 165.518
+    },
+    {
+      "name": "POST /api/visits",
+      "spans": 150,
+      "mean_ms": 54.486080000000015,
+      "p95_ms": 118.413
+    },
+    {
+      "name": "visits.insert",
+      "spans": 150,
+      "mean_ms": 11.93809333333333,
+      "p95_ms": 36.209
+    },
+    {
+      "name": "visits.update",
+      "spans": 136,
+      "mean_ms": 12.635499999999999,
+      "p95_ms": 49.072
+    },
+    {
+      "name": "POST /api/visits/{id}/complete",
+      "spans": 136,
+      "mean_ms": 35.96132352941176,
+      "p95_ms": 85.277
+    },
+    {
+      "name": "GET /api/schedule/free",
+      "spans": 96,
+      "mean_ms": 28.24680208333334,
+      "p95_ms": 68.84
+    },
+    {
+      "name": "schedule_slots.find",
+      "spans": 96,
+      "mean_ms": 20.36164583333333,
+      "p95_ms": 55.637
+    },
+    {
+      "name": "POST /api/appointments/{id}/cancel",
+      "spans": 64,
+      "mean_ms": 47.03103124999999,
+      "p95_ms": 83.507
+    },
+    {
+      "name": "patients.find",
+      "spans": 29,
+      "mean_ms": 24.287517241379312,
+      "p95_ms": 70.172
+    },
+    {
+      "name": "GET /api/patients/{id}",
+      "spans": 29,
+      "mean_ms": 31.459931034482757,
+      "p95_ms": 72.873
+    },
+    {
+      "name": "GET /health",
+      "spans": 3,
+      "mean_ms": 7.654,
+      "p95_ms": 21.101
+    },
+    {
+      "name": "ping",
+      "spans": 3,
+      "mean_ms": 7.255,
+      "p95_ms": 20.911
+    }
+  ]
+}

@@ -8,12 +8,14 @@ SCALE ?= 1
 VARIANT ?= tracing
 SCENARIO ?= stable
 VARIANTS := baseline tracing logging
+K6_IMAGE := grafana/k6:1.3.0
+GRAFANA := docker compose -f grafana/compose.yaml
 
-.PHONY: help setup images build run suite smoke bench compare ci check clean
+.PHONY: help setup images build run suite smoke bench compare ci check clean grafana grafana-down
 
 help:
 	@printf '%s\n' \
-	  'make setup                          Собрать образы (API с OpenTelemetry, генератор, экспортер) и утилиты' \
+	  'make setup                          Собрать образы (API с OpenTelemetry, экспортер), скачать k6 и собрать утилиты' \
 	  'make run VARIANT=tracing SCENARIO=stable SCALE=1' \
 	  '                                    Один сценарий ЛР4 в одном варианте: baseline | tracing | logging' \
 	  'make suite                          ramp, stress, stable во всех вариантах и сравнение, около 1,5 ч' \
@@ -21,19 +23,21 @@ help:
 	  'make bench                          Бенчмарки стоимости трассировки и логирования' \
 	  'make compare                        Пересобрать results/index.html' \
 	  'make ci                             Короткий прогон для CI: бенчмарки и stable во всех вариантах' \
-	  'make check                          go vet и тесты lab6 и клиники'
+	  'make check                          go vet и тесты lab6 и клиники' \
+	  'make grafana                        Дашборд Grafana по результатам (results или evidence): http://localhost:3000' \
+	  'make grafana-down                   Остановить дашборд'
 
 setup: images build
 	docker pull --quiet mongo:7
 	docker pull --quiet prom/prometheus:v3.5.0
 	docker pull --quiet jaegertracing/jaeger:2.11.0
+	docker pull --quiet $(K6_IMAGE)
 
 $(LOADTEST)/go.mod:
 	python3 scripts/export_source.py $(LOADTEST_REV) lab4 $(LOADTEST) go.mod go.sum Dockerfile cmd internal
 
 images: $(LOADTEST)/go.mod
 	docker build --quiet --tag vitaline-lab6-api:base ../project/VitaLineClinic
-	docker build --quiet --target loadgen --tag vitaline-lab4-loadgen:1 $(LOADTEST)
 	docker build --quiet --target exporter --tag vitaline-lab4-exporter:1 $(LOADTEST)
 
 build: $(LOADTEST)/go.mod
@@ -64,6 +68,16 @@ check:
 	go vet ./...
 	go test ./...
 	cd ../project/VitaLineClinic && go vet ./... && go test ./...
+
+grafana: build
+	$(TOOL) grafana
+	$(GRAFANA) down --volumes --remove-orphans
+	$(GRAFANA) up --detach
+	$(TOOL) grafana-traces
+	@echo 'Grafana: http://localhost:3000   Jaeger: http://localhost:16687'
+
+grafana-down:
+	$(GRAFANA) down --volumes --remove-orphans
 
 clean:
 	docker ps -aq --filter label=lab4.run | xargs -r docker rm -f

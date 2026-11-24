@@ -48,7 +48,7 @@ jobs:
       - name: Overhead benchmarks
         run: bin/lab6 bench -count 3 -benchtime 1000x
 
-      - name: Fixed load in every variant with traces exported from Jaeger
+      - name: Fixed load from k6 in every variant with traces exported from Jaeger
         run: |
           for variant in baseline tracing logging; do
             bin/lab6 run -scale "${{ inputs.scale || '0.1' }}" -variant "$variant" stable
@@ -56,7 +56,9 @@ jobs:
 
       - name: Comparison report
         if: ${{ always() }}
-        run: bin/lab6 compare
+        run: |
+          bin/lab6 compare
+          if [ -f results/summary.md ]; then cat results/summary.md >> "$GITHUB_STEP_SUMMARY"; fi
 
       - name: Trace summary
         if: ${{ always() }}

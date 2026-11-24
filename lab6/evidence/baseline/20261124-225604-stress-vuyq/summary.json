@@ -1,0 +1,758 @@
+{
+  "run": {
+    "id": "20261124-225604-stress-vuyq",
+    "scenario": "stress",
+    "scale": 1,
+    "started_at": "2026-11-24T22:56:12+03:00",
+    "finished_at": "2026-11-24T23:05:24+03:00",
+    "load_exit_code": 0,
+    "variant": "baseline",
+    "settings": {
+      "VITALINE_LOG_EXTENDED": "false",
+      "VITALINE_TRACING_ENABLED": "false"
+    },
+    "services": {
+      "api": {
+        "image": "vitaline-lab6-api:20261124-225604-stress-vuyq",
+        "image_id": "sha256:34bab9a88d5dd6aac6d82de9fe4900d86a1548be1e0f2d113f8a9a9b2cfb1455",
+        "cpuset": "0,1",
+        "cpus": 1,
+        "memory_mb": 512,
+        "memory_reserved_mb": 512
+      },
+      "exporter": {
+        "image": "vitaline-lab4-exporter:1",
+        "image_id": "sha256:5d8e679d55a38a86b6ea0eb17407fbc16954be055fd1dcd22d07948c4eb41226",
+        "cpuset": "6,7",
+        "cpus": 0,
+        "memory_mb": 64,
+        "memory_reserved_mb": 64
+      },
+      "loadgen": {
+        "image": "grafana/k6:1.3.0",
+        "image_id": "sha256:3ddc8b1a33a2c3d8edc6e99b6a762ae36cba08788463458f5e6a7703e14eb77d",
+        "cpuset": "4,5",
+        "cpus": 0,
+        "memory_mb": 2048,
+        "memory_reserved_mb": 2048
+      },
+      "mongo": {
+        "image": "mongo:7",
+        "image_id": "sha256:41e8195b2791692695e1dc9bd21cd51d0a3af05fff8ace9304a5c1acf94f1ae1",
+        "cpuset": "2,3",
+        "cpus": 1,
+        "memory_mb": 1024,
+        "memory_reserved_mb": 1024
+      },
+      "prometheus": {
+        "image": "prom/prometheus:v3.5.0",
+        "image_id": "sha256:63805ebb8d2b3920190daf1cb14a60871b16fd38bed42b857a3182bc621f4996",
+        "cpuset": "6,7",
+        "cpus": 0,
+        "memory_mb": 768,
+        "memory_reserved_mb": 768
+      }
+    }
+  },
+  "scenario": {
+    "title": "Перегрузка и восстановление",
+    "kind": "spike",
+    "ramp_s": 10,
+    "baseline_vus": 200,
+    "peak_vus": 1000,
+    "warmup_s": 120,
+    "overload_s": 120,
+    "recovery_s": 300,
+    "error_rate": 0
+  },
+  "slo": {
+    "p95_ms": 500,
+    "failure_rate": 0.01
+  },
+  "overall": {
+    "window_s": [
+      0,
+      570
+    ],
+    "requests": 265269,
+    "rps": {
+      "count": 570,
+      "min": 0,
+      "mean": 465.384,
+      "max": 2251,
+      "stdev": 416.85,
+      "p50": 261,
+      "p75": 447.25,
+      "p90": 1241.1,
+      "p95": 1280,
+      "p99": 1779.48
+    },
+    "latency_ms": {
+      "count": 265269,
+      "min": -1433.261,
+      "mean": 49.177,
+      "max": 1532.953,
+      "stdev": 117.033,
+      "p50": 3.165,
+      "p75": 38.203,
+      "p90": 147.793,
+      "p95": 269.701,
+      "p99": 588.923
+    },
+    "latency_valid_ms": {
+      "count": 265269,
+      "min": -1433.261,
+      "mean": 49.177,
+      "max": 1532.953,
+      "stdev": 117.033,
+      "p50": 3.165,
+      "p75": 38.203,
+      "p90": 147.793,
+      "p95": 269.701,
+      "p99": 588.923
+    },
+    "latency_invalid_ms": {
+      "count": 0,
+      "min": null,
+      "mean": null,
+      "max": null,
+      "stdev": null,
+      "p50": null,
+      "p75": null,
+      "p90": null,
+      "p95": null,
+      "p99": null
+    },
+    "failed_requests": 61,
+    "failure_rate": 0,
+    "invalid_share": 0,
+    "status_codes": [
+      {
+        "status": "200",
+        "count": 191714
+      },
+      {
+        "status": "201",
+        "count": 73494
+      },
+      {
+        "status": "500",
+        "count": 61
+      }
+    ]
+  },
+  "operations": [
+    {
+      "name": "book_appointment",
+      "latency_ms": {
+        "count": 38499,
+        "min": 0.039,
+        "mean": 52.659,
+        "max": 1096.067,
+        "stdev": 109.569,
+        "p50": 3.534,
+        "p75": 45.982,
+        "p90": 180.033,
+        "p95": 304.57,
+        "p99": 514.747
+      },
+      "failure_rate": 0,
+      "invalid_share": 0
+    },
+    {
+      "name": "browse_schedule",
+      "latency_ms": {
+        "count": 38578,
+        "min": 0.029,
+        "mean": 27.893,
+        "max": 752.792,
+        "stdev": 56.688,
+        "p50": 2.2,
+        "p75": 25.864,
+        "p90": 89.891,
+        "p95": 157.197,
+        "p99": 263.062
+      },
+      "failure_rate": 0,
+      "invalid_share": 0
+    },
+    {
+      "name": "cancel_appointment",
+      "latency_ms": {
+        "count": 11444,
+        "min": 0.037,
+        "mean": 52.315,
+        "max": 982.472,
+        "stdev": 110.522,
+        "p50": 3.154,
+        "p75": 43.379,
+        "p90": 181.195,
+        "p95": 312.46,
+        "p99": 518.319
+      },
+      "failure_rate": 0,
+      "invalid_share": 0
+    },
+    {
+      "name": "complete_visit",
+      "latency_ms": {
+        "count": 26741,
+        "min": 0.037,
+        "mean": 50.552,
+        "max": 992.233,
+        "stdev": 104.835,
+        "p50": 3.323,
+        "p75": 45.582,
+        "p90": 171.003,
+        "p95": 297.332,
+        "p99": 466.676
+      },
+      "failure_rate": 0,
+      "invalid_share": 0
+    },
+    {
+      "name": "login",
+      "latency_ms": {
+        "count": 38587,
+        "min": 0.039,
+        "mean": 28.349,
+        "max": 600.178,
+        "stdev": 59.206,
+        "p50": 1.891,
+        "p75": 25.809,
+        "p90": 92.057,
+        "p95": 158.818,
+        "p99": 279.819
+      },
+      "failure_rate": 0,
+      "invalid_share": 0
+    },
+    {
+      "name": "my_appointments",
+      "latency_ms": {
+        "count": 38370,
+        "min": -1433.261,
+        "mean": 28.176,
+        "max": 604.862,
+        "stdev": 58.935,
+        "p50": 2.086,
+        "p75": 25.924,
+        "p90": 90.775,
+        "p95": 159.817,
+        "p99": 276.178
+      },
+      "failure_rate": 0,
+      "invalid_share": 0
+    },
+    {
+      "name": "register",
+      "latency_ms": {
+        "count": 8171,
+        "min": 0.079,
+        "mean": 25.461,
+        "max": 546.526,
+        "stdev": 57.483,
+        "p50": 1.72,
+        "p75": 19.638,
+        "p90": 77.049,
+        "p95": 149.807,
+        "p99": 271.05
+      },
+      "failure_rate": 0,
+      "invalid_share": 0
+    },
+    {
+      "name": "start_visit",
+      "latency_ms": {
+        "count": 26824,
+        "min": 0.035,
+        "mean": 76.741,
+        "max": 1392.697,
+        "stdev": 161.354,
+        "p50": 4.224,
+        "p75": 60.886,
+        "p90": 273.239,
+        "p95": 460.631,
+        "p99": 754.631
+      },
+      "failure_rate": 0,
+      "invalid_share": 0
+    },
+    {
+      "name": "visit_history",
+      "latency_ms": {
+        "count": 38055,
+        "min": 0.025,
+        "mean": 93.276,
+        "max": 1532.953,
+        "stdev": 196.463,
+        "p50": 5.613,
+        "p75": 75.509,
+        "p90": 313.58,
+        "p95": 539.074,
+        "p99": 931.215
+      },
+      "failure_rate": 0.002,
+      "invalid_share": 0
+    }
+  ],
+  "phases": [
+    {
+      "phase": "разгон",
+      "vus": 200,
+      "rps_mean": 150.6,
+      "rps_p50": 150,
+      "rps_p5": 41.95,
+      "p50_ms": 1.37,
+      "p95_ms": 4.793,
+      "p99_ms": 16.098,
+      "failure_rate": 0,
+      "api_cpu": 0.098,
+      "mongo_cpu": 0.302,
+      "api_memory_mb": 10.888,
+      "within_slo": true
+    },
+    {
+      "phase": "базовая нагрузка",
+      "vus": 200,
+      "rps_mean": 286.733,
+      "rps_p50": 258,
+      "rps_p5": 242,
+      "p50_ms": 1.529,
+      "p95_ms": 12.924,
+      "p99_ms": 32.875,
+      "failure_rate": 0,
+      "api_cpu": 0.254,
+      "mongo_cpu": 0.457,
+      "api_memory_mb": 19.282,
+      "within_slo": true
+    },
+    {
+      "phase": "рост",
+      "vus": 1000,
+      "rps_mean": 1220,
+      "rps_p50": 1259,
+      "rps_p5": 1005.2,
+      "p50_ms": 1.969,
+      "p95_ms": 54.41,
+      "p99_ms": 79.694,
+      "failure_rate": 0,
+      "api_cpu": 0.599,
+      "mongo_cpu": 0.762,
+      "api_memory_mb": 61.735,
+      "within_slo": true
+    },
+    {
+      "phase": "перегрузка",
+      "vus": 1000,
+      "rps_mean": 1169.233,
+      "rps_p50": 1206.5,
+      "rps_p5": 764.2,
+      "p50_ms": 28.124,
+      "p95_ms": 393.986,
+      "p99_ms": 725.157,
+      "failure_rate": 0,
+      "api_cpu": 0.757,
+      "mongo_cpu": 0.985,
+      "api_memory_mb": 73.118,
+      "within_slo": true
+    },
+    {
+      "phase": "спад",
+      "vus": 200,
+      "rps_mean": 282.1,
+      "rps_p50": 259.5,
+      "rps_p5": 239.25,
+      "p50_ms": 1.749,
+      "p95_ms": 16.911,
+      "p99_ms": 38.687,
+      "failure_rate": 0,
+      "api_cpu": 0.3,
+      "mongo_cpu": 0.564,
+      "api_memory_mb": 53.098,
+      "within_slo": true
+    },
+    {
+      "phase": "восстановление",
+      "vus": 200,
+      "rps_mean": 246.753,
+      "rps_p50": 257,
+      "rps_p5": 0,
+      "p50_ms": 1.87,
+      "p95_ms": 25.018,
+      "p99_ms": 54.286,
+      "failure_rate": 0,
+      "api_cpu": 0.283,
+      "mongo_cpu": 0.539,
+      "api_memory_mb": 52.192,
+      "within_slo": true
+    }
+  ],
+  "recovery": {
+    "baseline": {
+      "phase": "эталон",
+      "vus": 200,
+      "rps_mean": 304.2,
+      "rps_p50": 261,
+      "rps_p5": 242,
+      "p50_ms": 1.462,
+      "p95_ms": 10.775,
+      "p99_ms": 31.808,
+      "failure_rate": 0,
+      "api_cpu": 0.252,
+      "mongo_cpu": 0.451,
+      "api_memory_mb": 19.907,
+      "within_slo": true
+    },
+    "overload": {
+      "phase": "перегрузка",
+      "vus": 1000,
+      "rps_mean": 1169.233,
+      "rps_p50": 1206.5,
+      "rps_p5": 764.2,
+      "p50_ms": 28.124,
+      "p95_ms": 393.986,
+      "p99_ms": 725.157,
+      "failure_rate": 0,
+      "api_cpu": 0.757,
+      "mongo_cpu": 0.985,
+      "api_memory_mb": 73.118,
+      "within_slo": true
+    },
+    "after_recovery": {
+      "phase": "после",
+      "vus": 200,
+      "rps_mean": 204.72,
+      "rps_p50": 254,
+      "rps_p5": 0,
+      "p50_ms": 1.617,
+      "p95_ms": 17.654,
+      "p99_ms": 39.537,
+      "failure_rate": 0,
+      "api_cpu": 0.243,
+      "mongo_cpu": 0.475,
+      "api_memory_mb": 52.269,
+      "within_slo": true
+    },
+    "criteria": {
+      "p95_ms_max": 60.775,
+      "failure_rate_max": 0.01,
+      "confirm_s": 20
+    },
+    "overload_end_s": 260,
+    "recovered": true,
+    "recovery_time_s": 0,
+    "recovery_timeline": [
+      {
+        "t_s": 262.5,
+        "p95_ms": 25.342,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 267.5,
+        "p95_ms": 7.092,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 272.5,
+        "p95_ms": 10.73,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 277.5,
+        "p95_ms": 14.207,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 282.5,
+        "p95_ms": 31.106,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 287.5,
+        "p95_ms": 21.208,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 292.5,
+        "p95_ms": 27.456,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 297.5,
+        "p95_ms": 22.471,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 302.5,
+        "p95_ms": 25.017,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 307.5,
+        "p95_ms": 11.97,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 312.5,
+        "p95_ms": 9.75,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 317.5,
+        "p95_ms": 21.685,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 322.5,
+        "p95_ms": 8.389,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 327.5,
+        "p95_ms": 51.864,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 332.5,
+        "p95_ms": 17.01,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 337.5,
+        "p95_ms": 25.884,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 342.5,
+        "p95_ms": 129.863,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 347.5,
+        "p95_ms": 57.107,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 352.5,
+        "p95_ms": 22.192,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 357.5,
+        "p95_ms": 27.153,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 362.5,
+        "p95_ms": 24.738,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 367.5,
+        "p95_ms": 12.736,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 372.5,
+        "p95_ms": 34.574,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 377.5,
+        "p95_ms": 13.144,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 382.5,
+        "p95_ms": 49.955,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 387.5,
+        "p95_ms": 49.736,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 392.5,
+        "p95_ms": 38.113,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 397.5,
+        "p95_ms": 10.168,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 402.5,
+        "p95_ms": 32.703,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 407.5,
+        "p95_ms": 33.998,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 412.5,
+        "p95_ms": 7.092,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 417.5,
+        "p95_ms": 21.331,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 422.5,
+        "p95_ms": 10.187,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 427.5,
+        "p95_ms": 9.029,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 432.5,
+        "p95_ms": 27.262,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 437.5,
+        "p95_ms": 30.128,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 442.5,
+        "p95_ms": 11.248,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 447.5,
+        "p95_ms": 9.82,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 452.5,
+        "p95_ms": 4.919,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 457.5,
+        "p95_ms": 16.283,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 462.5,
+        "p95_ms": 11.979,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 467.5,
+        "p95_ms": 5.741,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 472.5,
+        "p95_ms": 7.579,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 477.5,
+        "p95_ms": 24.715,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 482.5,
+        "p95_ms": 17.812,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 487.5,
+        "p95_ms": 18.125,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 492.5,
+        "p95_ms": 14.125,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 497.5,
+        "p95_ms": 28.561,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 502.5,
+        "p95_ms": 20.973,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 507.5,
+        "p95_ms": 17.29,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 512.5,
+        "p95_ms": 42.741,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 517.5,
+        "p95_ms": 18.912,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 522.5,
+        "p95_ms": 13.306,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 527.5,
+        "p95_ms": 4.588,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 532.5,
+        "p95_ms": 8.907,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 537.5,
+        "p95_ms": 4.843,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 542.5,
+        "p95_ms": 6.351,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 547.5,
+        "p95_ms": 9.879,
+        "failure_rate": 0
+      },
+      {
+        "t_s": 552.5,
+        "p95_ms": null,
+        "failure_rate": 1
+      },
+      {
+        "t_s": 557.5,
+        "p95_ms": null,
+        "failure_rate": 1
+      },
+      {
+        "t_s": 562.5,
+        "p95_ms": null,
+        "failure_rate": 1
+      },
+      {
+        "t_s": 567.5,
+        "p95_ms": null,
+        "failure_rate": 1
+      }
+    ]
+  }
+}
