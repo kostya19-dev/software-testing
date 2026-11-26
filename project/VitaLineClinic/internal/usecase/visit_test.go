@@ -11,8 +11,6 @@ import (
 	"vitaline-clinic/internal/domain"
 )
 
-//  РУЧНОЙ МОК VISIT РЕПОЗИТОРИЯ
-
 type mockVisitRepo struct {
 	visits map[uuid.UUID]*domain.Visit
 }
@@ -56,8 +54,6 @@ func (m *mockVisitRepo) Delete(_ context.Context, id uuid.UUID) error {
 	delete(m.visits, id)
 	return nil
 }
-
-// ТЕСТЫ CREATE
 
 func TestVisitCreate_Success(t *testing.T) {
 	visitRepo := newMockVisitRepo()
@@ -172,7 +168,7 @@ func TestVisitCreate_AppointmentNotFound(t *testing.T) {
 	}
 
 	_, err := service.Create(ctx, dto)
-	if err != domain.ErrNotFound {
+	if !errors.Is(err, domain.ErrNotFound) {
 		t.Errorf("ожидалась ErrNotFound, получено: %v", err)
 	}
 }
@@ -193,7 +189,7 @@ func TestVisitCreate_AppointmentAlreadyCancelled(t *testing.T) {
 	}
 
 	_, err := service.Create(ctx, dto)
-	if err != domain.ErrInvalidStatus {
+	if !errors.Is(err, domain.ErrInvalidStatus) {
 		t.Errorf("ожидалась ErrInvalidStatus, получено: %v", err)
 	}
 }
@@ -214,12 +210,10 @@ func TestVisitCreate_AppointmentAlreadyCompleted(t *testing.T) {
 	}
 
 	_, err := service.Create(ctx, dto)
-	if err != domain.ErrInvalidStatus {
+	if !errors.Is(err, domain.ErrInvalidStatus) {
 		t.Errorf("ожидалась ErrInvalidStatus, получено: %v", err)
 	}
 }
-
-//  ТЕСТЫ COMPLETE
 
 func TestVisitComplete_Success(t *testing.T) {
 	visitRepo := newMockVisitRepo()
@@ -266,7 +260,7 @@ func TestVisitComplete_NotFound(t *testing.T) {
 	}
 
 	_, err := service.Complete(ctx, uuid.New(), dto)
-	if err != domain.ErrNotFound {
+	if !errors.Is(err, domain.ErrNotFound) {
 		t.Errorf("ожидалась ErrNotFound, получено: %v", err)
 	}
 }
@@ -293,7 +287,7 @@ func TestVisitComplete_AlreadyCompleted(t *testing.T) {
 	}
 
 	_, err := service.Complete(ctx, visitID, dto)
-	if err != domain.ErrInvalidStatus {
+	if !errors.Is(err, domain.ErrInvalidStatus) {
 		t.Errorf("ожидалась ErrInvalidStatus, получено: %v", err)
 	}
 }
@@ -338,8 +332,6 @@ func TestVisitComplete_ValidationError_EmptyRecommendations(t *testing.T) {
 	}
 }
 
-// ТЕСТЫ GET
-
 func TestVisitGetByAppointment_Success(t *testing.T) {
 	visitRepo := newMockVisitRepo()
 	appRepo := newMockAppRepo()
@@ -372,7 +364,7 @@ func TestVisitGetByAppointment_NotFound(t *testing.T) {
 	ctx := context.Background()
 
 	_, err := service.GetByAppointment(ctx, uuid.New())
-	if err != domain.ErrNotFound {
+	if !errors.Is(err, domain.ErrNotFound) {
 		t.Errorf("ожидалась ErrNotFound, получено: %v", err)
 	}
 }

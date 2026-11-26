@@ -3,7 +3,7 @@ package gui
 import "html/template"
 
 func parseTemplates() *template.Template {
-	return template.Must(template.New("gui").Parse(commonTemplate + patientsTemplate + appointmentsTemplate + scheduleTemplate + visitsTemplate + emergenciesTemplate))
+	return template.Must(template.New("gui").Parse(commonTemplate + patientsTemplate + appointmentsTemplate + scheduleTemplate + visitsTemplate + emergenciesTemplate + paymentTemplate))
 }
 
 const commonTemplate = `
@@ -412,6 +412,12 @@ const appointmentsTemplate = `
           </td>
           <td class="id compact">{{.ID}}</td>
           <td>
+            {{if .Payable}}
+            <form method="post" action="/payments/create">
+              <input type="hidden" name="id" value="{{.ID}}">
+              <button type="submit">Оплатить</button>
+            </form>
+            {{end}}
             <form method="post" action="/appointments/cancel">
               <input type="hidden" name="id" value="{{.ID}}">
               <button class="danger" type="submit">Отменить</button>

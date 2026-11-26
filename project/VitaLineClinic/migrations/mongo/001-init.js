@@ -25,6 +25,7 @@ clinic.schedule_slots.createIndex({ doctor_id: 1, slot_date: 1, start_time: 1 })
 clinic.visits.createIndex({ appointment_id: 1 }, { unique: true });
 clinic.emergency_requests.createIndex({ status: 1, requested_date: 1 });
 clinic.reschedule_offers.createIndex({ emergency_request_id: 1, status: 1 });
+clinic.payments.createIndex({ appointment_id: 1, created_at: -1 });
 
 function upsertBatch(collection, docs) {
   for (let offset = 0; offset < docs.length; offset += batchSize) {

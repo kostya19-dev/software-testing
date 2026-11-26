@@ -142,6 +142,7 @@ func (h *Handler) login(w http.ResponseWriter, r *http.Request) {
 		h.badPassword(w, r, &u)
 		return
 	}
+
 	if time.Now().Before(u.Login.Expires) {
 		fail(w, 429, "challenge_pending")
 		return
@@ -256,6 +257,7 @@ func (h *Handler) recover(w http.ResponseWriter, r *http.Request) {
 		fail(w, 503, "auth_unavailable")
 		return
 	}
+
 	if err == nil && !h.startRecovery(w, r, &u, c, code) {
 		return
 	}

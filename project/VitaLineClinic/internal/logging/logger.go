@@ -17,11 +17,11 @@ type Instance struct {
 }
 
 func New(cfg appconfig.LoggingConfig, debug bool) (*Instance, error) {
-	if err := os.MkdirAll(filepath.Dir(cfg.File), 0o755); err != nil { //nolint:gosec // G301: host must read logs
+	if err := os.MkdirAll(filepath.Dir(cfg.File), 0o755); err != nil { //nolint:gosec
 		return nil, fmt.Errorf("create log directory: %w", err)
 	}
 
-	file, err := os.OpenFile(cfg.File, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644) //nolint:gosec // G302: host must read logs
+	file, err := os.OpenFile(cfg.File, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644) //nolint:gosec
 	if err != nil {
 		return nil, fmt.Errorf("open log file: %w", err)
 	}

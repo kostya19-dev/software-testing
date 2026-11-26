@@ -1,0 +1,14 @@
+#!/bin/sh
+root="$(git rev-parse --show-toplevel)" || exit 1
+
+if command -v go >/dev/null 2>&1; then
+	exec "$root/lab7/scripts/pre-commit.sh"
+fi
+
+if command -v wsl.exe >/dev/null 2>&1; then
+	win_root="$(cd "$root" && pwd -W)"
+	exec wsl.exe -e bash -lc "cd \"\$(wslpath -u '$win_root')\" && lab7/scripts/pre-commit.sh"
+fi
+
+echo "pre-commit: Go не найден, статический анализ невозможен (git commit --no-verify — пропустить)" >&2
+exit 1
