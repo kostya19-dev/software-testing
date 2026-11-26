@@ -26,6 +26,7 @@ type ViewModel struct {
 	Date          string
 	DateTime      string
 	Reason        string
+	Payment       *PaymentView
 }
 
 type PatientRow struct {
@@ -48,6 +49,7 @@ type AppointmentRow struct {
 	Status          string
 	Date            string
 	Badge           string
+	Payable         bool
 }
 
 type ScheduleSlotRow struct {

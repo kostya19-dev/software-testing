@@ -45,6 +45,7 @@ func (p *Presenter) Appointments(items []usecase.AppointmentResponseDTO) []Appoi
 			Status:    string(item.Status),
 			Date:      item.Date.Format(dateTimeLayout),
 			Badge:     appointmentBadge(item.Status),
+			Payable:   item.Status == domain.StatusCreated,
 		})
 	}
 	return rows

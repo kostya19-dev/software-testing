@@ -19,6 +19,7 @@ type Config struct {
 	Logging  LoggingConfig  `json:"logging"`
 	Tracing  TracingConfig  `json:"tracing"`
 	Business BusinessConfig `json:"business"`
+	Payments PaymentsConfig `json:"payments"`
 }
 
 type AppConfig struct {
@@ -120,6 +121,7 @@ func (c Config) ValidateWithOptions(opts ValidateOptions) error {
 	rules := []rule{{blank(c.App.Name), "app.name", msgEmpty}}
 	if opts.RequireDatabase {
 		rules = append(rules, c.Database.rules()...)
+		rules = append(rules, c.Payments.rules()...)
 	}
 	rules = append(rules,
 		rule{blank(c.Logging.Level), "logging.level", msgEmpty},
@@ -169,6 +171,7 @@ func (c *Config) applyDefaults() {
 	if c.Business.AppointmentMinLeadTimeMinutes == 0 {
 		c.Business.AppointmentMinLeadTimeMinutes = 30
 	}
+	c.Payments.applyDefaults()
 	if c.Tracing.SampleRatio == 0 {
 		c.Tracing.SampleRatio = 1
 	}
@@ -227,6 +230,9 @@ func (c *Config) applyEnvOverrides() error {
 		c.Business.AppointmentMinLeadTimeMinutes = minutes
 	}
 
+	if err := c.Payments.applyEnvOverrides(); err != nil {
+		return fmt.Errorf("parse VITALINE_PAYMENTS_TIMEOUT_SECONDS: %w", err)
+	}
 	return nil
 }
 

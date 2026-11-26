@@ -19,6 +19,8 @@ import (
 const (
 	defaultDoctorID  = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
 	defaultPatientID = "22222222-2222-2222-2222-222222222222"
+
+	readHeaderTimeout = 10 * time.Second
 )
 
 type Services struct {
@@ -27,6 +29,7 @@ type Services struct {
 	Schedule     usecase.IScheduleService
 	Visits       usecase.IVisitService
 	Emergencies  usecase.IEmergencyService
+	Payments     usecase.IPaymentService
 }
 
 type Server struct {
@@ -67,10 +70,13 @@ func NewServer(address, appName string, services Services, logger *slog.Logger) 
 	mux.HandleFunc("/emergencies/create", srv.handleEmergencyCreate)
 	mux.HandleFunc("/emergencies/offers/accept", srv.handleRescheduleOfferAccept)
 	mux.HandleFunc("/emergencies/offers/decline", srv.handleRescheduleOfferDecline)
+	mux.HandleFunc("/payments", srv.handlePayment)
+	mux.HandleFunc("/payments/create", srv.handlePaymentCreate)
 
 	srv.httpServer = &http.Server{
-		Addr:    address,
-		Handler: srv.logRequests(mux),
+		Addr:              address,
+		Handler:           srv.logRequests(mux),
+		ReadHeaderTimeout: readHeaderTimeout,
 	}
 	return srv
 }

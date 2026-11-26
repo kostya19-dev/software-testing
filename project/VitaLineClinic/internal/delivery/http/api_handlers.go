@@ -376,8 +376,10 @@ func writeAPIError(w nethttp.ResponseWriter, err error) {
 	case errors.Is(err, domain.ErrNotFound):
 		status = nethttp.StatusNotFound
 	case errors.Is(err, domain.ErrSlotBusy), errors.Is(err, domain.ErrInvalidStatus),
-		errors.Is(err, domain.ErrPastDate), errors.Is(err, domain.ErrAppointmentLeadTime):
+		errors.Is(err, domain.ErrPastDate), errors.Is(err, domain.ErrAppointmentLeadTime), errors.Is(err, domain.ErrAlreadyPaid):
 		status = nethttp.StatusConflict
+	case errors.Is(err, domain.ErrPaymentProvider):
+		status = nethttp.StatusBadGateway
 	}
 	writeJSON(w, status, map[string]string{"error": err.Error()})
 }

@@ -140,7 +140,7 @@ func (r *AppointmentRepository) CheckSlotBusy(ctx context.Context, doctorID uuid
 		return false, fmt.Errorf("build check slot busy: %w", err)
 	}
 
-	row := r.db.QueryRowContext(ctx, "SELECT EXISTS("+innerSQL+")", innerArgs...)
+	row := r.db.QueryRowContext(ctx, "SELECT EXISTS("+innerSQL+")", innerArgs...) //nolint:gosec
 
 	var busy bool
 	if err := row.Scan(&busy); err != nil {

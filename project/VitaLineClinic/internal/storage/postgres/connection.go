@@ -8,15 +8,13 @@ import (
 	"strings"
 	"time"
 
-	_ "github.com/jackc/pgx/v5/stdlib"
+	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/stdlib"
 
 	"vitaline-clinic/internal/domain"
 )
 
-const (
-	driverName         = "pgx"
-	defaultPingTimeout = 5 * time.Second
-)
+const defaultPingTimeout = 5 * time.Second
 
 func Open(ctx context.Context, dsn string) (*sql.DB, error) {
 	if strings.TrimSpace(dsn) == "" {
@@ -26,10 +24,11 @@ func Open(ctx context.Context, dsn string) (*sql.DB, error) {
 		ctx = context.Background()
 	}
 
-	db, err := sql.Open(driverName, dsn)
+	config, err := pgx.ParseConfig(dsn)
 	if err != nil {
 		return nil, fmt.Errorf("open postgres: %w", err)
 	}
+	db := stdlib.OpenDB(*config)
 
 	pingCtx, cancel := context.WithTimeout(ctx, defaultPingTimeout)
 	defer cancel()

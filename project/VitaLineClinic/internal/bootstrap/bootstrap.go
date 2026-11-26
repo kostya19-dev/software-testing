@@ -7,6 +7,8 @@ import (
 	"time"
 
 	"vitaline-clinic/internal/appconfig"
+	"vitaline-clinic/internal/domain"
+	"vitaline-clinic/internal/integration/yookassa"
 	"vitaline-clinic/internal/logging"
 	mongostorage "vitaline-clinic/internal/storage/mongodb"
 	"vitaline-clinic/internal/storage/postgres"
@@ -26,6 +28,7 @@ type UseCases interface {
 	Schedule() usecase.IScheduleService
 	Visits() usecase.IVisitService
 	Emergencies() usecase.IEmergencyService
+	Payments() usecase.IPaymentService
 }
 
 type HealthChecker interface {
@@ -42,6 +45,7 @@ type useCases struct {
 	schedule     usecase.IScheduleService
 	visits       usecase.IVisitService
 	emergencies  usecase.IEmergencyService
+	payments     usecase.IPaymentService
 }
 
 func (s *useCases) Patients() usecase.IPatientService {
@@ -62,6 +66,10 @@ func (s *useCases) Visits() usecase.IVisitService {
 
 func (s *useCases) Emergencies() usecase.IEmergencyService {
 	return s.emergencies
+}
+
+func (s *useCases) Payments() usecase.IPaymentService {
+	return s.payments
 }
 
 type databaseHealthChecker struct {
@@ -161,8 +169,48 @@ func (a *App) connect(ctx context.Context, cfg appconfig.Config, logs *logging.I
 	a.Health = store.health
 	a.closers = append(a.closers, tracer, store.closer)
 
-	a.UseCases = newUseCases(store, cfg.Business)
+	payments, err := newPaymentService(store, cfg.Payments)
+	if err != nil {
+		return err
+	}
+	cases := newUseCases(store, cfg.Business)
+	cases.payments = payments
+	a.UseCases = cases
+	logs.Logger.Info("payments configured",
+		"mode", cfg.Payments.Mode,
+		"provider_url", cfg.Payments.Endpoint().BaseURL,
+		"appointment_price", cfg.Payments.AppointmentPrice,
+	)
 	return nil
+}
+
+func newPaymentService(store storage, cfg appconfig.PaymentsConfig) (usecase.IPaymentService, error) {
+	if cfg.Mode == appconfig.PaymentsDisabled {
+		return nil, nil
+	}
+	price, err := domain.ParseMoney(cfg.AppointmentPrice, cfg.Currency)
+	if err != nil {
+		return nil, fmt.Errorf("payments.appointment_price: %w", err)
+	}
+	endpoint := cfg.Endpoint()
+	name := "yookassa"
+	if cfg.Mode == appconfig.PaymentsMock {
+		name = "yookassa-mock"
+	}
+	gateway, err := yookassa.New(yookassa.Config{
+		Name:      name,
+		BaseURL:   endpoint.BaseURL,
+		ShopID:    endpoint.ShopID,
+		SecretKey: endpoint.SecretKey,
+		Timeout:   time.Duration(cfg.TimeoutSeconds) * time.Second,
+	})
+	if err != nil {
+		return nil, err
+	}
+	return usecase.NewPaymentService(store.payments, store.appointments, gateway, usecase.PaymentSettings{
+		Price:     price,
+		ReturnURL: cfg.ReturnURL,
+	}), nil
 }
 
 type storage struct {
@@ -171,6 +219,7 @@ type storage struct {
 	schedule     usecase.ScheduleRepository
 	visits       usecase.VisitRepository
 	emergencies  usecase.EmergencyRepository
+	payments     usecase.PaymentRepository
 	health       HealthChecker
 	closer       closer
 }
@@ -197,6 +246,7 @@ func openPostgres(ctx context.Context, cfg appconfig.DatabaseConfig) (storage, e
 		schedule:     postgres.NewScheduleRepository(db),
 		visits:       postgres.NewVisitRepository(db),
 		emergencies:  postgres.NewEmergencyRepository(db),
+		payments:     postgres.NewPaymentRepository(db),
 		health:       &databaseHealthChecker{ping: db.PingContext},
 		closer:       db,
 	}, nil
@@ -217,6 +267,7 @@ func openMongo(ctx context.Context, cfg appconfig.DatabaseConfig, tracer *tracin
 		schedule:     mongostorage.NewScheduleRepository(db),
 		visits:       mongostorage.NewVisitRepository(db),
 		emergencies:  mongostorage.NewEmergencyRepository(db),
+		payments:     mongostorage.NewPaymentRepository(db),
 		health:       &databaseHealthChecker{ping: store.Ping},
 		closer:       store,
 	}, nil
