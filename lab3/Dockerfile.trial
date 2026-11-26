@@ -1,4 +1,0 @@
-ARG BASE=scratch
-FROM ${BASE}
-ARG TRIAL
-LABEL tiopo.lab3.trial=${TRIAL}

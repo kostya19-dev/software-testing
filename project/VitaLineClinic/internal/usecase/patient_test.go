@@ -207,7 +207,7 @@ func TestPatientDeleteSuccess(t *testing.T) {
 	if err := service.Delete(context.Background(), created.ID); err != nil {
 		t.Fatalf("ожидался успех, получена ошибка: %v", err)
 	}
-	if _, err := service.GetByID(context.Background(), created.ID); err != domain.ErrNotFound {
+	if _, err := service.GetByID(context.Background(), created.ID); !errors.Is(err, domain.ErrNotFound) {
 		t.Fatalf("ожидалась ErrNotFound после удаления, получено: %v", err)
 	}
 }

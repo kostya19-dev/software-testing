@@ -1,0 +1,101 @@
+name: Lab 7 - static analysis and tests
+
+on:
+  push:
+    paths:
+      - '.github/workflows/lab7.yml'
+      - '.githooks/**'
+      - 'lab7/**'
+      - 'project/VitaLineClinic/**'
+  pull_request:
+    paths:
+      - '.github/workflows/lab7.yml'
+      - '.githooks/**'
+      - 'lab7/**'
+      - 'project/VitaLineClinic/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  GOLANGCI_VERSION: v2.15.0
+
+jobs:
+  static-analysis:
+    name: Static analysis (style, types, cyclomatic <= 10, Halstead)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: project/VitaLineClinic/go.mod
+          cache-dependency-path: |
+            project/VitaLineClinic/go.sum
+            lab7/go.mod
+
+      - name: Cache golangci-lint
+        uses: actions/cache@v4
+        with:
+          path: lab7/.tools
+          key: lab7-tools-${{ runner.os }}-${{ env.GOLANGCI_VERSION }}-${{ hashFiles('project/VitaLineClinic/go.mod') }}
+
+      # Тот же скрипт, что вызывает pre-commit хук: golangci-lint
+      # (gofmt, goimports, govet, staticcheck, revive, gosec, gocyclo<=10, ...)
+      # и анализатор цикломатической сложности и метрик Холстеда.
+      - name: Lint, cyclomatic complexity and Halstead metrics
+        run: lab7/scripts/check.sh
+
+      - name: Upload complexity reports
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: lab7-complexity-${{ github.run_id }}-${{ github.run_attempt }}
+          path: lab7/reports/
+          if-no-files-found: warn
+          retention-days: 14
+
+  test:
+    name: Tests
+    needs: static-analysis
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: vitaline
+          POSTGRES_PASSWORD: vitaline
+          POSTGRES_DB: vitaline_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U vitaline"
+          --health-interval 2s
+          --health-timeout 5s
+          --health-retries 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: project/VitaLineClinic/go.mod
+          cache-dependency-path: |
+            project/VitaLineClinic/go.sum
+            lab7/go.mod
+
+      - name: Analyzer tests
+        working-directory: lab7
+        run: go test ./...
+
+      - name: Clinic unit and PostgreSQL integration tests
+        working-directory: project/VitaLineClinic
+        env:
+          TEST_DATABASE_URL: postgres://vitaline:vitaline@localhost:5432/vitaline_test?sslmode=disable
+        run: go test -race ./...

@@ -172,7 +172,7 @@ func TestVisitCreate_AppointmentNotFound(t *testing.T) {
 	}
 
 	_, err := service.Create(ctx, dto)
-	if err != domain.ErrNotFound {
+	if !errors.Is(err, domain.ErrNotFound) {
 		t.Errorf("ожидалась ErrNotFound, получено: %v", err)
 	}
 }
@@ -193,7 +193,7 @@ func TestVisitCreate_AppointmentAlreadyCancelled(t *testing.T) {
 	}
 
 	_, err := service.Create(ctx, dto)
-	if err != domain.ErrInvalidStatus {
+	if !errors.Is(err, domain.ErrInvalidStatus) {
 		t.Errorf("ожидалась ErrInvalidStatus, получено: %v", err)
 	}
 }
@@ -214,7 +214,7 @@ func TestVisitCreate_AppointmentAlreadyCompleted(t *testing.T) {
 	}
 
 	_, err := service.Create(ctx, dto)
-	if err != domain.ErrInvalidStatus {
+	if !errors.Is(err, domain.ErrInvalidStatus) {
 		t.Errorf("ожидалась ErrInvalidStatus, получено: %v", err)
 	}
 }
@@ -266,7 +266,7 @@ func TestVisitComplete_NotFound(t *testing.T) {
 	}
 
 	_, err := service.Complete(ctx, uuid.New(), dto)
-	if err != domain.ErrNotFound {
+	if !errors.Is(err, domain.ErrNotFound) {
 		t.Errorf("ожидалась ErrNotFound, получено: %v", err)
 	}
 }
@@ -293,7 +293,7 @@ func TestVisitComplete_AlreadyCompleted(t *testing.T) {
 	}
 
 	_, err := service.Complete(ctx, visitID, dto)
-	if err != domain.ErrInvalidStatus {
+	if !errors.Is(err, domain.ErrInvalidStatus) {
 		t.Errorf("ожидалась ErrInvalidStatus, получено: %v", err)
 	}
 }
@@ -372,7 +372,7 @@ func TestVisitGetByAppointment_NotFound(t *testing.T) {
 	ctx := context.Background()
 
 	_, err := service.GetByAppointment(ctx, uuid.New())
-	if err != domain.ErrNotFound {
+	if !errors.Is(err, domain.ErrNotFound) {
 		t.Errorf("ожидалась ErrNotFound, получено: %v", err)
 	}
 }

@@ -32,6 +32,8 @@ func combineMonitors(monitors []*event.CommandMonitor) *event.CommandMonitor {
 	}
 }
 
+// fanOut builds a callback that forwards an event to the selected callback
+// of every monitor that defines it.
 func fanOut[E any](monitors []*event.CommandMonitor, pick func(*event.CommandMonitor) func(context.Context, E)) func(context.Context, E) {
 	return func(ctx context.Context, e E) {
 		for _, monitor := range monitors {

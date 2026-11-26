@@ -58,6 +58,25 @@ CREATE TABLE IF NOT EXISTS reschedule_offers (
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+CREATE TABLE IF NOT EXISTS payments (
+    id UUID PRIMARY KEY,
+    appointment_id UUID NOT NULL,
+    amount_kopecks BIGINT NOT NULL CHECK (amount_kopecks > 0),
+    currency TEXT NOT NULL,
+    description TEXT NOT NULL DEFAULT '',
+    status TEXT NOT NULL CHECK (status IN ('PENDING', 'WAITING_FOR_CAPTURE', 'SUCCEEDED', 'CANCELED')),
+    provider TEXT NOT NULL,
+    provider_payment_id TEXT NOT NULL,
+    confirmation_url TEXT NOT NULL DEFAULT '',
+    cancellation_reason TEXT NOT NULL DEFAULT '',
+    test BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS payments_appointment_idx
+    ON payments (appointment_id, created_at DESC);
+
 CREATE UNIQUE INDEX IF NOT EXISTS appointments_doctor_slot_unique
     ON appointments (doctor_id, appointment_date)
     WHERE status <> 'CANCELLED';

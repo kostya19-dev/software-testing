@@ -25,6 +25,7 @@ type backendAPI struct {
 	baseURL string
 	client  *nethttp.Client
 	logger  *slog.Logger
+	timeout time.Duration
 }
 
 type patientBackend struct {
@@ -62,6 +63,7 @@ func NewBackendServices(baseURL string, logger *slog.Logger) Services {
 		Schedule:     &scheduleBackend{api: api},
 		Visits:       &visitBackend{api: api},
 		Emergencies:  &emergencyBackend{api: api},
+		Payments:     &paymentBackend{api: &backendAPI{baseURL: api.baseURL, client: api.client, logger: logger, timeout: paymentTimeout}},
 	}
 }
 
@@ -247,33 +249,20 @@ func (c *backendAPI) do(ctx context.Context, method, path string, query url.Valu
 		return errors.New("backend api url is empty")
 	}
 
-	requestCtx, cancel := context.WithTimeout(ctx, backendTimeout)
+	timeout := c.timeout
+	if timeout == 0 {
+		timeout = backendTimeout
+	}
+	requestCtx, cancel := context.WithTimeout(ctx, timeout)
 	defer cancel()
 
-	var body io.Reader
-	if payload != nil {
-		raw, err := json.Marshal(payload)
-		if err != nil {
-			return fmt.Errorf("encode backend request: %w", err)
-		}
-		body = bytes.NewReader(raw)
-	}
-
-	endpoint := c.baseURL + path
-	if len(query) > 0 {
-		endpoint += "?" + query.Encode()
-	}
-
-	req, err := nethttp.NewRequestWithContext(requestCtx, method, endpoint, body)
+	req, err := c.newRequest(requestCtx, method, path, query, payload)
 	if err != nil {
-		return fmt.Errorf("create backend request: %w", err)
-	}
-	req.Header.Set("Accept", "application/json")
-	if payload != nil {
-		req.Header.Set("Content-Type", "application/json")
+		return err
 	}
 
-	resp, err := c.client.Do(req)
+	// The URL is built from the configured backend base URL, not from user input.
+	resp, err := c.client.Do(req) //nolint:gosec // G704: trusted backend URL from config
 	if err != nil {
 		c.logger.Error("backend request failed", "method", method, "path", path, "error", err)
 		return fmt.Errorf("backend недоступен: %w", err)
@@ -293,6 +282,32 @@ func (c *backendAPI) do(ctx context.Context, method, path string, query url.Valu
 		return fmt.Errorf("decode backend response: %w", err)
 	}
 	return nil
+}
+
+func (c *backendAPI) newRequest(ctx context.Context, method, path string, query url.Values, payload any) (*nethttp.Request, error) {
+	var body io.Reader
+	if payload != nil {
+		raw, err := json.Marshal(payload)
+		if err != nil {
+			return nil, fmt.Errorf("encode backend request: %w", err)
+		}
+		body = bytes.NewReader(raw)
+	}
+
+	endpoint := c.baseURL + path
+	if len(query) > 0 {
+		endpoint += "?" + query.Encode()
+	}
+
+	req, err := nethttp.NewRequestWithContext(ctx, method, endpoint, body) //nolint:gosec // G704: trusted backend URL from config
+	if err != nil {
+		return nil, fmt.Errorf("create backend request: %w", err)
+	}
+	req.Header.Set("Accept", "application/json")
+	if payload != nil {
+		req.Header.Set("Content-Type", "application/json")
+	}
+	return req, nil
 }
 
 func readBackendError(body io.Reader) string {

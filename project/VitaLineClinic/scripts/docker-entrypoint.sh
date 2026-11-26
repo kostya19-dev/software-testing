@@ -14,6 +14,10 @@ MONGODB_DATABASE="${MONGODB_DATABASE:-vitaline_clinic}"
 VITALINE_LOG_LEVEL="${VITALINE_LOG_LEVEL:-info}"
 VITALINE_LOG_FILE="${VITALINE_LOG_FILE:-/app/logs/clinic.log}"
 VITALINE_APPOINTMENT_MIN_LEAD_TIME_MINUTES="${VITALINE_APPOINTMENT_MIN_LEAD_TIME_MINUTES:-30}"
+# Payment provider (YooKassa): mock | real | disabled. Credentials of the real
+# shop are passed only as env (YOOKASSA_SHOP_ID, YOOKASSA_SECRET_KEY), not written to the file.
+VITALINE_PAYMENTS_MODE="${VITALINE_PAYMENTS_MODE:-disabled}"
+VITALINE_PAYMENTS_MOCK_URL="${VITALINE_PAYMENTS_MOCK_URL:-http://yookassa-mock:8080/v3}"
 
 json_escape() {
 	printf '%s' "$1" | sed 's/\\/\\\\/g; s/"/\\"/g'
@@ -46,6 +50,12 @@ cat > "$APP_CONFIG_PATH" <<EOF
   },
   "business": {
     "appointment_min_lead_time_minutes": $VITALINE_APPOINTMENT_MIN_LEAD_TIME_MINUTES
+  },
+  "payments": {
+    "mode": "$(json_escape "$VITALINE_PAYMENTS_MODE")",
+    "mock": {
+      "base_url": "$(json_escape "$VITALINE_PAYMENTS_MOCK_URL")"
+    }
   }
 }
 EOF

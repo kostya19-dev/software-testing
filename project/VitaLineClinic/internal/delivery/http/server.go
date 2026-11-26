@@ -17,6 +17,7 @@ import (
 const (
 	bodyPreview = 1024
 
+	// readHeaderTimeout protects the server from slow-header (Slowloris) clients.
 	readHeaderTimeout = 10 * time.Second
 )
 
@@ -30,6 +31,7 @@ type Services struct {
 	Schedule     usecase.IScheduleService
 	Visits       usecase.IVisitService
 	Emergencies  usecase.IEmergencyService
+	Payments     usecase.IPaymentService
 }
 
 type Server struct {
@@ -63,6 +65,8 @@ func NewServer(address string, appName string, health HealthChecker, services Se
 	mux.HandleFunc("/api/emergencies", srv.handleEmergencies)
 	mux.HandleFunc("/api/reschedule-offers", srv.handleRescheduleOffers)
 	mux.HandleFunc("/api/reschedule-offers/", srv.handleRescheduleOfferAction)
+	mux.HandleFunc("/api/payments", srv.handlePayments)
+	mux.HandleFunc("/api/payments/", srv.handlePaymentByID)
 
 	srv.httpServer = &http.Server{
 		Addr:              address,
@@ -78,6 +82,7 @@ func (s *Server) ListenAndServe() error {
 	return s.httpServer.ListenAndServe()
 }
 
+// Wrap installs an optional boundary before the server starts accepting requests.
 func (s *Server) Wrap(middleware func(http.Handler) http.Handler) {
 	s.httpServer.Handler = middleware(s.httpServer.Handler)
 }

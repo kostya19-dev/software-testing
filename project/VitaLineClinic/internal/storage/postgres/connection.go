@@ -8,6 +8,7 @@ import (
 	"strings"
 	"time"
 
+	// Registers the "pgx" driver for database/sql.
 	_ "github.com/jackc/pgx/v5/stdlib"
 
 	"vitaline-clinic/internal/domain"

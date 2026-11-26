@@ -186,7 +186,7 @@ func TestCreate_PastDate(t *testing.T) {
 	}
 
 	_, err := service.Create(ctx, dto)
-	if err != domain.ErrPastDate {
+	if !errors.Is(err, domain.ErrPastDate) {
 		t.Errorf("ожидалась ErrPastDate, получено: %v", err)
 	}
 }
@@ -203,7 +203,7 @@ func TestCreate_TooSoonByConfiguredLeadTime(t *testing.T) {
 	}
 
 	_, err := service.Create(ctx, dto)
-	if err != domain.ErrAppointmentLeadTime {
+	if !errors.Is(err, domain.ErrAppointmentLeadTime) {
 		t.Errorf("ожидалась ErrAppointmentLeadTime, получено: %v", err)
 	}
 }
@@ -221,7 +221,7 @@ func TestCreate_SlotBusy(t *testing.T) {
 	}
 
 	_, err := service.Create(ctx, dto)
-	if err != domain.ErrSlotBusy {
+	if !errors.Is(err, domain.ErrSlotBusy) {
 		t.Errorf("ожидалась ErrSlotBusy, получено: %v", err)
 	}
 }
@@ -278,7 +278,7 @@ func TestCancel_NotFound(t *testing.T) {
 	ctx := context.Background()
 
 	err := service.Cancel(ctx, uuid.New())
-	if err != domain.ErrNotFound {
+	if !errors.Is(err, domain.ErrNotFound) {
 		t.Errorf("ожидалась ErrNotFound, получено: %v", err)
 	}
 }
@@ -293,7 +293,7 @@ func TestCancel_AlreadyCancelled(t *testing.T) {
 	_ = repo.Save(ctx, app)
 
 	err := service.Cancel(ctx, appID)
-	if err != domain.ErrInvalidStatus {
+	if !errors.Is(err, domain.ErrInvalidStatus) {
 		t.Errorf("ожидалась ErrInvalidStatus, получено: %v", err)
 	}
 }
@@ -308,7 +308,7 @@ func TestCancel_CompletedAppointment(t *testing.T) {
 	_ = repo.Save(ctx, app)
 
 	err := service.Cancel(ctx, appID)
-	if err != domain.ErrInvalidStatus {
+	if !errors.Is(err, domain.ErrInvalidStatus) {
 		t.Errorf("ожидалась ErrInvalidStatus, получено: %v", err)
 	}
 }
@@ -344,7 +344,7 @@ func TestGetByID_NotFound(t *testing.T) {
 	ctx := context.Background()
 
 	_, err := service.GetByID(ctx, uuid.New())
-	if err != domain.ErrNotFound {
+	if !errors.Is(err, domain.ErrNotFound) {
 		t.Errorf("ожидалась ErrNotFound, получено: %v", err)
 	}
 }

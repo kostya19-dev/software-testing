@@ -21,5 +21,22 @@
   },
   "business": {
     "appointment_min_lead_time_minutes": 30
+  },
+  "payments": {
+    "mode": "mock",
+    "appointment_price": "1500.00",
+    "currency": "RUB",
+    "return_url": "http://localhost:8090/payments",
+    "timeout_seconds": 10,
+    "mock": {
+      "base_url": "http://localhost:9095/v3",
+      "shop_id": "100500",
+      "secret_key": "test_mock_secret_key"
+    },
+    "real": {
+      "base_url": "https://api.yookassa.ru/v3",
+      "shop_id": "",
+      "secret_key": ""
+    }
   }
 }

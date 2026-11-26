@@ -17,6 +17,7 @@ type Instance struct {
 }
 
 func New(cfg appconfig.LoggingConfig, debug bool) (*Instance, error) {
+	// Log files are bind-mounted (docker-compose, lab4/lab6 stands) and read on the host.
 	if err := os.MkdirAll(filepath.Dir(cfg.File), 0o755); err != nil { //nolint:gosec // G301: host must read logs
 		return nil, fmt.Errorf("create log directory: %w", err)
 	}
